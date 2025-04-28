@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Floralish - Selamat Datang</title>
-    <!-- Tambahkan Font Poppins dari Google Fonts -->
+    <!-- Tambahkan Font Poppins dan Pacifico dari Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -20,6 +20,7 @@
                     },
                     fontFamily: {
                         sans: ['Poppins', 'sans-serif'],
+                        pacifico: ['Pacifico', 'cursive'],
                     }
                 }
             }
@@ -30,13 +31,26 @@
         body {
             font-family: 'Poppins', sans-serif;
         }
+        .logo-text {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.5rem;
+        }
+        .navbar-logo {
+            margin-top: 0.5rem;
+            position: relative;
+            top: 0.5rem;
+        }
+        .navbar-container {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
     </style>
 </head>
 <body class="min-h-screen">
     <!-- Bagian Header -->
     <header class="bg-white shadow-sm">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="text-2xl font-bold text-black">Floralish</div>
+        <div class="container mx-auto px-4 navbar-container flex justify-between items-center">
+            <a href="/" class="text-2xl font-bold text-black logo-text hover:text-primary transition-colors duration-300 navbar-logo">Floralish.</a>
             
             <!-- Navigasi Desktop -->
             <nav class="hidden md:flex items-center">
@@ -48,7 +62,7 @@
                 </ul>
                 
                 <!-- Menu Dropdown Profil (Belum Login) -->
-                <div class="dropdown">
+                <div class="dropdown {{ Auth::check() ? 'hidden' : '' }}">
                     <button class="flex items-center text-black hover:text-primary">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -56,24 +70,27 @@
                         Profile
                     </button>
                     <div class="dropdown-content">
-                        <a href="#" class="dropdown-item">Login</a>
-                        <a href="#" class="dropdown-item">Register</a>
+                        <a href="{{ route('login') }}" class="dropdown-item">Login</a>
+                        <a href="{{ route('register') }}" class="dropdown-item">Register</a>
                     </div>
                 </div>
                 
-                <!-- Menu Dropdown Profil (Sudah Login) - Tersembunyi secara default -->
-                <div class="dropdown hidden" id="loggedInDropdown">
+                <!-- Menu Dropdown Profil (Sudah Login) -->
+                <div class="dropdown {{ Auth::check() ? '' : 'hidden' }}" id="loggedInDropdown">
                     <button class="flex items-center text-black hover:text-primary">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
-                        John Doe
+                        {{ Auth::check() ? Auth::user()->name : 'Profile' }}
                     </button>
                     <div class="dropdown-content">
                         <a href="#" class="dropdown-item">My Profile</a>
                         <a href="#" class="dropdown-item">My Orders</a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">Logout</a>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="dropdown-item w-full text-left">Logout</button>
+                        </form>
                     </div>
                 </div>
             </nav>
@@ -103,8 +120,8 @@
             <div class="mt-4">
                 <div class="mobile-menu-item">Profile</div>
                 <div class="mobile-menu-dropdown">
-                    <a href="#" class="mobile-menu-dropdown-item">Login</a>
-                    <a href="#" class="mobile-menu-dropdown-item">Register</a>
+                    <a href="{{ route('login') }}" class="mobile-menu-dropdown-item">Login</a>
+                    <a href="{{ route('register') }}" class="mobile-menu-dropdown-item">Register</a>
                 </div>
             </div>
         </div>
@@ -208,7 +225,7 @@
     <div id="transitionOverlay" class="transition-overlay">
         <div class="logo-container">
             <div class="flower-icon">🌸</div>
-            <div class="logo-text">Floralish</div>
+            <div class="logo-text" style="font-size: 3rem;">Floralish.</div>
             <div class="logo-subtext">Menuju ke halaman utama...</div>  
         </div>
     </div>

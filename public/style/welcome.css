@@ -24,7 +24,7 @@ body, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, select, .logo-text,
     opacity: 1;
 }
 
-/* Kontainer untuk logo dan teks */
+/* Kontainer untuk logo dan teks */ 
 .logo-container {
     text-align: center;
 }
@@ -257,11 +257,11 @@ body, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, select, .logo-text,
 
 /* Header menu mobile */
 .mobile-menu-header {
+    padding: 1rem;
+    border-bottom: 1px solid #e5e7eb;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
-    border-bottom: 1px solid #e5e7eb;
 }
 
 /* Tombol tutup menu mobile */
@@ -271,6 +271,7 @@ body, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, select, .logo-text,
     font-size: 1.5rem;
     cursor: pointer;
     color: #4b5563;
+    padding: 0.5rem;
 }
 
 /* Konten menu mobile */
@@ -281,29 +282,32 @@ body, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, select, .logo-text,
 /* Item menu mobile */
 .mobile-menu-item {
     display: block;
-    padding: 0.75rem 0;
+    padding: 0.75rem 1rem;
     color: #4b5563;
     text-decoration: none;
-    border-bottom: 1px solid #f3f4f6;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 /* Item terakhir menu mobile */
 .mobile-menu-item:last-child {
-    border-bottom: none;
+    margin-bottom: 0;
 }
 
 /* Dropdown dalam menu mobile */
 .mobile-menu-dropdown {
-    margin-top: 0.5rem;
-    padding-left: 1rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e5e7eb;
 }
 
 /* Item dropdown dalam menu mobile */
 .mobile-menu-dropdown-item {
     display: block;
-    padding: 0.5rem 0;
-    color: #6b7280;
+    padding: 0.5rem 1rem;
+    color: #4b5563;
     text-decoration: none;
+    font-size: 0.875rem;
 }
 
 /* Gaya untuk kategori produk */
@@ -342,6 +346,15 @@ body, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, select, .logo-text,
     object-fit: cover;
 }
 
+.category-item h3 {
+    color: #4b5563;
+    transition: color 0.3s ease;
+}
+
+.category-item:hover h3 {
+    color: #90C9CF;
+}
+
 /* Media query untuk tampilan tablet */
 @media (max-width: 768px) {
     .category-circle {
@@ -356,4 +369,8 @@ body, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, select, .logo-text,
         width: 80px;
         height: 80px;
     }
+}
+
+.navbar-logo {
+    margin-top: 0.5rem;
 } 

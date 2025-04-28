@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Floralish - Navbar</title>
-    <!-- Tambahkan Font Poppins dari Google Fonts -->
+    <!-- Tambahkan Font Poppins dan Pacifico dari Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -20,6 +20,7 @@
                     },
                     fontFamily: {
                         sans: ['Poppins', 'sans-serif'],
+                        pacifico: ['Pacifico', 'cursive'],
                     }
                 }
             }
@@ -30,13 +31,20 @@
         body {
             font-family: 'Poppins', sans-serif;
         }
+        .logo-text {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.5rem;
+        }
+        .navbar-logo {
+            margin-top: 0.5rem;
+        }
     </style>
 </head>
 <body class="min-h-screen">
 <!-- Bagian Header -->
 <header class="bg-white shadow-sm">
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-        <div class="text-2xl font-bold text-black">Floralish</div>
+        <a href="/" class="text-2xl font-bold text-black logo-text hover:text-primary transition-colors duration-300 navbar-logo">Floralish.</a>
         
         <!-- Navigasi Desktop -->
         <nav class="hidden md:flex items-center">
