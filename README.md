@@ -9,10 +9,10 @@
 # 📘 Project Based Learning (PBL)
 
 ## 👥 Kelompok 4
-- Bindhu Owen Batami Hutagalung (Full Stack Developer)
-- Wahyu Perwira Sanusi Sihombing (Front End Developer)
-- Reynold Steven Lumbantoruan (Front End Developer)
-- Syahnaz Dwi Pawestri (UI/UX Designer , Tester)
+- 3312411017 - Bindhu Owen Batami Hutagalung (Full Stack Developer)
+- 3312411026 - Wahyu Perwira Sanusi Sihombing (Front End Developer)
+- 3312411025 - Reynold Steven Lumbantoruan (Front End Developer)
+- 3312411014 - Syahnaz Dwi Pawestri (UI/UX Designer , Tester)
 
 ---
 
