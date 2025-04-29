@@ -6,20 +6,21 @@
   <img src="https://i.ibb.co.com/YFFGv6Tf/xXdm05e.png" alt="Logo Floralish" width="200"/>
 </p>
 
-<h1 align="center">Judul Proyek : CMS Website for Flower Bucket (Floralish)</h1>
+<h1 align="center">💐 Judul Proyek: CMS Website for Flower Bucket (Floralish)</h1>
 
+---
 
 # 📘 Project Based Learning (PBL)
 
-<h1>Kelompok 4</h1>
-<ul>
-    <li>Bindhu Owen Batami Hutagalung</li>
-    <li>Wahyu Perwira Sanusi Sihombing</li>
-    <li>Reynold Steven Lumbantoruan</li>
-    <li>Syahnaz Dwi Pawestri</li>
-</ul>
+## 👥 Kelompok 4
+- Bindhu Owen Batami Hutagalung  
+- Wahyu Perwira Sanusi Sihombing  
+- Reynold Steven Lumbantoruan  
+- Syahnaz Dwi Pawestri  
 
-## 🔧 Fitur
+---
+
+## 🔧 Fitur yang Tersedia
 
 - ✅ Halaman Registrasi  
 - ✅ Halaman Login  
@@ -32,3 +33,9 @@
 - ✅ Fitur Edit dan Hapus Pengguna  
 - ✅ Login Admin (Dengan Hotkey Rahasia)  
 - ✅ Registrasi Admin (Dengan Hotkey Rahasia)  
+
+---
+
+## 🚀 Catatan
+Pengembangan fitur masih akan **berlanjut** dan terus di-*update* untuk meningkatkan fungsi dan pengalaman pengguna. Stay tuned!
+
