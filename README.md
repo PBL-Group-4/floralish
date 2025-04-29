@@ -2,9 +2,9 @@
   <img src="https://www.polibatam.ac.id/wp-content/uploads/2022/01/poltek-2048x1821.png" alt="Logo Polibatam" width="300"/>
 </p>
 
-# 📘 Proyek Web
+# 📘 Project Based Learning (PBL)
 
-Project Based Learning Kelompok 4
+<h1>Kelompok 4</h1>
 - Bindhu Owen Batami Hutagalung
 - Wahyu Perwira Sanusi Sihombing
 - Reynold Steven Lumbantoruan
