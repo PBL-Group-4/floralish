@@ -4,7 +4,11 @@
 
 # 📘 Proyek Web
 
-Ini adalah proyek web yang dikembangkan dengan berbagai fitur untuk pengguna dan admin.
+Project Based Learning Kelompok 4
+- Bindhu Owen Batami Hutagalung
+- Wahyu Perwira Sanusi Sihombing
+- Reynold Steven Lumbantoruan
+- Syahnaz Dwi Pawestri
 
 ## 🔧 Fitur
 
