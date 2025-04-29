@@ -1,3 +1,11 @@
+<p align="center">
+  <img src="https://www.polibatam.ac.id/wp-content/uploads/2022/01/poltek-2048x1821.png" alt="Logo Polibatam" width="300"/>
+</p>
+
+# 📘 Proyek Web
+
+Ini adalah proyek web yang dikembangkan dengan berbagai fitur untuk pengguna dan admin.
+
 ## 🔧 Fitur
 
 - ✅ Halaman Registrasi
