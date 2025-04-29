@@ -48,6 +48,7 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role_id' => 9999, // Role untuk user biasa
         ]);
 
         // Tidak login otomatis setelah register
