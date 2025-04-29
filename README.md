@@ -64,6 +64,3 @@
 
 ## 🚀 Catatan
 Pengembangan fitur masih akan **berlanjut** dan terus di-*update* untuk meningkatkan fungsi dan pengalaman pengguna. Stay tuned!
-
-</body>
-</html>
