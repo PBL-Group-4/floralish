@@ -2,11 +2,7 @@
   <img src="https://www.polibatam.ac.id/wp-content/uploads/2022/01/poltek-2048x1821.png" alt="Logo Polibatam" width="300"/>
 </p>
 
-<p align="center">
-  <img src="https://i.ibb.co.com/YFFGv6Tf/xXdm05e.png" alt="Logo Floralish" width="200"/>
-</p>
-
-<h1 align="center">💐 Judul Proyek: CMS Website for Flower Bucket (Floralish)</h1>
+<h1 align="left">Judul Proyek: CMS Website for Flower Bucket (Floralish)</h1>
 
 ---
 
