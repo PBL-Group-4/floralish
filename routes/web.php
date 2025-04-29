@@ -22,3 +22,8 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.authenticat
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('register.store');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// Lokasi
+Route::get('/lokasi', function () {
+    return view('lokasi');
+});
