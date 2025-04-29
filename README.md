@@ -1,4 +1,10 @@
 <p align="center">
+  <img src="https://i.ibb.co.com/YFFGv6Tf/xXdm05e.png" alt="Logo Floralish" width="200"/>
+</p>
+
+<h1 align="center">💐 Flower Bucket (Floralish)</h1>
+
+<p align="center">
   <img src="https://www.polibatam.ac.id/wp-content/uploads/2022/01/poltek-2048x1821.png" alt="Logo Polibatam" width="300"/>
 </p>
 
@@ -12,20 +18,16 @@
     <li>Syahnaz Dwi Pawestri</li>
 </ul>
 
-
-
-
-
 ## 🔧 Fitur
 
-- ✅ Halaman Registrasi
-- ✅ Halaman Login
-- ✅ Fungsi Logout
-- ✅ Manajemen Session dan Cookie
-- ✅ Syarat dan Ketentuan pada Halaman Registrasi
-- ✅ Integrasi Database
-- ✅ Dashboard Admin dengan Controller
-- ✅ CRUD (Create, Read, Update, Delete) untuk Produk
-- ✅ Fitur Edit dan Hapus Pengguna
-- ✅ Login Admin (Dengan Hotkey Rahasia)
-- ✅ Registrasi Admin (Dengan Hotkey Rahasia)
+- ✅ Halaman Registrasi  
+- ✅ Halaman Login  
+- ✅ Fungsi Logout  
+- ✅ Manajemen Session dan Cookie  
+- ✅ Syarat dan Ketentuan pada Halaman Registrasi  
+- ✅ Integrasi Database  
+- ✅ Dashboard Admin dengan Controller  
+- ✅ CRUD (Create, Read, Update, Delete) untuk Produk  
+- ✅ Fitur Edit dan Hapus Pengguna  
+- ✅ Login Admin (Dengan Hotkey Rahasia)  
+- ✅ Registrasi Admin (Dengan Hotkey Rahasia)  
