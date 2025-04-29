@@ -42,26 +42,31 @@
         <th>NIM</th>
         <th>Nama</th>
         <th>Role</th>
-    </tr>
-    <tr>
-        <td>3312411017</td>
-        <td>Bindhu Owen Batami Hutagalung</td>
-        <td>Full Stack Developer</td>
+        <th>Posisi</th>
     </tr>
     <tr>
         <td>3312411026</td>
         <td>Wahyu Perwira Sanusi Sihombing</td>
         <td>Front End Developer</td>
+        <td>Ketua</td>
+    </tr>
+    <tr>
+        <td>3312411017</td>
+        <td>Bindhu Owen Batami Hutagalung</td>
+        <td>Full Stack Developer</td>
+        <td>Anggota Grup</td>
     </tr>
     <tr>
         <td>3312411025</td>
         <td>Reynold Steven Lumbantoruan</td>
         <td>Front End Developer</td>
+        <td>Anggota Grup</td>
     </tr>
     <tr>
         <td>3312411014</td>
         <td>Syahnaz Dwi Pawestri</td>
         <td>UI/UX Designer, Tester</td>
+        <td>Anggota Grup</td>
     </tr>
 </table>
 
