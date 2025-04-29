@@ -1,13 +1,13 @@
-## 🔧 Features
+## 🔧 Fitur
 
-- ✅ Register Page
-- ✅ Login Page
-- ✅ Logout Functionality
-- ✅ Session and Cookie Management
-- ✅ Terms and Conditions Agreement on Register Page
-- ✅ Database Integration
-- ✅ Admin Dashboard with Controller
-- ✅ CRUD (Create, Read, Update, Delete) for Products
-- ✅ Edit and Delete User Functionality
-- ✅ Admin Login (Activated via Secret Hotkey)
-- ✅ Admin Registration (Activated via Secret Hotkey)
+- ✅ Halaman Registrasi
+- ✅ Halaman Login
+- ✅ Fungsi Logout
+- ✅ Manajemen Session dan Cookie
+- ✅ Syarat dan Ketentuan pada Halaman Registrasi
+- ✅ Integrasi Database
+- ✅ Dashboard Admin dengan Controller
+- ✅ CRUD (Create, Read, Update, Delete) untuk Produk
+- ✅ Fitur Edit dan Hapus Pengguna
+- ✅ Login Admin (Dengan Hotkey Rahasia)
+- ✅ Registrasi Admin (Dengan Hotkey Rahasia)
