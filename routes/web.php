@@ -27,6 +27,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // Lokasi
 Route::get('/lokasi', function () {
     return view('lokasi');
+});
 
 // Admin Routes
 Route::prefix('admin')->group(function () {
@@ -34,9 +35,31 @@ Route::prefix('admin')->group(function () {
     Route::post('/login', [AdminController::class, 'login'])->name('admin.login.authenticate');
     Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
     
+    // Admin Register Routes
+    Route::get('/register', [AdminController::class, 'showRegisterForm'])->name('admin.register');
+    Route::post('/register', [AdminController::class, 'register'])->name('admin.register.store');
+    
     // Routes yang memerlukan autentikasi admin
     Route::middleware(['admin'])->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+        
+        // Product Management Routes
+        Route::get('/products', [AdminController::class, 'products'])->name('admin.products.index');
+        Route::get('/products/create', [AdminController::class, 'createProduct'])->name('admin.products.create');
+        Route::post('/products', [AdminController::class, 'storeProduct'])->name('admin.products.store');
+        Route::get('/products/{product}/edit', [AdminController::class, 'editProduct'])->name('admin.products.edit');
+        Route::put('/products/{product}', [AdminController::class, 'updateProduct'])->name('admin.products.update');
+        Route::delete('/products/{product}', [AdminController::class, 'destroyProduct'])->name('admin.products.destroy');
+
+        // User Management Routes
+        Route::get('/users', [AdminController::class, 'users'])->name('admin.users.index');
+        Route::get('/users/{id}/edit', [AdminController::class, 'editUser'])->name('admin.users.edit');
+        Route::put('/users/{id}', [AdminController::class, 'updateUser'])->name('admin.users.update');
+        Route::delete('/users/{id}', [AdminController::class, 'destroyUser'])->name('admin.users.destroy');
+        Route::get('/users/{id}', [AdminController::class, 'showUser'])->name('admin.users.show');
+
+        // Settings Route
+        Route::get('/settings', [AdminController::class, 'settings'])->name('admin.settings');
     });
 
 });
