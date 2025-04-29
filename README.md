@@ -5,10 +5,16 @@
 # 📘 Project Based Learning (PBL)
 
 <h1>Kelompok 4</h1>
-- Bindhu Owen Batami Hutagalung
-- Wahyu Perwira Sanusi Sihombing
-- Reynold Steven Lumbantoruan
-- Syahnaz Dwi Pawestri
+<ul>
+    <li>- Bindhu Owen Batami Hutagalung</li>
+    <li>- Wahyu Perwira Sanusi Sihombing</li>
+    <li>- Reynold Steven Lumbantoruan</li>
+    <li>- Syahnaz Dwi Pawestri</li>
+</ul>
+
+
+
+
 
 ## 🔧 Fitur
 
