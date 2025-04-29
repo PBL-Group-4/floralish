@@ -22,7 +22,7 @@
         <td>3312411026</td>
         <td>Wahyu Perwira Sanusi Sihombing</td>
         <td>Front End Developer</td>
-        <td>Ketua</td>
+        <td>Ketua Grup</td>
     </tr>
     <tr>
         <td>3312411017</td>
