@@ -6,10 +6,10 @@
 
 <h1>Kelompok 4</h1>
 <ul>
-    <li>- Bindhu Owen Batami Hutagalung</li>
-    <li>- Wahyu Perwira Sanusi Sihombing</li>
-    <li>- Reynold Steven Lumbantoruan</li>
-    <li>- Syahnaz Dwi Pawestri</li>
+    <li>Bindhu Owen Batami Hutagalung</li>
+    <li>Wahyu Perwira Sanusi Sihombing</li>
+    <li>Reynold Steven Lumbantoruan</li>
+    <li>Syahnaz Dwi Pawestri</li>
 </ul>
 
 
