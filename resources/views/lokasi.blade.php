@@ -90,10 +90,10 @@
         <!-- Navigasi Desktop -->
         <nav class="hidden md:flex items-center">
             <ul class="flex space-x-6 mr-6">
-                <li><a href="{{ route('home') }}" class="text-black hover:text-primary">Home</a></li>
-                <li><a href="{{ route('products') }}" class="text-black hover:text-primary">Products</a></li>
-                <li><a href="{{ route('about') }}" class="text-black hover:text-primary">About</a></li>
-                <li><a href="{{ route('contact') }}" class="text-black hover:text-primary">Contact</a></li>
+                <li><a href="#" class="text-black hover:text-primary">Home</a></li>
+                <li><a href="#" class="text-black hover:text-primary">Products</a></li>
+                <li><a href="#" class="text-black hover:text-primary">About</a></li>
+                <li><a href="#" class="text-black hover:text-primary">Contact</a></li>
             </ul>
             
             <!-- Menu Dropdown Profil (Belum Login) -->
@@ -144,10 +144,10 @@
         <button id="mobileMenuClose" class="mobile-menu-close">&times;</button>
     </div>
     <div class="mobile-menu-content">
-        <a href="{{ route('home') }}" class="mobile-menu-item">Home</a>
-        <a href="{{ route('products') }}" class="mobile-menu-item">Products</a>
-        <a href="{{ route('about') }}" class="mobile-menu-item">About</a>
-        <a href="{{ route('contact') }}" class="mobile-menu-item">Contact</a>
+        <a href="#" class="mobile-menu-item">Home</a>
+        <a href="#" class="mobile-menu-item">Products</a>
+        <a href="#" class="mobile-menu-item">About</a>
+        <a href="#" class="mobile-menu-item">Contact</a>
         
         <div class="mt-4">
             <div class="mobile-menu-item">Profile</div>
