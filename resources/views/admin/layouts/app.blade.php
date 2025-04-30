@@ -49,6 +49,76 @@
             border-left: 4px solid #90C9CF;
         }
     </style>
+    <script>
+        function initImagePreview() {
+            const fileInputs = document.querySelectorAll('input[type="file"][accept="image/*"]');
+            
+            fileInputs.forEach(input => {
+                input.addEventListener('change', function(e) {
+                    const preview = document.getElementById('preview');
+                    const imagePreview = document.getElementById('image-preview');
+                    
+                    if (this.files && this.files[0]) {
+                        const reader = new FileReader();
+                        
+                        reader.onload = function(e) {
+                            preview.src = e.target.result;
+                            imagePreview.classList.remove('hidden');
+                        }
+                        
+                        reader.readAsDataURL(this.files[0]);
+                    }
+                });
+            });
+
+            // Drag and drop functionality
+            const dropZones = document.querySelectorAll('.border-dashed');
+            
+            dropZones.forEach(dropZone => {
+                const fileInput = dropZone.querySelector('input[type="file"]');
+                
+                ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                    dropZone.addEventListener(eventName, preventDefaults, false);
+                });
+
+                function preventDefaults (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+
+                ['dragenter', 'dragover'].forEach(eventName => {
+                    dropZone.addEventListener(eventName, highlight, false);
+                });
+
+                ['dragleave', 'drop'].forEach(eventName => {
+                    dropZone.addEventListener(eventName, unhighlight, false);
+                });
+
+                function highlight(e) {
+                    dropZone.classList.add('border-primary');
+                }
+
+                function unhighlight(e) {
+                    dropZone.classList.remove('border-primary');
+                }
+
+                dropZone.addEventListener('drop', handleDrop, false);
+
+                function handleDrop(e) {
+                    const dt = e.dataTransfer;
+                    const files = dt.files;
+                    fileInput.files = files;
+                    
+                    // Trigger change event
+                    const event = new Event('change');
+                    fileInput.dispatchEvent(event);
+                }
+            });
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initImagePreview);
+    </script>
 </head>
 <body class="bg-gray-50">
     <div class="flex h-screen overflow-hidden">
@@ -60,7 +130,7 @@
             </div>
             <nav class="mt-6">
                 <div class="px-4 py-2">
-                    <a href="{{ route('admin.dashboard') }}" class="flex items-center text-white bg-white bg-opacity-20 rounded-lg px-4 py-3">
+                    <a href="{{ route('admin.dashboard') }}" class="flex items-center text-white {{ request()->routeIs('admin.dashboard') ? 'bg-white bg-opacity-20' : 'hover:bg-white hover:bg-opacity-20' }} rounded-lg px-4 py-3">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                         </svg>
@@ -68,7 +138,7 @@
                     </a>
                 </div>
                 <div class="px-4 py-2">
-                    <a href="{{ route('admin.products.index') }}" class="flex items-center text-white hover:bg-white hover:bg-opacity-20 rounded-lg px-4 py-3">
+                    <a href="{{ route('admin.products.index') }}" class="flex items-center text-white {{ request()->routeIs('admin.products*') ? 'bg-white bg-opacity-20' : 'hover:bg-white hover:bg-opacity-20' }} rounded-lg px-4 py-3">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                         </svg>
@@ -76,7 +146,7 @@
                     </a>
                 </div>
                 <div class="px-4 py-2">
-                    <a href="{{ route('admin.users.index') }}" class="flex items-center text-white hover:bg-white hover:bg-opacity-20 rounded-lg px-4 py-3">
+                    <a href="{{ route('admin.users.index') }}" class="flex items-center text-white {{ request()->routeIs('admin.users*') ? 'bg-white bg-opacity-20' : 'hover:bg-white hover:bg-opacity-20' }} rounded-lg px-4 py-3">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                         </svg>
@@ -84,7 +154,7 @@
                     </a>
                 </div>
                 <div class="px-4 py-2">
-                    <a href="{{ route('admin.settings') }}" class="flex items-center text-white hover:bg-white hover:bg-opacity-20 rounded-lg px-4 py-3">
+                    <a href="#" class="flex items-center text-white hover:bg-white hover:bg-opacity-20 rounded-lg px-4 py-3">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -106,7 +176,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                             </svg>
                         </button>
-                        <h2 class="text-xl font-semibold text-gray-800 ml-4">Dashboard</h2>
+                        <h2 class="text-xl font-semibold text-gray-800 ml-4">@yield('title', 'Dashboard')</h2>
                     </div>
                     <div class="flex items-center">
                         <div class="relative">
@@ -132,85 +202,11 @@
             </header>
             
             <!-- Main Content Area -->
-            <main class="flex-1 overflow-y-auto bg-gray-50 p-4">
-                <div class="container mx-auto">
-                    <!-- Welcome Section -->
-                    <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
-                        <h1 class="text-2xl font-semibold text-gray-800">Selamat Datang, {{ Auth::guard('admin')->user()->name }}!</h1>
-                        <p class="text-gray-600 mt-2">Berikut adalah ringkasan aktivitas dan statistik Floralish hari ini.</p>
-                    </div>
-                    
-                    <!-- Stats Cards -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                        <div class="stat-card rounded-lg shadow-sm p-6">
-                            <div class="flex items-center">
-                                <div class="p-3 rounded-full bg-primary bg-opacity-10">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                                    </svg>
-                                </div>
-                                <div class="ml-4">
-                                    <p class="text-sm font-medium text-gray-500">Total Produk</p>
-                                    <p class="text-2xl font-semibold text-gray-800">{{ $totalProducts }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="stat-card rounded-lg shadow-sm p-6">
-                            <div class="flex items-center">
-                                <div class="p-3 rounded-full bg-primary bg-opacity-10">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                                    </svg>
-                                </div>
-                                <div class="ml-4">
-                                    <p class="text-sm font-medium text-gray-500">Total User</p>
-                                    <p class="text-2xl font-semibold text-gray-800">{{ $totalUsers }}</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="stat-card rounded-lg shadow-sm p-6">
-                            <div class="flex items-center">
-                                <div class="p-3 rounded-full bg-primary bg-opacity-10">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                                    </svg>
-                                </div>
-                                <div class="ml-4">
-                                    <p class="text-sm font-medium text-gray-500">Total Admin</p>
-                                    <p class="text-2xl font-semibold text-gray-800">{{ $totalAdmins }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Popular Products -->
-                    <div class="bg-white rounded-lg shadow-sm p-6">
-                        <div class="flex justify-between items-center mb-4">
-                            <h2 class="text-lg font-semibold text-gray-800">Produk Terbaru</h2>
-                            <a href="{{ route('admin.products.index') }}" class="text-primary hover:text-opacity-80 text-sm font-medium">Lihat Semua</a>
-                        </div>
-                        <div class="space-y-4">
-                            @foreach($popularProducts as $product)
-                            <div class="flex items-center">
-                                <div class="h-12 w-12 rounded-md bg-gray-200 flex-shrink-0 overflow-hidden">
-                                    <img src="{{ asset($product->image) ?? 'https://via.placeholder.com/100' }}" alt="{{ $product->name }}" class="h-full w-full object-cover">
-                                </div>
-                                <div class="ml-4 flex-1">
-                                    <h3 class="text-sm font-medium text-gray-900">{{ $product->name }}</h3>
-                                    <p class="text-sm text-gray-500">{{ Str::limit($product->description, 50) }}</p>
-                                </div>
-                                <div class="ml-4">
-                                    <span class="text-sm font-medium text-gray-900">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
+            <main class="flex-1 overflow-y-auto bg-gray-50">
+                @yield('content')
             </main>
         </div>
     </div>
+    @stack('scripts')
 </body>
 </html> 

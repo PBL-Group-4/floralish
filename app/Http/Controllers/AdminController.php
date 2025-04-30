@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Admin;
+use App\Models\Product;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class AdminController extends Controller
 {
@@ -15,6 +20,36 @@ class AdminController extends Controller
     public function showLoginForm()
     {
         return view('admin.login');
+    }
+
+    /**
+     * Menampilkan form register admin
+     */
+    public function showRegisterForm()
+    {
+        return view('admin.register');
+    }
+
+    /**
+     * Memproses register admin
+     */
+    public function register(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:admins',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $admin = Admin::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+            'role_id' => 9998, // Admin role
+        ]);
+
+        return redirect()->route('admin.login')
+            ->with('success', 'Akun admin berhasil dibuat. Silakan login.');
     }
 
     /**
@@ -33,7 +68,7 @@ class AdminController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'Email atau password yang dimasukkan tidak sesuai.',
+            'email' => 'Email atau password salah.',
         ])->onlyInput('email');
     }
 
@@ -42,7 +77,19 @@ class AdminController extends Controller
      */
     public function dashboard()
     {
-        return view('admin.dashboard');
+        $totalProducts = Product::count();
+        $totalUsers = User::count();
+        $totalAdmins = Admin::count();
+        $totalAllUsers = $totalUsers + $totalAdmins;
+        $popularProducts = Product::latest()->take(5)->get();
+
+        return view('admin.dashboard', compact(
+            'totalProducts',
+            'totalUsers',
+            'totalAdmins',
+            'totalAllUsers',
+            'popularProducts'
+        ));
     }
 
     /**
@@ -53,6 +100,212 @@ class AdminController extends Controller
         Auth::guard('admin')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/');
+        return redirect()->route('admin.login');
+    }
+
+    public function products()
+    {
+        $products = Product::latest()->paginate(10);
+        return view('admin.products.index', compact('products'));
+    }
+
+    public function createProduct()
+    {
+        return view('admin.products.create');
+    }
+
+    public function storeProduct(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images/products'), $imageName);
+            $validated['image'] = 'images/products/' . $imageName;
+        }
+
+        Product::create($validated);
+
+        return redirect()->route('admin.products.index')
+            ->with('success', 'Produk berhasil ditambahkan');
+    }
+
+    public function editProduct(Product $product)
+    {
+        return view('admin.products.edit', compact('product'));
+    }
+
+    public function updateProduct(Request $request, Product $product)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        if ($request->hasFile('image')) {
+            // Hapus gambar lama jika ada
+            if ($product->image && file_exists(public_path($product->image))) {
+                unlink(public_path($product->image));
+            }
+
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images/products'), $imageName);
+            $validated['image'] = 'images/products/' . $imageName;
+        }
+
+        $product->update($validated);
+
+        return redirect()->route('admin.products.index')
+            ->with('success', 'Produk berhasil diperbarui');
+    }
+
+    public function destroyProduct(Product $product)
+    {
+        // Hapus gambar produk jika ada
+        if ($product->image && file_exists(public_path($product->image))) {
+            unlink(public_path($product->image));
+        }
+
+        $product->delete();
+
+        return redirect()->route('admin.products.index')
+            ->with('success', 'Produk berhasil dihapus');
+    }
+
+    /**
+     * Menampilkan daftar pengguna
+     */
+    public function users()
+    {
+        // Ambil data dari tabel users dan admins
+        $users = User::latest()->get();
+        $admins = Admin::latest()->get();
+        
+        // Gabungkan data users dan admins
+        $allUsers = $users->concat($admins);
+        
+        // Urutkan berdasarkan created_at terbaru
+        $allUsers = $allUsers->sortByDesc('created_at');
+        
+        // Buat pagination manual
+        $page = request()->get('page', 1);
+        $perPage = 10;
+        $offset = ($page - 1) * $perPage;
+        $items = $allUsers->slice($offset, $perPage);
+        
+        // Buat instance LengthAwarePaginator
+        $paginatedItems = new \Illuminate\Pagination\LengthAwarePaginator(
+            $items,
+            $allUsers->count(),
+            $perPage,
+            $page,
+            ['path' => request()->url()]
+        );
+        
+        return view('admin.users.index', compact('paginatedItems'));
+    }
+
+    /**
+     * Menampilkan form edit pengguna
+     */
+    public function editUser($id)
+    {
+        // Coba cari di tabel users
+        $user = User::find($id);
+        
+        // Jika tidak ditemukan di users, cari di admins
+        if (!$user) {
+            $user = Admin::findOrFail($id);
+        }
+        
+        return view('admin.users.edit', compact('user'));
+    }
+
+    /**
+     * Memperbarui data pengguna
+     */
+    public function updateUser(Request $request, $id)
+    {
+        // Coba cari di tabel users
+        $user = User::find($id);
+        
+        // Jika tidak ditemukan di users, cari di admins
+        if (!$user) {
+            $user = Admin::findOrFail($id);
+            $table = 'admins';
+        } else {
+            $table = 'users';
+        }
+        
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => "required|string|email|max:255|unique:{$table},email,{$id}",
+            'role_id' => 'required|in:9998,9999',
+        ]);
+
+        $user->update($validated);
+
+        return redirect()->route('admin.users.index')
+            ->with('success', 'Data pengguna berhasil diperbarui');
+    }
+
+    /**
+     * Menghapus pengguna
+     */
+    public function destroyUser($id)
+    {
+        // Coba cari di tabel users
+        $user = User::find($id);
+        
+        // Jika tidak ditemukan di users, cari di admins
+        if (!$user) {
+            $user = Admin::findOrFail($id);
+            
+            // Cek jika admin mencoba menghapus dirinya sendiri
+            if ($user->id === auth()->guard('admin')->id()) {
+                return redirect()->route('admin.users.index')
+                    ->with('error', 'Anda tidak dapat menghapus akun Anda sendiri');
+            }
+        }
+
+        $user->delete();
+
+        return redirect()->route('admin.users.index')
+            ->with('success', 'Pengguna berhasil dihapus');
+    }
+
+    /**
+     * Menampilkan detail pengguna
+     */
+    public function showUser($id)
+    {
+        // Coba cari di tabel users
+        $user = User::find($id);
+        
+        // Jika tidak ditemukan di users, cari di admins
+        if (!$user) {
+            $user = Admin::findOrFail($id);
+        }
+        
+        return view('admin.users.show', compact('user'));
+    }
+
+    /**
+     * Menampilkan halaman pengaturan
+     */
+    public function settings()
+    {
+        return view('admin.settings');
     }
 } 

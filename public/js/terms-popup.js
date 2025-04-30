@@ -1,58 +1,74 @@
+// Debug flag
+const DEBUG = true;
+
+function debug(message, ...args) {
+    if (DEBUG) {
+        console.log(`[Terms Popup] ${message}`, ...args);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('Initializing terms popup');
+    
+    // Dapatkan elemen-elemen yang diperlukan
+    const popup = document.getElementById('termsPopup');
+    const overlay = document.getElementById('termsOverlay');
+    const closeButton = document.getElementById('closeTermsPopup');
+    const termsLink = document.querySelector('a[onclick="openTermsPopup()"]');
+
+    console.log('Popup element:', popup);
+    console.log('Overlay element:', overlay);
+
+    if (!popup || !overlay) {
+        console.error('Required elements not found!');
+        return;
+    }
+
     // Fungsi untuk membuka popup
     window.openTermsPopup = function() {
-        const popup = document.getElementById('termsPopup');
-        const overlay = document.getElementById('termsOverlay');
-        const popupContent = document.querySelector('#termsPopup .bg-white');
-        
-        // Tampilkan overlay dan popup
-        overlay.classList.remove('hidden');
-        popup.classList.remove('hidden');
-        
-        // Tambahkan animasi
-        setTimeout(() => {
-            overlay.classList.add('opacity-100');
-            popupContent.classList.add('scale-100', 'opacity-100');
-        }, 10);
-        
-        // Mencegah scrolling pada body
+        console.log('Opening popup');
+        popup.style.display = 'block';
         document.body.style.overflow = 'hidden';
     };
-    
+
     // Fungsi untuk menutup popup
     window.closeTermsPopup = function() {
-        const popup = document.getElementById('termsPopup');
-        const overlay = document.getElementById('termsOverlay');
-        const popupContent = document.querySelector('#termsPopup .bg-white');
-        
-        // Hapus animasi
-        popupContent.classList.remove('scale-100', 'opacity-100');
-        overlay.classList.remove('opacity-100');
-        
-        // Tunggu animasi selesai, lalu sembunyikan
-        setTimeout(() => {
-            popup.classList.add('hidden');
-            overlay.classList.add('hidden');
-            document.body.style.overflow = '';
-        }, 300);
+        console.log('Closing popup');
+        popup.style.display = 'none';
+        document.body.style.overflow = '';
     };
-    
+
     // Event listener untuk tombol close
-    const closeButton = document.getElementById('closeTermsPopup');
     if (closeButton) {
-        closeButton.addEventListener('click', closeTermsPopup);
+        closeButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            closeTermsPopup();
+        });
     }
-    
-    // Event listener untuk overlay (klik di luar popup)
-    const overlay = document.getElementById('termsOverlay');
-    if (overlay) {
-        overlay.addEventListener('click', closeTermsPopup);
-    }
-    
-    // Event listener untuk tombol ESC
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
+
+    // Event listener untuk klik di luar popup
+    overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) {
+            console.log('Overlay clicked - closing popup');
             closeTermsPopup();
         }
     });
+
+    // Event listener untuk tombol Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && popup.style.display === 'block') {
+            console.log('Escape key pressed - closing popup');
+            closeTermsPopup();
+        }
+    });
+
+    // Event listener untuk link syarat dan ketentuan
+    if (termsLink) {
+        termsLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            openTermsPopup();
+        });
+    }
+
+    console.log('Terms popup initialized');
 }); 
