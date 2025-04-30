@@ -27,6 +27,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // Lokasi
 Route::get('/lokasi', function () {
     return view('lokasi');
+});
 
 // Admin Routes
 Route::prefix('admin')->group(function () {
@@ -38,5 +39,4 @@ Route::prefix('admin')->group(function () {
     Route::middleware(['admin'])->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     });
-
 });
