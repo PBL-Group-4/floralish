@@ -57,6 +57,19 @@
                     @enderror
                 </div>
 
+                <!-- Kategori -->
+                <div>
+                    <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
+                    <select name="category" id="category" class="w-full border rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary @error('category') border-red-500 @enderror">
+                        <option value="Bunga">Bunga</option>
+                        <option value="Karangan Bunga Papan">Karangan Bunga Papan</option>
+                        <option value="Kado & Cakes">Kado & Cakes</option>
+                    </select>
+                    @error('category')
+                        <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                    @enderror
+                </div>
+
                 <!-- Gambar -->
                 <div>
                     <label for="image" class="block text-sm font-medium text-gray-700 mb-1">Gambar Produk</label>

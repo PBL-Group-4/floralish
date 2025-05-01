@@ -6,14 +6,13 @@ use App\Http\Controllers\NavbarController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\HomeController;
 
 
 
 
 Route::get('/produk', [ProductController::class, 'index']);
-Route::get('/welcome', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index']);
 Route::get('home', function () {
     return view('home');
 });
@@ -74,4 +73,9 @@ Route::prefix('admin')->group(function () {
     });
     
     
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 });

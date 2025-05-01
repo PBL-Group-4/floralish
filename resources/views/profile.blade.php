@@ -170,12 +170,12 @@
     <!-- Navbar -->
     <header class="bg-white shadow-sm">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="/welcome" class="text-2xl font-bold text-black logo-text hover:text-primary transition-colors duration-300 navbar-logo">Floralish.</a>
+            <a href="/" class="text-2xl font-bold text-black logo-text hover:text-primary transition-colors duration-300 navbar-logo">Floralish.</a>
             
             <!-- Navigasi Desktop -->
             <nav class="hidden md:flex items-center">
                 <ul class="flex space-x-6 mr-6">
-                    <li><a href="/welcome" class="text-black hover:text-primary">Home</a></li>
+                    <li><a href="/" class="text-black hover:text-primary">Home</a></li>
                     <li><a href="/produk" class="text-black hover:text-primary">Products</a></li>
                     <li><a href="/profile" class="text-black hover:text-primary">About</a></li>
                     <li><a href="/contact" class="text-black hover:text-primary">Contact</a></li>
@@ -229,7 +229,7 @@
             <button id="mobileMenuClose" class="mobile-menu-close">&times;</button>
         </div>
         <div class="mobile-menu-content">
-            <a href="/welcome" class="mobile-menu-item">Home</a>
+            <a href="/" class="mobile-menu-item">Home</a>
             <a href="/produk" class="mobile-menu-item">Products</a>
             <a href="/profile" class="mobile-menu-item">About</a>
             <a href="/contact" class="mobile-menu-item">Contact</a>
