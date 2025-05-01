@@ -5,6 +5,10 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\NavbarController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProfileController;
+
+
+
 
 Route::get('/produk', [ProductController::class, 'index']);
 Route::get('/welcome', function () {
@@ -28,6 +32,9 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/lokasi', function () {
     return view('lokasi');
 });
+
+// Profile
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 
 // Admin Routes
 Route::prefix('admin')->group(function () {
@@ -61,4 +68,6 @@ Route::prefix('admin')->group(function () {
         // Settings Route
         Route::get('/settings', [AdminController::class, 'settings'])->name('admin.settings');
     });
+    
+    
 });
