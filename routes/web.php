@@ -18,6 +18,10 @@ Route::get('home', function () {
     return view('home');
 });
 
+Route::get('produk', function () {
+    return view('produk');
+});
+
 // Route untuk halaman dengan navbar
 Route::get('/navbar', [NavbarController::class, 'index'])->name('navbar.index');
 

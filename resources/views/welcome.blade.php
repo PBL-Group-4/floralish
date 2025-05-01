@@ -221,6 +221,133 @@
         </div>
     </section>
     
+    <!-- Bagian Catalog Produk -->
+    <section class="bg-white w-full px-0 py-12">
+        <h2 class="text-3xl font-bold text-center text-black mb-8">Catalog Produk</h2>
+        
+        <!-- Container untuk baris pertama -->
+        <div class="relative mb-12">
+            <div class="flex overflow-x-hidden scroll-smooth w-full" id="firstRow">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden aspect-square min-w-[25vw] mx-2">
+                    <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=500&q=80" 
+                         alt="Bunga Mawar" 
+                         class="w-full h-3/4 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-black">Bunga Mawar</h3>
+                        <p class="text-primary font-bold mt-2">Rp 150.000</p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden aspect-square min-w-[25vw] mx-2">
+                    <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=500&q=80" 
+                         alt="Bunga Tulip" 
+                         class="w-full h-3/4 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-black">Bunga Tulip</h3>
+                        <p class="text-primary font-bold mt-2">Rp 200.000</p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden aspect-square min-w-[25vw] mx-2">
+                    <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=500&q=80" 
+                         alt="Bunga Lily" 
+                         class="w-full h-3/4 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-black">Bunga Lily</h3>
+                        <p class="text-primary font-bold mt-2">Rp 175.000</p>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden aspect-square min-w-[25vw] mx-2">
+                    <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=500&q=80" 
+                         alt="Bunga Anggrek" 
+                         class="w-full h-3/4 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-black">Bunga Anggrek</h3>
+                        <p class="text-primary font-bold mt-2">Rp 250.000</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tombol navigasi baris pertama -->
+            <button class="absolute right-0 top-1/2 -translate-y-1/2 bg-white rounded-full p-3 shadow-lg hover:bg-primary hover:text-white transition-colors duration-300 z-10" onclick="scrollRight('firstRow')">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+            <button class="absolute left-0 top-1/2 -translate-y-1/2 bg-white rounded-full p-3 shadow-lg hover:bg-primary hover:text-white transition-colors duration-300 z-10" onclick="scrollLeft('firstRow')">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Container untuk baris kedua -->
+        <div class="relative">
+            <div class="flex overflow-x-hidden scroll-smooth w-full" id="secondRow">
+                <!-- Card 5 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden aspect-square min-w-[25vw] mx-2">
+                    <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=500&q=80" 
+                         alt="Bunga Matahari" 
+                         class="w-full h-3/4 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-black">Bunga Matahari</h3>
+                        <p class="text-primary font-bold mt-2">Rp 180.000</p>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden aspect-square min-w-[25vw] mx-2">
+                    <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=500&q=80" 
+                         alt="Bunga Melati" 
+                         class="w-full h-3/4 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-black">Bunga Melati</h3>
+                        <p class="text-primary font-bold mt-2">Rp 120.000</p>
+                    </div>
+                </div>
+
+                <!-- Card 7 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden aspect-square min-w-[25vw] mx-2">
+                    <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=500&q=80" 
+                         alt="Bunga Lavender" 
+                         class="w-full h-3/4 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-black">Bunga Lavender</h3>
+                        <p class="text-primary font-bold mt-2">Rp 160.000</p>
+                    </div>
+                </div>
+
+                <!-- Card 8 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden aspect-square min-w-[25vw] mx-2">
+                    <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&h=500&q=80" 
+                         alt="Bunga Sakura" 
+                         class="w-full h-3/4 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-black">Bunga Sakura</h3>
+                        <p class="text-primary font-bold mt-2">Rp 220.000</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tombol navigasi baris kedua -->
+            <button class="absolute right-0 top-1/2 -translate-y-1/2 bg-white rounded-full p-3 shadow-lg hover:bg-primary hover:text-white transition-colors duration-300 z-10" onclick="scrollRight('secondRow')">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+            <button class="absolute left-0 top-1/2 -translate-y-1/2 bg-white rounded-full p-3 shadow-lg hover:bg-primary hover:text-white transition-colors duration-300 z-10" onclick="scrollLeft('secondRow')">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+        </div>
+    </section>
+    
     <!-- Overlay Transisi -->
     <div id="transitionOverlay" class="transition-overlay">
         <div class="logo-container">
@@ -231,5 +358,69 @@
     </div>
     
     <script src="{{ asset('js/welcome.js') }}"></script>
+    <script>
+        function scrollRight(elementId) {
+            const element = document.getElementById(elementId);
+            const cardWidth = element.offsetWidth / 4; // 25% of container width
+            const currentScroll = element.scrollLeft;
+            const maxScroll = element.scrollWidth - element.clientWidth;
+            
+            if (currentScroll < maxScroll) {
+                element.scrollTo({
+                    left: Math.min(currentScroll + cardWidth, maxScroll),
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        function scrollLeft(elementId) {
+            const element = document.getElementById(elementId);
+            const cardWidth = element.offsetWidth / 4; // 25% of container width
+            const currentScroll = element.scrollLeft;
+            
+            if (currentScroll > 0) {
+                element.scrollTo({
+                    left: Math.max(currentScroll - cardWidth, 0),
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Inisialisasi scroll behavior saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', function() {
+            const rows = ['firstRow', 'secondRow'];
+            
+            rows.forEach(rowId => {
+                const row = document.getElementById(rowId);
+                if (row) {
+                    // Fungsi untuk mengecek dan update status tombol
+                    function updateButtonStates() {
+                        const canScrollLeft = row.scrollLeft > 0;
+                        const canScrollRight = row.scrollLeft < (row.scrollWidth - row.clientWidth);
+                        
+                        // Update tombol scroll kiri
+                        const leftButton = row.parentElement.querySelector('button[onclick*="scrollLeft"]');
+                        if (leftButton) {
+                            leftButton.style.opacity = canScrollLeft ? '1' : '0.5';
+                            leftButton.style.pointerEvents = canScrollLeft ? 'auto' : 'none';
+                        }
+                        
+                        // Update tombol scroll kanan
+                        const rightButton = row.parentElement.querySelector('button[onclick*="scrollRight"]');
+                        if (rightButton) {
+                            rightButton.style.opacity = canScrollRight ? '1' : '0.5';
+                            rightButton.style.pointerEvents = canScrollRight ? 'auto' : 'none';
+                        }
+                    }
+
+                    // Tambahkan event listener untuk scroll
+                    row.addEventListener('scroll', updateButtonStates);
+                    
+                    // Panggil fungsi update saat halaman dimuat
+                    updateButtonStates();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
