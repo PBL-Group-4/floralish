@@ -340,10 +340,10 @@
             <div>
                 <h3 class="text-lg font-semibold text-gray-800 mb-4">Quick Links</h3>
                 <ul class="space-y-2">
-                    <li><a href="#" class="text-gray-600 hover:text-[#7eaeb5] transition">Home</a></li>
-                    <li><a href="#" class="text-gray-600 hover:text-[#7eaeb5] transition">Products</a></li>
-                    <li><a href="#" class="text-gray-600 hover:text-[#7eaeb5] transition">About Us</a></li>
-                    <li><a href="#" class="text-gray-600 hover:text-[#7eaeb5] transition">Contact</a></li>
+                    <li><a href="/welcome" class="text-gray-600 hover:text-[#7eaeb5] transition">Home</a></li>
+                    <li><a href="/produk" class="text-gray-600 hover:text-[#7eaeb5] transition">Products</a></li>
+                    <li><a href="/profile" class="text-gray-600 hover:text-[#7eaeb5] transition">About Us</a></li>
+                    <li><a href="contact" class="text-gray-600 hover:text-[#7eaeb5] transition">Contact</a></li>
                 </ul>
             </div>
 
