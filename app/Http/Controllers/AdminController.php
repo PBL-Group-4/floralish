@@ -64,7 +64,7 @@ class AdminController extends Controller
 
         if (Auth::guard('admin')->attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('admin/dashboard');
+            return redirect()->route('admin.dashboard');
         }
 
         return back()->withErrors([
@@ -103,9 +103,67 @@ class AdminController extends Controller
         return redirect()->route('admin.login');
     }
 
-    public function products()
+    public function products(Request $request)
     {
-        $products = Product::latest()->paginate(10);
+        $query = Product::query();
+
+        // Filter berdasarkan pencarian
+        if ($request->has('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%')
+                  ->orWhere('description', 'like', '%' . $request->search . '%');
+        }
+
+        // Filter berdasarkan kategori
+        if ($request->has('category') && $request->category != '') {
+            $query->where('category', $request->category);
+        }
+
+        // Filter berdasarkan stok
+        if ($request->has('stock_filter')) {
+            switch ($request->stock_filter) {
+                case 'in_stock':
+                    $query->where('stock', '>', 10);
+                    break;
+                case 'low_stock':
+                    $query->where('stock', '>', 0)->where('stock', '<=', 10);
+                    break;
+                case 'out_of_stock':
+                    $query->where('stock', 0);
+                    break;
+            }
+        }
+
+        // Sorting
+        if ($request->has('sort')) {
+            switch ($request->sort) {
+                case 'name_asc':
+                    $query->orderBy('name', 'asc');
+                    break;
+                case 'name_desc':
+                    $query->orderBy('name', 'desc');
+                    break;
+                case 'price_asc':
+                    $query->orderBy('price', 'asc');
+                    break;
+                case 'price_desc':
+                    $query->orderBy('price', 'desc');
+                    break;
+                case 'stock_asc':
+                    $query->orderBy('stock', 'asc');
+                    break;
+                case 'stock_desc':
+                    $query->orderBy('stock', 'desc');
+                    break;
+                default:
+                    $query->latest();
+                    break;
+            }
+        } else {
+            $query->latest();
+        }
+
+        $products = $query->paginate(10);
+
         return view('admin.products.index', compact('products'));
     }
 
@@ -121,6 +179,7 @@ class AdminController extends Controller
             'description' => 'required|string',
             'price' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
+            'category' => 'required|in:Bunga,Karangan Bunga Papan,Kado & Cakes',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
@@ -149,6 +208,7 @@ class AdminController extends Controller
             'description' => 'required|string',
             'price' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
+            'category' => 'required|in:Bunga,Karangan Bunga Papan,Kado & Cakes',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 

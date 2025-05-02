@@ -15,7 +15,7 @@ class AdminSeeder extends Seeder
     public function run(): void
     {
         Admin::create([
-            'name' => 'Admin Floralish',
+            'name' => 'Admin',
             'email' => 'admin@floralish.com',
             'password' => Hash::make('admin123'),
             'role_id' => 9998,
