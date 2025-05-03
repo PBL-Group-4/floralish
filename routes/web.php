@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\WhatsAppController;
 
 
 
@@ -79,3 +80,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
     Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 });
+
+// WhatsApp Route
+Route::get('/whatsapp/send', [WhatsAppController::class, 'send'])->name('whatsapp.send');
