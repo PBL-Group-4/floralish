@@ -1,4 +1,3 @@
-
 <p align="center">
   <img src="https://www.polibatam.ac.id/wp-content/uploads/2022/01/poltek-2048x1821.png" alt="Logo Polibatam" width="300"/>
 </p>
@@ -62,5 +61,36 @@
 
 ---
 
+## 🛠️ Teknologi yang Digunakan
+
+Pada project ini digunakan beberapa bahasa pemrograman dan teknologi berikut:
+
+### Backend:
+- **PHP** (Laravel Framework)
+- **SQL** (untuk database)
+
+### Frontend:
+- **HTML**
+- **CSS** (menggunakan Tailwind CSS)
+- **JavaScript**
+- **Blade Template Engine** (Laravel)
+
+### Styling:
+- **Tailwind CSS** (framework CSS)
+- **Font Awesome** (untuk ikon)
+- **Google Fonts** (menggunakan *Poppins* dan *Pacifico*)
+
+### Database:
+- **MySQL/MariaDB** (dengan Laravel Eloquent ORM)
+
+### Lainnya:
+- **Composer** (untuk dependency management PHP)
+- **npm** (untuk package management JavaScript)
+
+Project ini menggunakan **Laravel** sebagai framework utama yang menyediakan struktur **MVC (Model-View-Controller)** serta berbagai fitur *built-in* untuk pengembangan web yang lebih efisien dan terstruktur.
+
+---
+
 ## 🚀 Catatan
+
 Pengembangan fitur masih akan **berlanjut** dan terus di-*update* untuk meningkatkan fungsi dan pengalaman pengguna. Stay tuned!
