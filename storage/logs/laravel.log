@@ -15235,3 +15235,51 @@ Did you mean one of these?
 [2025-05-03 15:33:51] local.INFO: Product Image URL: {"name":"wahyu","image_url":"http://127.0.0.1:8000/images/products/1746286300.jpeg"} 
 [2025-05-03 15:33:51] local.INFO: Product Image URL: {"name":"wayu","image_url":"http://127.0.0.1:8000/images/products/1746286318.jpeg"} 
 [2025-05-03 15:33:51] local.INFO: Product Image URL: {"name":"yuu","image_url":"http://127.0.0.1:8000/images/products/1746286421.jpeg"} 
+[2025-05-03 15:43:41] local.INFO: Product Debug: {"id":1,"name":"bunga bangkai","image":"images/products/1746286275.jpeg","image_url":"http://127.0.0.1:8000/images/products/1746286275.jpeg","category":"Bunga"} 
+[2025-05-03 15:43:41] local.INFO: Product Debug: {"id":2,"name":"wahyu","image":"images/products/1746286300.jpeg","image_url":"http://127.0.0.1:8000/images/products/1746286300.jpeg","category":"Karangan Bunga Papan"} 
+[2025-05-03 15:43:41] local.INFO: Product Debug: {"id":3,"name":"wayu","image":"images/products/1746286318.jpeg","image_url":"http://127.0.0.1:8000/images/products/1746286318.jpeg","category":"Kado & Cakes"} 
+[2025-05-03 15:43:41] local.INFO: Product Debug: {"id":4,"name":"yuu","image":"images/products/1746286421.jpeg","image_url":"http://127.0.0.1:8000/images/products/1746286421.jpeg","category":"Kado & Cakes"} 
+[2025-05-03 15:43:41] local.INFO: Product Image URL: {"name":"bunga bangkai","image_url":"http://127.0.0.1:8000/images/products/1746286275.jpeg"} 
+[2025-05-03 15:43:41] local.INFO: Product Image URL: {"name":"wahyu","image_url":"http://127.0.0.1:8000/images/products/1746286300.jpeg"} 
+[2025-05-03 15:43:41] local.INFO: Product Image URL: {"name":"wayu","image_url":"http://127.0.0.1:8000/images/products/1746286318.jpeg"} 
+[2025-05-03 15:43:41] local.INFO: Product Image URL: {"name":"yuu","image_url":"http://127.0.0.1:8000/images/products/1746286421.jpeg"} 
+[2025-05-03 15:43:44] local.INFO: Product Debug: {"id":1,"name":"bunga bangkai","image":"images/products/1746286275.jpeg","image_url":"http://127.0.0.1:8000/images/products/1746286275.jpeg","category":"Bunga"} 
+[2025-05-03 15:43:44] local.INFO: Product Debug: {"id":2,"name":"wahyu","image":"images/products/1746286300.jpeg","image_url":"http://127.0.0.1:8000/images/products/1746286300.jpeg","category":"Karangan Bunga Papan"} 
+[2025-05-03 15:43:44] local.INFO: Product Debug: {"id":3,"name":"wayu","image":"images/products/1746286318.jpeg","image_url":"http://127.0.0.1:8000/images/products/1746286318.jpeg","category":"Kado & Cakes"} 
+[2025-05-03 15:43:44] local.INFO: Product Debug: {"id":4,"name":"yuu","image":"images/products/1746286421.jpeg","image_url":"http://127.0.0.1:8000/images/products/1746286421.jpeg","category":"Kado & Cakes"} 
+[2025-05-03 15:43:44] local.INFO: Product Image URL: {"name":"bunga bangkai","image_url":"http://127.0.0.1:8000/images/products/1746286275.jpeg"} 
+[2025-05-03 15:43:44] local.INFO: Product Image URL: {"name":"wahyu","image_url":"http://127.0.0.1:8000/images/products/1746286300.jpeg"} 
+[2025-05-03 15:43:44] local.INFO: Product Image URL: {"name":"wayu","image_url":"http://127.0.0.1:8000/images/products/1746286318.jpeg"} 
+[2025-05-03 15:43:44] local.INFO: Product Image URL: {"name":"yuu","image_url":"http://127.0.0.1:8000/images/products/1746286421.jpeg"} 
+[2025-05-03 15:43:49] local.INFO: Product Debug: {"id":1,"name":"bunga bangkai","image":"images/products/1746286275.jpeg","image_url":"http://127.0.0.1:8000/images/products/1746286275.jpeg","category":"Bunga"} 
+[2025-05-03 15:43:49] local.INFO: Product Debug: {"id":2,"name":"wahyu","image":"images/products/1746286300.jpeg","image_url":"http://127.0.0.1:8000/images/products/1746286300.jpeg","category":"Karangan Bunga Papan"} 
+[2025-05-03 15:43:49] local.INFO: Product Debug: {"id":3,"name":"wayu","image":"images/products/1746286318.jpeg","image_url":"http://127.0.0.1:8000/images/products/1746286318.jpeg","category":"Kado & Cakes"} 
+[2025-05-03 15:43:49] local.INFO: Product Debug: {"id":4,"name":"yuu","image":"images/products/1746286421.jpeg","image_url":"http://127.0.0.1:8000/images/products/1746286421.jpeg","category":"Kado & Cakes"} 
+[2025-05-03 15:43:49] local.INFO: Product Image URL: {"name":"bunga bangkai","image_url":"http://127.0.0.1:8000/images/products/1746286275.jpeg"} 
+[2025-05-03 15:43:49] local.INFO: Product Image URL: {"name":"wahyu","image_url":"http://127.0.0.1:8000/images/products/1746286300.jpeg"} 
+[2025-05-03 15:43:49] local.INFO: Product Image URL: {"name":"wayu","image_url":"http://127.0.0.1:8000/images/products/1746286318.jpeg"} 
+[2025-05-03 15:43:49] local.INFO: Product Image URL: {"name":"yuu","image_url":"http://127.0.0.1:8000/images/products/1746286421.jpeg"} 
+[2025-05-03 15:46:07] local.INFO: Product Debug: {"id":1,"name":"bunga bangkai","image":"images/products/1746286275.jpeg","image_url":"http://127.0.0.1:8000/images/products/1746286275.jpeg","category":"Bunga"} 
+[2025-05-03 15:46:07] local.INFO: Product Debug: {"id":2,"name":"wahyu","image":"images/products/1746286300.jpeg","image_url":"http://127.0.0.1:8000/images/products/1746286300.jpeg","category":"Karangan Bunga Papan"} 
+[2025-05-03 15:46:07] local.INFO: Product Debug: {"id":3,"name":"wayu","image":"images/products/1746286318.jpeg","image_url":"http://127.0.0.1:8000/images/products/1746286318.jpeg","category":"Kado & Cakes"} 
+[2025-05-03 15:46:07] local.INFO: Product Debug: {"id":4,"name":"yuu","image":"images/products/1746286421.jpeg","image_url":"http://127.0.0.1:8000/images/products/1746286421.jpeg","category":"Kado & Cakes"} 
+[2025-05-03 15:46:07] local.INFO: Product Image URL: {"name":"bunga bangkai","image_url":"http://127.0.0.1:8000/images/products/1746286275.jpeg"} 
+[2025-05-03 15:46:07] local.INFO: Product Image URL: {"name":"wahyu","image_url":"http://127.0.0.1:8000/images/products/1746286300.jpeg"} 
+[2025-05-03 15:46:07] local.INFO: Product Image URL: {"name":"wayu","image_url":"http://127.0.0.1:8000/images/products/1746286318.jpeg"} 
+[2025-05-03 15:46:07] local.INFO: Product Image URL: {"name":"yuu","image_url":"http://127.0.0.1:8000/images/products/1746286421.jpeg"} 
+[2025-05-03 15:46:15] local.INFO: Product Debug: {"id":1,"name":"bunga bangkai","image":"images/products/1746286275.jpeg","image_url":"http://127.0.0.1:8000/images/products/1746286275.jpeg","category":"Bunga"} 
+[2025-05-03 15:46:15] local.INFO: Product Debug: {"id":2,"name":"wahyu","image":"images/products/1746286300.jpeg","image_url":"http://127.0.0.1:8000/images/products/1746286300.jpeg","category":"Karangan Bunga Papan"} 
+[2025-05-03 15:46:15] local.INFO: Product Debug: {"id":3,"name":"wayu","image":"images/products/1746286318.jpeg","image_url":"http://127.0.0.1:8000/images/products/1746286318.jpeg","category":"Kado & Cakes"} 
+[2025-05-03 15:46:15] local.INFO: Product Debug: {"id":4,"name":"yuu","image":"images/products/1746286421.jpeg","image_url":"http://127.0.0.1:8000/images/products/1746286421.jpeg","category":"Kado & Cakes"} 
+[2025-05-03 15:46:15] local.INFO: Product Image URL: {"name":"bunga bangkai","image_url":"http://127.0.0.1:8000/images/products/1746286275.jpeg"} 
+[2025-05-03 15:46:15] local.INFO: Product Image URL: {"name":"wahyu","image_url":"http://127.0.0.1:8000/images/products/1746286300.jpeg"} 
+[2025-05-03 15:46:15] local.INFO: Product Image URL: {"name":"wayu","image_url":"http://127.0.0.1:8000/images/products/1746286318.jpeg"} 
+[2025-05-03 15:46:15] local.INFO: Product Image URL: {"name":"yuu","image_url":"http://127.0.0.1:8000/images/products/1746286421.jpeg"} 
+[2025-05-03 15:46:20] local.INFO: Product Debug: {"id":1,"name":"bunga bangkai","image":"images/products/1746286275.jpeg","image_url":"http://127.0.0.1:8000/images/products/1746286275.jpeg","category":"Bunga"} 
+[2025-05-03 15:46:20] local.INFO: Product Debug: {"id":2,"name":"wahyu","image":"images/products/1746286300.jpeg","image_url":"http://127.0.0.1:8000/images/products/1746286300.jpeg","category":"Karangan Bunga Papan"} 
+[2025-05-03 15:46:20] local.INFO: Product Debug: {"id":3,"name":"wayu","image":"images/products/1746286318.jpeg","image_url":"http://127.0.0.1:8000/images/products/1746286318.jpeg","category":"Kado & Cakes"} 
+[2025-05-03 15:46:20] local.INFO: Product Debug: {"id":4,"name":"yuu","image":"images/products/1746286421.jpeg","image_url":"http://127.0.0.1:8000/images/products/1746286421.jpeg","category":"Kado & Cakes"} 
+[2025-05-03 15:46:20] local.INFO: Product Image URL: {"name":"bunga bangkai","image_url":"http://127.0.0.1:8000/images/products/1746286275.jpeg"} 
+[2025-05-03 15:46:20] local.INFO: Product Image URL: {"name":"wahyu","image_url":"http://127.0.0.1:8000/images/products/1746286300.jpeg"} 
+[2025-05-03 15:46:20] local.INFO: Product Image URL: {"name":"wayu","image_url":"http://127.0.0.1:8000/images/products/1746286318.jpeg"} 
+[2025-05-03 15:46:20] local.INFO: Product Image URL: {"name":"yuu","image_url":"http://127.0.0.1:8000/images/products/1746286421.jpeg"} 
