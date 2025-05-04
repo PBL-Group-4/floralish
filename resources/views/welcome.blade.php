@@ -244,7 +244,7 @@
                 <div class="category-circle">
                     <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&h=150&q=80" alt="Buket">
                 </div>
-                <h3 class="text-lg font-semibold text-center mt-3">Buket</h3>
+                <h3 class="text-lg font-semibold text-center mt-3">Karangan Bunga Papan</h3>
             </div>
             
             <!-- Kategori 3 -->
@@ -252,31 +252,7 @@
                 <div class="category-circle">
                     <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&h=150&q=80" alt="Hampers">
                 </div>
-                <h3 class="text-lg font-semibold text-center mt-3">Hampers</h3>
-            </div>
-            
-            <!-- Kategori 4 -->
-            <div class="category-item">
-                <div class="category-circle">
-                    <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&h=150&q=80" alt="Papan Bunga">
-                </div>
-                <h3 class="text-lg font-semibold text-center mt-3">Papan Bunga</h3>
-            </div>
-            
-            <!-- Kategori 5 -->
-            <div class="category-item">
-                <div class="category-circle">
-                    <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&h=150&q=80" alt="Box Bunga">
-                </div>
-                <h3 class="text-lg font-semibold text-center mt-3">Box Bunga</h3>
-            </div>
-            
-            <!-- Kategori 6 -->
-            <div class="category-item">
-                <div class="category-circle">
-                    <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&h=150&q=80" alt="Aksesoris">
-                </div>
-                <h3 class="text-lg font-semibold text-center mt-3">Aksesoris</h3>
+                <h3 class="text-lg font-semibold text-center mt-3">Kado & Bunga</h3>
             </div>
         </div>
     </section>
