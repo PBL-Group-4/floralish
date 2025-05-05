@@ -262,66 +262,120 @@
         <h2 class="text-3xl font-bold text-center text-black mb-8">Catalog Produk</h2>
         
         <!-- Kategori Bunga -->
-        <div class="mb-16">
-            <h3 class="text-2xl font-semibold text-center text-black mb-6">Bunga</h3>
-            <div class="flex overflow-x-auto gap-4 px-4">
+        <div class="mb-12 px-4 sm:px-6 md:px-8">
+            <div class="relative mb-6">
+                <h3 class="text-2xl font-semibold text-center text-black">Bunga</h3>
+                @if($products->where('category', 'Bunga')->count() > 0)
+                    <a href="{{ route('products.index', ['category' => 'Bunga']) }}" class="absolute right-0 top-[80%] inline-flex items-center gap-2 text-primary hover:text-primary-dark transition-all duration-300 group">
+                        <span class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all after:duration-300 group-hover:after:w-full">Lihat Selengkapnya</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-0.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                @endif
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
                 @foreach($products->where('category', 'Bunga')->take(4) as $product)
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden min-w-[250px] flex-shrink-0">
-                        <div class="w-full h-48 bg-gray-100 flex items-center justify-center">
-                            <img src="{{ $product->image_url }}" 
-                                 alt="{{ $product->name }}" 
-                                 class="w-full h-full object-cover"
-                                 onerror="this.src='{{ asset('images/default-product.jpg') }}'">
-                        </div>
-                        <div class="p-4">
-                            <h3 class="text-lg font-semibold text-black">{{ $product->name }}</h3>
-                            <p class="text-primary font-bold mt-2">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
-                            <a href="{{ route('products.show', $product) }}" class="mt-2 inline-block bg-primary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Lihat Detail</a>
-                        </div>
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300">
+                        <a href="{{ route('products.show', $product) }}" class="block">
+                            <div class="relative pb-[75%]">
+                                <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" 
+                                    class="absolute inset-0 w-full h-full object-cover">
+                            </div>
+                            <div class="p-4">
+                                <h3 class="text-lg font-semibold text-gray-800 mb-2">{{ $product->name }}</h3>
+                                <p class="text-sm text-gray-600 mb-4">{{ Str::limit($product->description, 50) }}</p>
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="text-primary font-bold">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
+                                </div>
+                                <a href="{{ route('products.show', $product) }}" class="w-full inline-flex items-center justify-center gap-2 bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark hover:scale-[1.02] transition-all duration-300 shadow-md hover:shadow-lg transform">
+                                    <span>Lihat Detail</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </a>
                     </div>
                 @endforeach
             </div>
         </div>
 
         <!-- Kategori Karangan Bunga Papan -->
-        <div class="mb-16">
-            <h3 class="text-2xl font-semibold text-center text-black mb-6">Karangan Bunga Papan</h3>
-            <div class="flex overflow-x-auto gap-4 px-4">
+        <div class="mb-12 px-4 sm:px-6 md:px-8">
+            <div class="relative mb-6">
+                <h3 class="text-2xl font-semibold text-center text-black">Karangan Bunga Papan</h3>
+                @if($products->where('category', 'Karangan Bunga Papan')->count() > 0)
+                    <a href="{{ route('products.index', ['category' => 'Karangan Bunga Papan']) }}" class="absolute right-0 top-[80%] inline-flex items-center gap-2 text-primary hover:text-primary-dark transition-all duration-300 group">
+                        <span class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all after:duration-300 group-hover:after:w-full">Lihat Selengkapnya</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-0.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                @endif
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
                 @foreach($products->where('category', 'Karangan Bunga Papan')->take(4) as $product)
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden min-w-[250px] flex-shrink-0">
-                        <div class="w-full h-48 bg-gray-100 flex items-center justify-center">
-                            <img src="{{ $product->image_url }}" 
-                                 alt="{{ $product->name }}" 
-                                 class="w-full h-full object-cover"
-                                 onerror="this.src='{{ asset('images/default-product.jpg') }}'">
-                        </div>
-                        <div class="p-4">
-                            <h3 class="text-lg font-semibold text-black">{{ $product->name }}</h3>
-                            <p class="text-primary font-bold mt-2">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
-                            <a href="{{ route('products.show', $product) }}" class="mt-2 inline-block bg-primary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Lihat Detail</a>
-                        </div>
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300">
+                        <a href="{{ route('products.show', $product) }}" class="block">
+                            <div class="relative pb-[75%]">
+                                <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" 
+                                    class="absolute inset-0 w-full h-full object-cover">
+                            </div>
+                            <div class="p-4">
+                                <h3 class="text-lg font-semibold text-gray-800 mb-2">{{ $product->name }}</h3>
+                                <p class="text-sm text-gray-600 mb-4">{{ Str::limit($product->description, 50) }}</p>
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="text-primary font-bold">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
+                                </div>
+                                <a href="{{ route('products.show', $product) }}" class="w-full inline-flex items-center justify-center gap-2 bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark hover:scale-[1.02] transition-all duration-300 shadow-md hover:shadow-lg transform">
+                                    <span>Lihat Detail</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </a>
                     </div>
                 @endforeach
             </div>
         </div>
 
         <!-- Kategori Kado & Cakes -->
-        <div class="mb-16">
-            <h3 class="text-2xl font-semibold text-center text-black mb-6">Kado & Cakes</h3>
-            <div class="flex overflow-x-auto gap-4 px-4">
+        <div class="mb-12 px-4 sm:px-6 md:px-8">
+            <div class="relative mb-6">
+                <h3 class="text-2xl font-semibold text-center text-black">Kado & Cakes</h3>
+                @if($products->where('category', 'Kado & Cakes')->count() > 0)
+                    <a href="{{ route('products.index', ['category' => 'Kado & Cakes']) }}" class="absolute right-0 top-[80%] inline-flex items-center gap-2 text-primary hover:text-primary-dark transition-all duration-300 group">
+                        <span class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all after:duration-300 group-hover:after:w-full">Lihat Selengkapnya</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-0.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                @endif
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
                 @foreach($products->where('category', 'Kado & Cakes')->take(4) as $product)
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden min-w-[250px] flex-shrink-0">
-                        <div class="w-full h-48 bg-gray-100 flex items-center justify-center">
-                            <img src="{{ $product->image_url }}" 
-                                 alt="{{ $product->name }}" 
-                                 class="w-full h-full object-cover"
-                                 onerror="this.src='{{ asset('images/default-product.jpg') }}'">
-                        </div>
-                        <div class="p-4">
-                            <h3 class="text-lg font-semibold text-black">{{ $product->name }}</h3>
-                            <p class="text-primary font-bold mt-2">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
-                            <a href="{{ route('products.show', $product) }}" class="mt-2 inline-block bg-primary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Lihat Detail</a>
-                        </div>
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300">
+                        <a href="{{ route('products.show', $product) }}" class="block">
+                            <div class="relative pb-[75%]">
+                                <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" 
+                                    class="absolute inset-0 w-full h-full object-cover">
+                            </div>
+                            <div class="p-4">
+                                <h3 class="text-lg font-semibold text-gray-800 mb-2">{{ $product->name }}</h3>
+                                <p class="text-sm text-gray-600 mb-4">{{ Str::limit($product->description, 50) }}</p>
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="text-primary font-bold">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
+                                </div>
+                                <a href="{{ route('products.show', $product) }}" class="w-full inline-flex items-center justify-center gap-2 bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark hover:scale-[1.02] transition-all duration-300 shadow-md hover:shadow-lg transform">
+                                    <span>Lihat Detail</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </a>
                     </div>
                 @endforeach
             </div>
