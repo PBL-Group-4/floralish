@@ -63,6 +63,12 @@ class ProductController extends Controller
 
     public function showByLocation($location)
     {
+        $validLocations = ['jakarta', 'bandung', 'batam'];
+        
+        if (!in_array(strtolower($location), $validLocations)) {
+            abort(404, 'Lokasi tidak ditemukan');
+        }
+
         $query = Product::query()->where('location', ucfirst($location));
 
         // Filter by search
@@ -108,7 +114,8 @@ class ProductController extends Controller
         
         return view($view, [
             'products' => $products,
-            'categories' => $categories
+            'categories' => $categories,
+            'location' => ucfirst($location)
         ]);
     }
 }

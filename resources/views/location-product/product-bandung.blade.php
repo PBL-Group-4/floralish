@@ -18,7 +18,7 @@
 <!-- Filter Section -->
 <div class="bg-white py-6 shadow-sm">
     <div class="container mx-auto px-4">
-        <form action="{{ route('product.bandung') }}" method="GET" class="flex flex-wrap gap-4 justify-between items-center">
+        <form action="{{ route('lokasi.show', ['location' => 'bandung']) }}" method="GET" class="flex flex-wrap gap-4 justify-between items-center">
             <div class="flex-1 min-w-[200px]">
                 <input type="text" name="search" value="{{ request('search') }}" 
                     placeholder="Cari produk..." 

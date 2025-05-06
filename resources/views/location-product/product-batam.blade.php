@@ -18,7 +18,7 @@
 <!-- Filter Section -->
 <div class="bg-white py-6 shadow-sm">
     <div class="container mx-auto px-4">
-        <form action="{{ route('products.location', 'batam') }}" method="GET" class="flex flex-wrap gap-4">
+        <form action="{{ route('lokasi.show', ['location' => 'batam']) }}" method="GET" class="flex flex-wrap gap-4 justify-between items-center">
             <div class="flex-1 min-w-[200px]">
                 <input type="text" name="search" value="{{ request('search') }}" 
                     placeholder="Cari produk..." 

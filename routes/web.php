@@ -11,14 +11,14 @@ use App\Http\Controllers\WhatsAppController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+// Location routes
 Route::get('/lokasi', function () {
     return view('lokasi');
-});
+})->name('lokasi.index');
 
-// Product routes
-Route::get('/product/jakarta', [ProductController::class, 'showByLocation'])->name('product.jakarta');
-Route::get('/product/bandung', [ProductController::class, 'showByLocation'])->name('product.bandung');
-Route::get('/product/batam', [ProductController::class, 'showByLocation'])->name('product.batam');
+Route::get('/lokasi/{location}', [ProductController::class, 'showByLocation'])
+    ->where('location', 'jakarta|bandung|batam')
+    ->name('lokasi.show');
 
 // Route untuk halaman dengan navbar
 Route::get('/navbar', [NavbarController::class, 'index'])->name('navbar.index');
@@ -72,11 +72,7 @@ Route::prefix('admin')->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
     Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
-    Route::get('/products/location/{city}', [ProductController::class, 'showByLocation'])->name('products.location');
 });
 
 // WhatsApp Route
 Route::get('/whatsapp/send', [WhatsAppController::class, 'send'])->name('whatsapp.send');
-
-// Product routes
-Route::get('/product/{location}', [ProductController::class, 'showByLocation'])->name('product.{location}');
