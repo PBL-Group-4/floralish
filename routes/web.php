@@ -75,4 +75,4 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // WhatsApp Route
-Route::get('/whatsapp/send', [WhatsAppController::class, 'send'])->name('whatsapp.send');
+Route::get('/whatsapp/send', [WhatsAppController::class, 'send'])->name('whatsapp.send')->middleware('auth');
