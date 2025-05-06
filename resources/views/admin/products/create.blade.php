@@ -59,14 +59,36 @@
 
                 <!-- Kategori -->
                 <div>
-                    <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
-                    <select name="category" id="category" class="w-full border rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary @error('category') border-red-500 @enderror">
-                        <option value="Bunga">Bunga</option>
-                        <option value="Karangan Bunga Papan">Karangan Bunga Papan</option>
-                        <option value="Kado & Cakes">Kado & Cakes</option>
+                    <label for="category" class="block text-sm font-medium text-gray-700">Kategori</label>
+                    <select name="category" id="category" required
+                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary">
+                        <option value="">Pilih Kategori</option>
+                        <option value="Bunga" {{ old('category') == 'Bunga' ? 'selected' : '' }}>Bunga</option>
+                        <option value="Karangan Bunga Papan" {{ old('category') == 'Karangan Bunga Papan' ? 'selected' : '' }}>Karangan Bunga Papan</option>
+                        <option value="Kado & Cakes" {{ old('category') == 'Kado & Cakes' ? 'selected' : '' }}>Kado & Cakes</option>
                     </select>
                     @error('category')
-                        <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- Lokasi -->
+                <div>
+                    <label for="location" class="block text-sm font-medium text-gray-700">Lokasi</label>
+                    @if(request('location'))
+                        <input type="text" name="location" id="location" value="{{ request('location') }}" readonly
+                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 bg-gray-50">
+                    @else
+                        <select name="location" id="location" required
+                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary">
+                            <option value="">Pilih Lokasi</option>
+                            <option value="batam" {{ old('location') == 'batam' ? 'selected' : '' }}>Batam</option>
+                            <option value="jakarta" {{ old('location') == 'jakarta' ? 'selected' : '' }}>Jakarta</option>
+                            <option value="bandung" {{ old('location') == 'bandung' ? 'selected' : '' }}>Bandung</option>
+                        </select>
+                    @endif
+                    @error('location')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
 
@@ -120,4 +142,22 @@
         </form>
     </div>
 </div>
+
+@push('scripts')
+<script>
+    // Preview image before upload
+    document.getElementById('image').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const preview = document.getElementById('preview');
+                preview.src = e.target.result;
+                document.getElementById('image-preview').classList.remove('hidden');
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+@endpush
 @endsection 

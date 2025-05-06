@@ -7,17 +7,19 @@
     <!-- Header -->
     <div class="flex justify-between items-center mb-6">
         <h1 class="text-2xl font-semibold text-gray-800">Manajemen Produk</h1>
-        <a href="{{ route('admin.products.create') }}" class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-            </svg>
-            Tambah Produk
-        </a>
+        <div class="flex space-x-2">
+            <a href="{{ route('admin.products.create', ['location' => request('location')]) }}" class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                </svg>
+                Tambah Produk {{ request('location') ? 'di ' . ucfirst(request('location')) : '' }}
+            </a>
+        </div>
     </div>
 
     <!-- Filters -->
     <div class="bg-white rounded-lg shadow-sm p-4 mb-6">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
             <!-- Search -->
             <div class="relative">
                 <input type="text" id="search" value="{{ request('search') }}" placeholder="Cari produk..." 
@@ -27,6 +29,16 @@
                 </svg>
             </div>
             
+            <!-- Location -->
+            <div>
+                <select id="location" class="w-full border rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary">
+                    <option value="">Semua Lokasi</option>
+                    <option value="batam" {{ request('location') == 'batam' ? 'selected' : '' }}>Batam</option>
+                    <option value="jakarta" {{ request('location') == 'jakarta' ? 'selected' : '' }}>Jakarta</option>
+                    <option value="bandung" {{ request('location') == 'bandung' ? 'selected' : '' }}>Bandung</option>
+                </select>
+            </div>
+            
             <!-- Kategori -->
             <div>
                 <select id="category" class="w-full border rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary">
@@ -34,6 +46,16 @@
                     <option value="Bunga" {{ request('category') == 'Bunga' ? 'selected' : '' }}>Bunga</option>
                     <option value="Karangan Bunga Papan" {{ request('category') == 'Karangan Bunga Papan' ? 'selected' : '' }}>Karangan Bunga Papan</option>
                     <option value="Kado & Cakes" {{ request('category') == 'Kado & Cakes' ? 'selected' : '' }}>Kado & Cakes</option>
+                </select>
+            </div>
+            
+            <!-- Stock Filter -->
+            <div>
+                <select id="stock_filter" class="w-full border rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary">
+                    <option value="">Filter Stok</option>
+                    <option value="in_stock" {{ request('stock_filter') == 'in_stock' ? 'selected' : '' }}>Tersedia</option>
+                    <option value="low_stock" {{ request('stock_filter') == 'low_stock' ? 'selected' : '' }}>Stok Menipis</option>
+                    <option value="out_of_stock" {{ request('stock_filter') == 'out_of_stock' ? 'selected' : '' }}>Habis</option>
                 </select>
             </div>
             
@@ -49,16 +71,6 @@
                     <option value="stock_desc" {{ request('sort') == 'stock_desc' ? 'selected' : '' }}>Stok (Tertinggi)</option>
                 </select>
             </div>
-            
-            <!-- Stock Filter -->
-            <div>
-                <select id="stock_filter" class="w-full border rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary">
-                    <option value="">Filter Stok</option>
-                    <option value="in_stock" {{ request('stock_filter') == 'in_stock' ? 'selected' : '' }}>Tersedia</option>
-                    <option value="low_stock" {{ request('stock_filter') == 'low_stock' ? 'selected' : '' }}>Stok Menipis</option>
-                    <option value="out_of_stock" {{ request('stock_filter') == 'out_of_stock' ? 'selected' : '' }}>Habis</option>
-                </select>
-            </div>
         </div>
     </div>
 
@@ -71,6 +83,7 @@
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Harga</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Stok</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kategori</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Lokasi</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
                 </tr>
@@ -97,6 +110,9 @@
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <div class="text-sm text-gray-900">{{ $product->category }}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-900">{{ $product->location ? ucfirst($product->location) : '-' }}</div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         @if($product->stock > 10)
@@ -134,7 +150,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="5" class="px-6 py-4 text-center text-gray-500">
+                    <td colspan="7" class="px-6 py-4 text-center text-gray-500">
                         Belum ada produk yang ditambahkan
                     </td>
                 </tr>
@@ -154,6 +170,7 @@
     // Fungsi untuk mengupdate URL dengan parameter filter
     function updateFilters() {
         const search = document.getElementById('search').value;
+        const location = document.getElementById('location').value;
         const category = document.getElementById('category').value;
         const sort = document.getElementById('sort').value;
         const stockFilter = document.getElementById('stock_filter').value;
@@ -165,6 +182,9 @@
         // Update parameter
         if (search) params.set('search', search);
         else params.delete('search');
+
+        if (location) params.set('location', location);
+        else params.delete('location');
 
         if (category) params.set('category', category);
         else params.delete('category');
@@ -187,6 +207,7 @@
     });
 
     // Event listener untuk select
+    document.getElementById('location').addEventListener('change', updateFilters);
     document.getElementById('category').addEventListener('change', updateFilters);
     document.getElementById('sort').addEventListener('change', updateFilters);
     document.getElementById('stock_filter').addEventListener('change', updateFilters);

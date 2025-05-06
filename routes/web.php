@@ -9,18 +9,16 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WhatsAppController;
 
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-
-
-Route::get('/produk', [ProductController::class, 'index']);
-Route::get('/', [HomeController::class, 'index']);
-Route::get('home', function () {
-    return view('home');
+Route::get('/lokasi', function () {
+    return view('lokasi');
 });
 
-Route::get('produk', function () {
-    return view('produk');
-});
+// Product routes
+Route::get('/product/jakarta', [ProductController::class, 'showByLocation'])->name('product.jakarta');
+Route::get('/product/bandung', [ProductController::class, 'showByLocation'])->name('product.bandung');
+Route::get('/product/batam', [ProductController::class, 'showByLocation'])->name('product.batam');
 
 // Route untuk halaman dengan navbar
 Route::get('/navbar', [NavbarController::class, 'index'])->name('navbar.index');
@@ -31,11 +29,6 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.authenticat
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('register.store');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-// Lokasi
-Route::get('/lokasi', function () {
-    return view('lokasi');
-});
 
 // Profile
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
@@ -79,7 +72,11 @@ Route::prefix('admin')->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
     Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+    Route::get('/products/location/{city}', [ProductController::class, 'showByLocation'])->name('products.location');
 });
 
 // WhatsApp Route
 Route::get('/whatsapp/send', [WhatsAppController::class, 'send'])->name('whatsapp.send');
+
+// Product routes
+Route::get('/product/{location}', [ProductController::class, 'showByLocation'])->name('product.{location}');

@@ -107,6 +107,11 @@ class AdminController extends Controller
     {
         $query = Product::query();
 
+        // Filter berdasarkan lokasi
+        if ($request->has('location') && $request->location != '') {
+            $query->where('location', $request->location);
+        }
+
         // Filter berdasarkan pencarian
         if ($request->has('search')) {
             $query->where('name', 'like', '%' . $request->search . '%')
@@ -163,8 +168,9 @@ class AdminController extends Controller
         }
 
         $products = $query->paginate(10);
+        $locations = Product::distinct()->pluck('location')->filter();
 
-        return view('admin.products.index', compact('products'));
+        return view('admin.products.index', compact('products', 'locations'));
     }
 
     public function createProduct()
@@ -180,6 +186,7 @@ class AdminController extends Controller
             'price' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
             'category' => 'required|in:Bunga,Karangan Bunga Papan,Kado & Cakes',
+            'location' => 'nullable|string|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
@@ -209,6 +216,7 @@ class AdminController extends Controller
             'price' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
             'category' => 'required|in:Bunga,Karangan Bunga Papan,Kado & Cakes',
+            'location' => 'nullable|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
@@ -367,5 +375,178 @@ class AdminController extends Controller
     public function settings()
     {
         return view('admin.settings');
+    }
+
+    /**
+     * Menampilkan daftar produk Batam
+     */
+    public function batamProducts(Request $request)
+    {
+        $query = Product::where('location', 'batam');
+
+        // Filter berdasarkan pencarian
+        if ($request->has('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%')
+                  ->orWhere('description', 'like', '%' . $request->search . '%');
+        }
+
+        // Filter berdasarkan kategori
+        if ($request->has('category') && $request->category != '') {
+            $query->where('category', $request->category);
+        }
+
+        // Filter berdasarkan stok
+        if ($request->has('stock_filter')) {
+            switch ($request->stock_filter) {
+                case 'in_stock':
+                    $query->where('stock', '>', 10);
+                    break;
+                case 'low_stock':
+                    $query->where('stock', '>', 0)->where('stock', '<=', 10);
+                    break;
+                case 'out_of_stock':
+                    $query->where('stock', 0);
+                    break;
+            }
+        }
+
+        // Sorting
+        if ($request->has('sort')) {
+            switch ($request->sort) {
+                case 'name_asc':
+                    $query->orderBy('name', 'asc');
+                    break;
+                case 'name_desc':
+                    $query->orderBy('name', 'desc');
+                    break;
+                case 'price_asc':
+                    $query->orderBy('price', 'asc');
+                    break;
+                case 'price_desc':
+                    $query->orderBy('price', 'desc');
+                    break;
+                case 'stock_asc':
+                    $query->orderBy('stock', 'asc');
+                    break;
+                case 'stock_desc':
+                    $query->orderBy('stock', 'desc');
+                    break;
+                default:
+                    $query->latest();
+                    break;
+            }
+        } else {
+            $query->latest();
+        }
+
+        $products = $query->paginate(10);
+
+        return view('admin.batam-products.index', compact('products'));
+    }
+
+    /**
+     * Menampilkan form tambah produk Batam
+     */
+    public function createBatamProduct()
+    {
+        return view('admin.batam-products.create');
+    }
+
+    /**
+     * Menyimpan produk Batam baru
+     */
+    public function storeBatamProduct(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
+            'category' => 'required|in:Bunga,Karangan Bunga Papan,Kado & Cakes',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images/products'), $imageName);
+            $validated['image'] = 'images/products/' . $imageName;
+        }
+
+        $validated['location'] = 'batam';
+        Product::create($validated);
+
+        return redirect()->route('admin.batam.products.index')
+            ->with('success', 'Produk Batam berhasil ditambahkan');
+    }
+
+    /**
+     * Menampilkan form edit produk Batam
+     */
+    public function editBatamProduct(Product $product)
+    {
+        if ($product->location !== 'batam') {
+            return redirect()->route('admin.batam.products.index')
+                ->with('error', 'Produk tidak ditemukan');
+        }
+        return view('admin.batam-products.edit', compact('product'));
+    }
+
+    /**
+     * Memperbarui produk Batam
+     */
+    public function updateBatamProduct(Request $request, Product $product)
+    {
+        if ($product->location !== 'batam') {
+            return redirect()->route('admin.batam.products.index')
+                ->with('error', 'Produk tidak ditemukan');
+        }
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
+            'category' => 'required|in:Bunga,Karangan Bunga Papan,Kado & Cakes',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        if ($request->hasFile('image')) {
+            // Hapus gambar lama jika ada
+            if ($product->image && file_exists(public_path($product->image))) {
+                unlink(public_path($product->image));
+            }
+
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images/products'), $imageName);
+            $validated['image'] = 'images/products/' . $imageName;
+        }
+
+        $product->update($validated);
+
+        return redirect()->route('admin.batam.products.index')
+            ->with('success', 'Produk Batam berhasil diperbarui');
+    }
+
+    /**
+     * Menghapus produk Batam
+     */
+    public function destroyBatamProduct(Product $product)
+    {
+        if ($product->location !== 'batam') {
+            return redirect()->route('admin.batam.products.index')
+                ->with('error', 'Produk tidak ditemukan');
+        }
+
+        // Hapus gambar produk jika ada
+        if ($product->image && file_exists(public_path($product->image))) {
+            unlink(public_path($product->image));
+        }
+
+        $product->delete();
+
+        return redirect()->route('admin.batam.products.index')
+            ->with('success', 'Produk Batam berhasil dihapus');
     }
 } 
