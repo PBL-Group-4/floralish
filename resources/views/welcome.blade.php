@@ -108,7 +108,7 @@
                 <ul class="flex space-x-6 mr-6">
                     <li><a href="/" class="text-black hover:text-primary">Home</a></li>
                     <li><a href="{{ route('products.index') }}" class="text-black hover:text-primary">Products</a></li>
-                    <li><a href="/profile" class="text-black hover:text-primary">About</a></li>
+                    <li><a href="/about" class="text-black hover:text-primary">About</a></li>
                     <li><a href="/contact" class="text-black hover:text-primary">Contact</a></li>
                     <li><a href="/lokasi" class="text-black hover:text-primary">Lokasi</a></li>
                 </ul>
@@ -181,7 +181,7 @@
         <div class="mobile-menu-content">
             <a href="/" class="mobile-menu-item">Home</a>
             <a href="{{ route('products.index') }}" class="mobile-menu-item">Products</a>
-            <a href="/profile" class="mobile-menu-item">About</a>
+            <a href="/about" class="mobile-menu-item">About</a>
             <a href="/contact" class="mobile-menu-item">Contact</a>
             <a href="/lokasi" class="mobile-menu-item">Lokasi</a>
             

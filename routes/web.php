@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WhatsAppController;
+use App\Http\Controllers\AboutController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -30,8 +31,8 @@ Route::get('/register', [AuthController::class, 'showRegister'])->name('register
 Route::post('/register', [AuthController::class, 'register'])->name('register.store');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Profile
-Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+// About
+Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 // Admin Routes
 Route::prefix('admin')->group(function () {

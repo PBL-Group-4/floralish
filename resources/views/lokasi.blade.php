@@ -92,7 +92,7 @@
             <ul class="flex space-x-6 mr-6">
                 <li><a href="/" class="text-black hover:text-primary">Home</a></li>
                 <li><a href="{{ route('products.index') }}" class="text-black hover:text-primary">Products</a></li>
-                <li><a href="/profile" class="text-black hover:text-primary">About</a></li>
+                <li><a href="/about" class="text-black hover:text-primary">About</a></li>
                 <li><a href="/contact" class="text-black hover:text-primary">Contact</a></li>
                 <li><a href="/lokasi" class="text-black hover:text-primary">Lokasi</a></li>
             </ul>
@@ -157,7 +157,7 @@
     <div class="mobile-menu-content">
         <a href="/" class="mobile-menu-item">Home</a>
         <a href="{{ route('products.index') }}" class="mobile-menu-item">Products</a>
-        <a href="/profile" class="mobile-menu-item">About</a>
+        <a href="/about" class="mobile-menu-item">About</a>
         <a href="/contact" class="mobile-menu-item">Contact</a>
         <a href="/lokasi" class="mobile-menu-item">Lokasi</a>
         
@@ -182,10 +182,43 @@
       <div class="absolute top-1/2 right-6 transform -translate-y-1/2 bg-white rounded-2xl p-6 max-w-md shadow-lg">
         <h2 class="font-bold text-lg sm:text-xl leading-tight mb-2 text-center">Toko Bunga & Florist Online Terlengkap, Kirim Se-Indonesia</h2>
         <p class="text-xs sm:text-sm font-semibold text-center mb-4">Toko bunga & florist online yang menghadirkan rangkaian bunga berkualitas tinggi...</p>
-        <button class="btn-pilih bg-[#7eaeb5] text-white rounded-full px-5 py-2 mx-auto block shadow-md hover:bg-[#6a9ba3] transition-colors">Pilih Tujuan Pengiriman</button>
+        <button onclick="openLocationModal()" class="btn-pilih bg-[#7eaeb5] text-white rounded-full px-5 py-2 mx-auto block shadow-md hover:bg-[#6a9ba3] transition-colors">Pilih Tujuan Pengiriman</button>
       </div>
     </div>
   </section>
+
+  <!-- Location Modal -->
+  <div id="locationModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold text-gray-900">Pilih Kota Tujuan</h2>
+        <button onclick="closeLocationModal()" class="text-gray-500 hover:text-gray-700">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      
+      <div class="space-y-4">
+        <div class="relative">
+          <input type="text" 
+                 id="citySearch" 
+                 placeholder="Cari kota..." 
+                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#7eaeb5] focus:border-[#7eaeb5]"
+                 onkeyup="filterCities()">
+        </div>
+        
+        <div id="cityList" class="max-h-60 overflow-y-auto space-y-2">
+          @foreach(['Batam','Jakarta','Bandung','Surabaya','Medan','Padang','Palembang','Pekanbaru','Pontianak','Kupang','Ambon','Manado','Makassar','Banjarmasin','Samarinda'] as $city)
+            <a href="{{ route('products.index', ['city' => strtolower($city)]) }}" 
+               class="block px-4 py-2 text-gray-700 hover:bg-[#7eaeb5] hover:text-white rounded-lg transition duration-200 city-item">
+              {{ $city }}
+            </a>
+          @endforeach
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Features -->
   <section class="max-w-full mx-0 mt-6 px-4 sm:px-6 md:px-10 lg:px-16">
@@ -378,6 +411,50 @@
             mobileMenu.style.display = 'none';
             mobileMenuOverlay.style.display = 'none';
         }, 300);
+    });
+
+    // Location Modal functionality
+    function openLocationModal() {
+        document.getElementById('locationModal').classList.remove('hidden');
+        document.getElementById('locationModal').classList.add('flex');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLocationModal() {
+        document.getElementById('locationModal').classList.add('hidden');
+        document.getElementById('locationModal').classList.remove('flex');
+        document.body.style.overflow = 'auto';
+    }
+
+    function filterCities() {
+        const input = document.getElementById('citySearch');
+        const filter = input.value.toUpperCase();
+        const cityList = document.getElementById('cityList');
+        const cities = cityList.getElementsByClassName('city-item');
+
+        for (let i = 0; i < cities.length; i++) {
+            const city = cities[i];
+            const text = city.textContent || city.innerText;
+            if (text.toUpperCase().indexOf(filter) > -1) {
+                city.style.display = "";
+            } else {
+                city.style.display = "none";
+            }
+        }
+    }
+
+    // Close modal when clicking outside
+    document.getElementById('locationModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeLocationModal();
+        }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeLocationModal();
+        }
     });
   </script>
 </body>
