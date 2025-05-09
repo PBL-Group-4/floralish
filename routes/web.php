@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WhatsAppController;
+use Illuminate\Http\Request;
 
 
 
@@ -39,6 +40,26 @@ Route::get('/lokasi', function () {
 
 // Profile
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+
+// Contact
+Route::get('/contact', function () {
+    return view('Tugas.contact');
+})->name('contact');
+
+Route::post('/contact', function (Request $request) {
+    $validated = $request->validate([
+        'name' => 'required|min:3|max:255',
+        'email' => 'required|email|max:255',
+        'category' => 'required|in:wedding,birthday,graduation,other',
+        'budget' => 'required|in:under_200k,200k_500k,500k_1m,above_1m',
+        'message' => 'required|min:10'
+    ]);
+
+    // Di sini Anda bisa menambahkan logika untuk menyimpan pesan ke database
+    // atau mengirim email notifikasi
+
+    return redirect()->back()->with('success', 'Pesan Anda telah berhasil dikirim! Kami akan segera menghubungi Anda.');
+})->name('contact.submit');
 
 // Admin Routes
 Route::prefix('admin')->group(function () {
