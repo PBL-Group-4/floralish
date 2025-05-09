@@ -16,6 +16,11 @@ class ProductController extends Controller
             $query->where('category', $request->category);
         }
 
+        // Filter berdasarkan kota
+        if ($request->has('city') && $request->city != '') {
+            $query->where('location', ucfirst($request->city));
+        }
+
         // Filter berdasarkan pencarian
         if ($request->has('search')) {
             $query->where('name', 'like', '%' . $request->search . '%')
@@ -63,7 +68,11 @@ class ProductController extends Controller
 
     public function showByLocation($location)
     {
-        $validLocations = ['jakarta', 'bandung', 'batam'];
+        $validLocations = [
+            'jakarta', 'bandung', 'batam', 'surabaya', 'medan', 'padang',
+            'palembang', 'pekanbaru', 'pontianak', 'kupang', 'ambon', 'manado',
+            'makassar', 'banjarmasin', 'samarinda'
+        ];
         
         if (!in_array(strtolower($location), $validLocations)) {
             abort(404, 'Lokasi tidak ditemukan');

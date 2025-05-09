@@ -85,6 +85,18 @@
                             <option value="batam" {{ old('location') == 'batam' ? 'selected' : '' }}>Batam</option>
                             <option value="jakarta" {{ old('location') == 'jakarta' ? 'selected' : '' }}>Jakarta</option>
                             <option value="bandung" {{ old('location') == 'bandung' ? 'selected' : '' }}>Bandung</option>
+                            <option value="surabaya" {{ old('location') == 'surabaya' ? 'selected' : '' }}>Surabaya</option>
+                            <option value="medan" {{ old('location') == 'medan' ? 'selected' : '' }}>Medan</option>
+                            <option value="padang" {{ old('location') == 'padang' ? 'selected' : '' }}>Padang</option>
+                            <option value="palembang" {{ old('location') == 'palembang' ? 'selected' : '' }}>Palembang</option>
+                            <option value="pekanbaru" {{ old('location') == 'pekanbaru' ? 'selected' : '' }}>Pekanbaru</option>
+                            <option value="pontianak" {{ old('location') == 'pontianak' ? 'selected' : '' }}>Pontianak</option>
+                            <option value="kupang" {{ old('location') == 'kupang' ? 'selected' : '' }}>Kupang</option>
+                            <option value="ambon" {{ old('location') == 'ambon' ? 'selected' : '' }}>Ambon</option>
+                            <option value="manado" {{ old('location') == 'manado' ? 'selected' : '' }}>Manado</option>
+                            <option value="makassar" {{ old('location') == 'makassar' ? 'selected' : '' }}>Makassar</option>
+                            <option value="banjarmasin" {{ old('location') == 'banjarmasin' ? 'selected' : '' }}>Banjarmasin</option>
+                            <option value="samarinda" {{ old('location') == 'samarinda' ? 'selected' : '' }}>Samarinda</option>
                         </select>
                     @endif
                     @error('location')

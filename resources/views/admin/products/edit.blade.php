@@ -82,6 +82,18 @@
                         <option value="batam" {{ old('location', $product->location) == 'batam' ? 'selected' : '' }}>Batam</option>
                         <option value="jakarta" {{ old('location', $product->location) == 'jakarta' ? 'selected' : '' }}>Jakarta</option>
                         <option value="bandung" {{ old('location', $product->location) == 'bandung' ? 'selected' : '' }}>Bandung</option>
+                        <option value="surabaya" {{ old('location', $product->location) == 'surabaya' ? 'selected' : '' }}>Surabaya</option>
+                        <option value="medan" {{ old('location', $product->location) == 'medan' ? 'selected' : '' }}>Medan</option>
+                        <option value="padang" {{ old('location', $product->location) == 'padang' ? 'selected' : '' }}>Padang</option>
+                        <option value="palembang" {{ old('location', $product->location) == 'palembang' ? 'selected' : '' }}>Palembang</option>
+                        <option value="pekanbaru" {{ old('location', $product->location) == 'pekanbaru' ? 'selected' : '' }}>Pekanbaru</option>
+                        <option value="pontianak" {{ old('location', $product->location) == 'pontianak' ? 'selected' : '' }}>Pontianak</option>
+                        <option value="kupang" {{ old('location', $product->location) == 'kupang' ? 'selected' : '' }}>Kupang</option>
+                        <option value="ambon" {{ old('location', $product->location) == 'ambon' ? 'selected' : '' }}>Ambon</option>
+                        <option value="manado" {{ old('location', $product->location) == 'manado' ? 'selected' : '' }}>Manado</option>
+                        <option value="makassar" {{ old('location', $product->location) == 'makassar' ? 'selected' : '' }}>Makassar</option>
+                        <option value="banjarmasin" {{ old('location', $product->location) == 'banjarmasin' ? 'selected' : '' }}>Banjarmasin</option>
+                        <option value="samarinda" {{ old('location', $product->location) == 'samarinda' ? 'selected' : '' }}>Samarinda</option>
                     </select>
                     @error('location')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>

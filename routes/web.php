@@ -65,8 +65,6 @@ Route::prefix('admin')->group(function () {
         // Settings Route
         Route::get('/settings', [AdminController::class, 'settings'])->name('admin.settings');
     });
-    
-    
 });
 
 Route::middleware(['auth'])->group(function () {

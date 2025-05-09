@@ -233,11 +233,7 @@
     <h3 class="text-white text-center text-lg sm:text-xl font-semibold tracking-widest mb-8">Temukan Offline Store kami</h3>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
       @foreach(['Batam','Jakarta','Bandung','Surabaya','Medan','Padang','Palembang','Pekanbaru','Pontianak','Kupang','Ambon','Manado','Makassar','Banjarmasin','Samarinda'] as $city)
-        @if(in_array($city, ['Batam', 'Jakarta', 'Bandung']))
-          <a href="{{ route('lokasi.show', ['location' => strtolower($city)]) }}" class="btn-store bg-white rounded-full shadow-lg py-3 px-8 text-[#7eaeb5] hover:brightness-90 transition text-sm font-medium text-center">{{ $city }}</a>
-        @else
-          <button class="btn-store bg-white rounded-full shadow-lg py-3 px-8 text-[#7eaeb5] hover:brightness-90 transition text-sm font-medium text-center">{{ $city }}</button>
-        @endif
+        <a href="{{ route('products.index', ['city' => strtolower($city)]) }}" class="btn-store bg-white rounded-full shadow-lg py-3 px-8 text-[#7eaeb5] hover:brightness-90 transition text-sm font-medium text-center">{{ $city }}</a>
       @endforeach
     </div>
   </section>
