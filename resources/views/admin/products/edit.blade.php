@@ -60,14 +60,43 @@
 
                 <!-- Kategori -->
                 <div>
-                    <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
-                    <select name="category" id="category" class="w-full border rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-primary @error('category') border-red-500 @enderror">
+                    <label for="category" class="block text-sm font-medium text-gray-700">Kategori</label>
+                    <select name="category" id="category" required
+                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary">
+                        <option value="">Pilih Kategori</option>
                         <option value="Bunga" {{ old('category', $product->category) == 'Bunga' ? 'selected' : '' }}>Bunga</option>
                         <option value="Karangan Bunga Papan" {{ old('category', $product->category) == 'Karangan Bunga Papan' ? 'selected' : '' }}>Karangan Bunga Papan</option>
                         <option value="Kado & Cakes" {{ old('category', $product->category) == 'Kado & Cakes' ? 'selected' : '' }}>Kado & Cakes</option>
                     </select>
                     @error('category')
-                        <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- Lokasi -->
+                <div>
+                    <label for="location" class="block text-sm font-medium text-gray-700">Lokasi</label>
+                    <select name="location" id="location" required
+                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary">
+                        <option value="">Pilih Lokasi</option>
+                        <option value="batam" {{ old('location', $product->location) == 'batam' ? 'selected' : '' }}>Batam</option>
+                        <option value="jakarta" {{ old('location', $product->location) == 'jakarta' ? 'selected' : '' }}>Jakarta</option>
+                        <option value="bandung" {{ old('location', $product->location) == 'bandung' ? 'selected' : '' }}>Bandung</option>
+                        <option value="surabaya" {{ old('location', $product->location) == 'surabaya' ? 'selected' : '' }}>Surabaya</option>
+                        <option value="medan" {{ old('location', $product->location) == 'medan' ? 'selected' : '' }}>Medan</option>
+                        <option value="padang" {{ old('location', $product->location) == 'padang' ? 'selected' : '' }}>Padang</option>
+                        <option value="palembang" {{ old('location', $product->location) == 'palembang' ? 'selected' : '' }}>Palembang</option>
+                        <option value="pekanbaru" {{ old('location', $product->location) == 'pekanbaru' ? 'selected' : '' }}>Pekanbaru</option>
+                        <option value="pontianak" {{ old('location', $product->location) == 'pontianak' ? 'selected' : '' }}>Pontianak</option>
+                        <option value="kupang" {{ old('location', $product->location) == 'kupang' ? 'selected' : '' }}>Kupang</option>
+                        <option value="ambon" {{ old('location', $product->location) == 'ambon' ? 'selected' : '' }}>Ambon</option>
+                        <option value="manado" {{ old('location', $product->location) == 'manado' ? 'selected' : '' }}>Manado</option>
+                        <option value="makassar" {{ old('location', $product->location) == 'makassar' ? 'selected' : '' }}>Makassar</option>
+                        <option value="banjarmasin" {{ old('location', $product->location) == 'banjarmasin' ? 'selected' : '' }}>Banjarmasin</option>
+                        <option value="samarinda" {{ old('location', $product->location) == 'samarinda' ? 'selected' : '' }}>Samarinda</option>
+                    </select>
+                    @error('location')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
 
@@ -128,4 +157,21 @@
         </form>
     </div>
 </div>
+
+@push('scripts')
+<script>
+    // Preview image before upload
+    document.getElementById('image').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const preview = document.getElementById('preview');
+                preview.src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+@endpush
 @endsection 

@@ -108,7 +108,7 @@
                 <ul class="flex space-x-6 mr-6">
                     <li><a href="/" class="text-black hover:text-primary">Home</a></li>
                     <li><a href="{{ route('products.index') }}" class="text-black hover:text-primary">Products</a></li>
-                    <li><a href="/profile" class="text-black hover:text-primary">About</a></li>
+                    <li><a href="/about" class="text-black hover:text-primary">About</a></li>
                     <li><a href="/contact" class="text-black hover:text-primary">Contact</a></li>
                     <li><a href="/lokasi" class="text-black hover:text-primary">Lokasi</a></li>
                 </ul>
@@ -147,11 +147,19 @@
                 </div>
 
                 <!-- WhatsApp Button -->
-                <a href="{{ route('whatsapp.send') }}" class="flex items-center text-black hover:text-primary ml-5">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                    </svg>
-                </a>
+                @auth
+                    <a href="{{ route('whatsapp.send') }}" class="flex items-center text-black hover:text-primary ml-5">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
+                    </a>
+                @else
+                    <a href="{{ route('login') }}" class="flex items-center text-black hover:text-primary ml-5" title="Login untuk menghubungi kami via WhatsApp">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
+                    </a>
+                @endauth
             </nav>
             
             <!-- Tombol Menu Mobile -->
@@ -173,7 +181,7 @@
         <div class="mobile-menu-content">
             <a href="/" class="mobile-menu-item">Home</a>
             <a href="{{ route('products.index') }}" class="mobile-menu-item">Products</a>
-            <a href="/profile" class="mobile-menu-item">About</a>
+            <a href="/about" class="mobile-menu-item">About</a>
             <a href="/contact" class="mobile-menu-item">Contact</a>
             <a href="/lokasi" class="mobile-menu-item">Lokasi</a>
             
@@ -231,53 +239,14 @@
     <section class="bg-white container mx-auto px-4 py-12">
         <h2 class="text-3xl font-bold text-center text-black mb-8">Kategori Produk</h2>
         <div class="flex flex-wrap justify-center gap-6 md:gap-10">
-            <!-- Kategori 1 -->
+            @foreach($categories as $category)
             <div class="category-item">
                 <div class="category-circle">
-                    <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&h=150&q=80" alt="Bunga">
+                    <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&h=150&q=80" alt="{{ $category->category }}">
                 </div>
-                <h3 class="text-lg font-semibold text-center mt-3">Bunga</h3>
+                <h3 class="text-lg font-semibold text-center mt-3">{{ $category->category }}</h3>
             </div>
-            
-            <!-- Kategori 2 -->
-            <div class="category-item">
-                <div class="category-circle">
-                    <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&h=150&q=80" alt="Buket">
-                </div>
-                <h3 class="text-lg font-semibold text-center mt-3">Buket</h3>
-            </div>
-            
-            <!-- Kategori 3 -->
-            <div class="category-item">
-                <div class="category-circle">
-                    <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&h=150&q=80" alt="Hampers">
-                </div>
-                <h3 class="text-lg font-semibold text-center mt-3">Hampers</h3>
-            </div>
-            
-            <!-- Kategori 4 -->
-            <div class="category-item">
-                <div class="category-circle">
-                    <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&h=150&q=80" alt="Papan Bunga">
-                </div>
-                <h3 class="text-lg font-semibold text-center mt-3">Papan Bunga</h3>
-            </div>
-            
-            <!-- Kategori 5 -->
-            <div class="category-item">
-                <div class="category-circle">
-                    <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&h=150&q=80" alt="Box Bunga">
-                </div>
-                <h3 class="text-lg font-semibold text-center mt-3">Box Bunga</h3>
-            </div>
-            
-            <!-- Kategori 6 -->
-            <div class="category-item">
-                <div class="category-circle">
-                    <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&h=150&q=80" alt="Aksesoris">
-                </div>
-                <h3 class="text-lg font-semibold text-center mt-3">Aksesoris</h3>
-            </div>
+            @endforeach
         </div>
     </section>
     
@@ -285,71 +254,46 @@
     <section class="bg-white w-full px-0 py-12">
         <h2 class="text-3xl font-bold text-center text-black mb-8">Catalog Produk</h2>
         
-        <!-- Kategori Bunga -->
-        <div class="mb-16">
-            <h3 class="text-2xl font-semibold text-center text-black mb-6">Bunga</h3>
-            <div class="flex overflow-x-auto gap-4 px-4">
-                @foreach($products->where('category', 'Bunga')->take(4) as $product)
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden min-w-[250px] flex-shrink-0">
-                        <div class="w-full h-48 bg-gray-100 flex items-center justify-center">
-                            <img src="{{ $product->image_url }}" 
-                                 alt="{{ $product->name }}" 
-                                 class="w-full h-full object-cover"
-                                 onerror="this.src='{{ asset('images/default-product.jpg') }}'">
-                        </div>
-                        <div class="p-4">
-                            <h3 class="text-lg font-semibold text-black">{{ $product->name }}</h3>
-                            <p class="text-primary font-bold mt-2">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
-                            <a href="{{ route('products.show', $product) }}" class="mt-2 inline-block bg-primary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Lihat Detail</a>
-                        </div>
+        @foreach(['Bunga', 'Karangan Bunga Papan', 'Kado & Cakes'] as $categoryName)
+        <div class="mb-12 px-4 sm:px-6 md:px-8">
+            <div class="relative mb-6">
+                <h3 class="text-2xl font-semibold text-center text-black">{{ $categoryName }}</h3>
+                @if($products->where('category', $categoryName)->count() > 0)
+                    <a href="{{ route('products.index', ['category' => $categoryName]) }}" class="absolute right-0 top-[80%] inline-flex items-center gap-2 text-primary hover:text-primary-dark transition-all duration-300 group">
+                        <span class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all after:duration-300 group-hover:after:w-full">Lihat Selengkapnya</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-0.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                @endif
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
+                @foreach($products->where('category', $categoryName)->take(4) as $product)
+                    <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300 h-full flex flex-col">
+                        <a href="{{ route('products.show', $product) }}" class="block flex-grow">
+                            <div class="relative pb-[75%]">
+                                <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" 
+                                    class="absolute inset-0 w-full h-full object-cover">
+                            </div>
+                            <div class="p-4 flex flex-col flex-grow">
+                                <h3 class="text-lg font-semibold text-gray-800 mb-2 line-clamp-2">{{ $product->name }}</h3>
+                                <p class="text-sm text-gray-600 mb-4 line-clamp-2">{{ Str::limit($product->description, 50) }}</p>
+                                <div class="flex justify-between items-center mb-4 mt-auto">
+                                    <span class="text-primary font-bold">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
+                                </div>
+                                <a href="{{ route('products.show', $product) }}" class="w-full inline-flex items-center justify-center gap-2 bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark hover:scale-[1.02] transition-all duration-300 shadow-md hover:shadow-lg transform">
+                                    <span>Lihat Detail</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </a>
                     </div>
                 @endforeach
             </div>
         </div>
-
-        <!-- Kategori Karangan Bunga Papan -->
-        <div class="mb-16">
-            <h3 class="text-2xl font-semibold text-center text-black mb-6">Karangan Bunga Papan</h3>
-            <div class="flex overflow-x-auto gap-4 px-4">
-                @foreach($products->where('category', 'Karangan Bunga Papan')->take(4) as $product)
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden min-w-[250px] flex-shrink-0">
-                        <div class="w-full h-48 bg-gray-100 flex items-center justify-center">
-                            <img src="{{ $product->image_url }}" 
-                                 alt="{{ $product->name }}" 
-                                 class="w-full h-full object-cover"
-                                 onerror="this.src='{{ asset('images/default-product.jpg') }}'">
-                        </div>
-                        <div class="p-4">
-                            <h3 class="text-lg font-semibold text-black">{{ $product->name }}</h3>
-                            <p class="text-primary font-bold mt-2">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
-                            <a href="{{ route('products.show', $product) }}" class="mt-2 inline-block bg-primary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Lihat Detail</a>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-
-        <!-- Kategori Kado & Cakes -->
-        <div class="mb-16">
-            <h3 class="text-2xl font-semibold text-center text-black mb-6">Kado & Cakes</h3>
-            <div class="flex overflow-x-auto gap-4 px-4">
-                @foreach($products->where('category', 'Kado & Cakes')->take(4) as $product)
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden min-w-[250px] flex-shrink-0">
-                        <div class="w-full h-48 bg-gray-100 flex items-center justify-center">
-                            <img src="{{ $product->image_url }}" 
-                                 alt="{{ $product->name }}" 
-                                 class="w-full h-full object-cover"
-                                 onerror="this.src='{{ asset('images/default-product.jpg') }}'">
-                        </div>
-                        <div class="p-4">
-                            <h3 class="text-lg font-semibold text-black">{{ $product->name }}</h3>
-                            <p class="text-primary font-bold mt-2">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
-                            <a href="{{ route('products.show', $product) }}" class="mt-2 inline-block bg-primary text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition">Lihat Detail</a>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
+        @endforeach
     </section>
 
     <!-- Features -->
@@ -398,7 +342,7 @@
         <h3 class="text-[#7eaeb5] text-center text-lg sm:text-xl font-semibold tracking-widest mb-8">Temukan Offline Store kami</h3>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
             @foreach(['Batam','Jakarta','Bandung','Surabaya','Medan','Padang','Palembang','Pekanbaru','Pontianak','Kupang','Ambon','Manado','Makassar','Banjarmasin','Samarinda'] as $city)
-                <button class="btn-store bg-[#7eaeb5] rounded-full shadow-lg py-3 px-8 text-white hover:brightness-90 transition text-sm font-medium">{{ $city }}</button>
+                <a href="{{ route('products.index', ['city' => strtolower($city)]) }}" class="btn-store bg-[#7eaeb5] rounded-full shadow-lg py-3 px-8 text-white hover:brightness-90 transition text-sm font-medium text-center">{{ $city }}</a>
             @endforeach
         </div>
     </section>

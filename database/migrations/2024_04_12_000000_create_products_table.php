@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('stock');
             $table->string('image')->nullable();
             $table->enum('category', ['Bunga', 'Karangan Bunga Papan', 'Kado & Cakes'])->default('Bunga');
+            $table->string('location')->nullable();
             $table->timestamps();
         });
     }

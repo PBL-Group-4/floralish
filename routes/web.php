@@ -9,19 +9,18 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WhatsAppController;
 use Illuminate\Http\Request;
+use App\Http\Controllers\AboutController;
 
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
+// Location routes
+Route::get('/lokasi', function () {
+    return view('lokasi');
+})->name('lokasi.index');
 
-
-Route::get('/produk', [ProductController::class, 'index']);
-Route::get('/', [HomeController::class, 'index']);
-Route::get('home', function () {
-    return view('home');
-});
-
-Route::get('produk', function () {
-    return view('produk');
-});
+Route::get('/lokasi/{location}', [ProductController::class, 'showByLocation'])
+    ->where('location', 'jakarta|bandung|batam|surabaya|medan|padang|palembang|pekanbaru|pontianak|kupang|ambon|manado|makassar|banjarmasin|samarinda')
+    ->name('lokasi.show');
 
 // Route untuk halaman dengan navbar
 Route::get('/navbar', [NavbarController::class, 'index'])->name('navbar.index');
@@ -33,13 +32,8 @@ Route::get('/register', [AuthController::class, 'showRegister'])->name('register
 Route::post('/register', [AuthController::class, 'register'])->name('register.store');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Lokasi
-Route::get('/lokasi', function () {
-    return view('lokasi');
-});
-
-// Profile
-Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+// About
+Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 // Contact
 Route::get('/contact', function () {
@@ -93,8 +87,6 @@ Route::prefix('admin')->group(function () {
         // Settings Route
         Route::get('/settings', [AdminController::class, 'settings'])->name('admin.settings');
     });
-    
-    
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -103,4 +95,4 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // WhatsApp Route
-Route::get('/whatsapp/send', [WhatsAppController::class, 'send'])->name('whatsapp.send');
+Route::get('/whatsapp/send', [WhatsAppController::class, 'send'])->name('whatsapp.send')->middleware('auth');

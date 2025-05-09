@@ -6,13 +6,20 @@ use Illuminate\Http\Request;
 
 class WhatsAppController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function send()
     {
         // Nomor WhatsApp penjual (format: 628xxxxxxxxxx)
         $phoneNumber = '6282283130010'; // Ganti dengan nomor WhatsApp penjual yang sebenarnya
         
-        // Template pesan
-        $message = "Halo, saya tertarik dengan produk Floralish. Mohon informasinya lebih lanjut.";
+        // Template pesan dengan informasi user
+        $message = "Halo, saya " . auth()->user()->name . " tertarik dengan produk Floralish.\n";
+        $message .= "Email: " . auth()->user()->email . "\n";
+        $message .= "Mohon informasinya lebih lanjut.";
         
         // Encode pesan untuk URL
         $encodedMessage = urlencode($message);

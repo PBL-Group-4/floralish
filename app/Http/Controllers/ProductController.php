@@ -16,6 +16,11 @@ class ProductController extends Controller
             $query->where('category', $request->category);
         }
 
+        // Filter berdasarkan kota
+        if ($request->has('city') && $request->city != '') {
+            $query->where('location', ucfirst($request->city));
+        }
+
         // Filter berdasarkan pencarian
         if ($request->has('search')) {
             $query->where('name', 'like', '%' . $request->search . '%')
@@ -59,5 +64,67 @@ class ProductController extends Controller
             ->get();
 
         return view('products.show', compact('product', 'relatedProducts'));
+    }
+
+    public function showByLocation($location)
+    {
+        $validLocations = [
+            'jakarta', 'bandung', 'batam', 'surabaya', 'medan', 'padang',
+            'palembang', 'pekanbaru', 'pontianak', 'kupang', 'ambon', 'manado',
+            'makassar', 'banjarmasin', 'samarinda'
+        ];
+        
+        if (!in_array(strtolower($location), $validLocations)) {
+            abort(404, 'Lokasi tidak ditemukan');
+        }
+
+        $query = Product::query()->where('location', ucfirst($location));
+
+        // Filter by search
+        if (request('search')) {
+            $query->where(function($q) {
+                $q->where('name', 'like', '%' . request('search') . '%')
+                  ->orWhere('description', 'like', '%' . request('search') . '%');
+            });
+        }
+
+        // Filter by category
+        if (request('category')) {
+            $query->where('category', request('category'));
+        }
+
+        // Sort products
+        if (request('sort')) {
+            switch (request('sort')) {
+                case 'price_asc':
+                    $query->orderBy('price', 'asc');
+                    break;
+                case 'price_desc':
+                    $query->orderBy('price', 'desc');
+                    break;
+                case 'name_asc':
+                    $query->orderBy('name', 'asc');
+                    break;
+                case 'name_desc':
+                    $query->orderBy('name', 'desc');
+                    break;
+                default:
+                    $query->orderBy('created_at', 'desc');
+            }
+        } else {
+            $query->orderBy('created_at', 'desc');
+        }
+
+        $products = $query->paginate(12);
+        $categories = Product::select('category')->distinct()->get();
+
+        // Determine which view to use based on location
+        $view = 'location-product.product-' . strtolower($location);
+        
+        return view($view, [
+            'products' => $products,
+            'categories' => $categories,
+            'location' => ucfirst($location)
+        ]);
     }
 }

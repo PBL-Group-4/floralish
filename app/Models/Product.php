@@ -17,6 +17,7 @@ class Product extends Model
         'stock',
         'image',
         'category',
+        'location',
     ];
 
     public function getImageUrlAttribute()
@@ -26,12 +27,5 @@ class Product extends Model
         }
         
         return asset('images/default-product.jpg');
-    }
-
-    public function orders()
-    {
-        return $this->belongsToMany(Order::class, 'order_items')
-            ->withPivot('quantity', 'price')
-            ->withTimestamps();
     }
 } 
