@@ -17,7 +17,7 @@ Route::get('/lokasi', function () {
 })->name('lokasi.index');
 
 Route::get('/lokasi/{location}', [ProductController::class, 'showByLocation'])
-    ->where('location', 'jakarta|bandung|batam')
+    ->where('location', 'jakarta|bandung|batam|surabaya|medan|padang|palembang|pekanbaru|pontianak|kupang|ambon|manado|makassar|banjarmasin|samarinda')
     ->name('lokasi.show');
 
 // Route untuk halaman dengan navbar

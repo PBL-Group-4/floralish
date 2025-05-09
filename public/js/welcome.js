@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Tunggu animasi selesai, lalu arahkan ke halaman home
         setTimeout(function() {
-            window.location.href = '/home';
+            window.location.href = '/';
         }, 2500);
     });
 }); 

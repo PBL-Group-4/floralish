@@ -10,8 +10,9 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $products = Product::latest()->take(8)->get();
-        return view('welcome', compact('products'));
+        $products = Product::latest()->get();
+        $categories = Product::select('category')->distinct()->get();
+        return view('welcome', compact('products', 'categories'));
     }
     
     public function contact()

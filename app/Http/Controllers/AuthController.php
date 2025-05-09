@@ -29,7 +29,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
-            return redirect('/');
+            return redirect()->intended(route('products.index'));
         }
 
         return back()->with('error', 'Email atau password salah.');
