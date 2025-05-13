@@ -86,7 +86,7 @@
                 </button>
             </div>
         </form>
-        
+
         <div class="mt-6 text-center">
             <p class="text-sm text-gray-600">
                 Belum punya akun? 
