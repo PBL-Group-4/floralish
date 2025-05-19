@@ -6,137 +6,104 @@
 
 ---
 
-# 📘 Project Based Learning (PBL)
+## 📘 Project Based Learning (PBL) - Kelompok 4
 
-## 👥 Kelompok 4
-
-<table>
-    <tr>
-        <th>NIM</th>
-        <th>Nama</th>
-        <th>Role</th>
-        <th>Posisi</th>
-    </tr>
-    <tr>
-        <td>3312411026</td>
-        <td>Wahyu Perwira Sanusi Sihombing</td>
-        <td>Front End Developer</td>
-        <td>Ketua Grup</td>
-    </tr>
-    <tr>
-        <td>3312411017</td>
-        <td>Bindhu Owen Batami Hutagalung</td>
-        <td>Full Stack Developer</td>
-        <td>Anggota Grup</td>
-    </tr>
-    <tr>
-        <td>3312411025</td>
-        <td>Reynold Steven Lumbantoruan</td>
-        <td>Front End Developer</td>
-        <td>Anggota Grup</td>
-    </tr>
-    <tr>
-        <td>3312411014</td>
-        <td>Syahnaz Dwi Pawestri</td>
-        <td>UI/UX Designer, Tester</td>
-        <td>Anggota Grup</td>
-    </tr>
-</table>
+| NIM         | Nama                               | Role                    | Posisi        |
+|-------------|------------------------------------|-------------------------|----------------|
+| 3312411026  | Wahyu Perwira Sanusi Sihombing     | Front End Developer     | Ketua Grup     |
+| 3312411017  | Bindhu Owen Batami Hutagalung      | Full Stack Developer    | Anggota Grup   |
+| 3312411025  | Reynold Steven Lumbantoruan         | Front End Developer     | Anggota Grup   |
+| 3312411014  | Syahnaz Dwi Pawestri               | UI/UX Designer, Tester  | Anggota Grup   |
 
 ---
 
 ## 🔧 Fitur yang Tersedia
 
-Berikut adalah fitur-fitur yang ada pada project ini:
+### ✅ Autentikasi & Manajemen User
+- Login/Register untuk user biasa
+- Login/Register untuk admin (hotkey rahasia)
+- Manajemen profil user
+- Logout
 
-1. **Autentikasi & Manajemen User**:
-   - Login/Register untuk user biasa
-   - Login/Register untuk admin (dengan hotkey rahasia)
-   - Manajemen profil user
-   - Logout
+### 📦 Manajemen Produk
+- Daftar produk
+- Detail produk
+- CRUD produk untuk admin
 
-2. **Manajemen Produk**:
-   - Daftar produk
-   - Detail produk
-   - CRUD produk (Create, Read, Update, Delete) untuk admin
+### 🧑‍💼 Manajemen Admin
+- Dashboard admin
+- Manajemen user & produk
+- Pengaturan sistem
 
-3. **Manajemen Admin**:
-   - Dashboard admin
-   - Manajemen user
-   - Manajemen produk
-   - Pengaturan sistem
+### 🧭 Navigasi & UI
+- Navbar responsif (desktop & mobile)
+- Dropdown menu profil
+- WhatsApp button
+- Footer dengan informasi kontak
 
-4. **Navigasi & UI**:
-   - Navbar responsif (desktop & mobile)
-   - Dropdown menu profil
-   - WhatsApp button
-   - Footer dengan informasi kontak
+### 📄 Halaman
+- Home
+- Products
+- About
+- Location
+- Profile
+- Admin Dashboard
 
-5. **Halaman**:
-   - Home page
-   - Products page
-   - About page
-   - Location page
-   - Profile page
-   - Admin dashboard
+### 📱 Responsivitas
+- Tampilan mobile-friendly
+- Menu mobile
+- Layout yang responsif
 
-6. **Responsivitas**:
-   - Tampilan mobile-friendly
-   - Menu mobile
-   - Layout yang responsif
+### 🔗 Integrasi
+- WhatsApp integration
+- Google Maps untuk lokasi toko
 
-7. **Integrasi**:
-   - WhatsApp integration
-   - Google Maps untuk lokasi
+### 🎨 Styling & UI/UX
+- Desain modern dengan Tailwind CSS
+- Animasi & transisi
+- Font Awesome icons
+- Google Fonts (Poppins & Pacifico)
 
-8. **Styling & UI/UX**:
-   - Desain modern dengan Tailwind CSS
-   - Animasi dan transisi
-   - Ikon Font Awesome
-   - Custom fonts (Poppins & Pacifico)
+### 🔒 Keamanan
+- Middleware untuk autentikasi & admin
+- CSRF protection
+- Validasi form
 
-9. **Keamanan**:
-   - Middleware untuk autentikasi
-   - Middleware untuk admin
-   - CSRF protection
-   - Form validation
-
-10. **Database**:
-    - Relational database dengan MySQL/MariaDB
-    - Eloquent ORM untuk interaksi database
+### 🗄️ Database
+- Relational database: MySQL/MariaDB
+- Eloquent ORM
 
 ---
 
 ## 🛠️ Teknologi yang Digunakan
 
-Pada project ini digunakan beberapa bahasa pemrograman dan teknologi berikut:
-
-### Backend:
+### Backend
 - **PHP** (Laravel Framework)
-- **SQL** (untuk database)
+- **MySQL/MariaDB** (Database)
 
-### Frontend:
-- **HTML**
-- **CSS** (menggunakan Tailwind CSS)
-- **JavaScript**
+### Frontend
+- **HTML**, **CSS** (Tailwind CSS), **JavaScript**
 - **Blade Template Engine** (Laravel)
 
-### Styling:
-- **Tailwind CSS** (framework CSS)
-- **Font Awesome** (untuk ikon)
-- **Google Fonts** (menggunakan *Poppins* dan *Pacifico*)
+### Styling & Resources
+- **Tailwind CSS**
+- **Font Awesome**
+- **Google Fonts** (Poppins, Pacifico)
 
-### Database:
-- **MySQL/MariaDB** (dengan Laravel Eloquent ORM)
-
-### Lainnya:
-- **Composer** (untuk dependency management PHP)
-- **npm** (untuk package management JavaScript)
-
-Project ini menggunakan **Laravel** sebagai framework utama yang menyediakan struktur **MVC (Model-View-Controller)** serta berbagai fitur *built-in* untuk pengembangan web yang lebih efisien dan terstruktur.
+### Tools & Dependency Management
+- **Composer** (PHP dependency management)
+- **npm** (JavaScript package management)
 
 ---
 
-## 🚀 Catatan
+## 🚀 Catatan Pengembangan
 
-Pengembangan fitur masih akan **berlanjut** dan terus di-*update* untuk meningkatkan fungsi dan pengalaman pengguna. Stay tuned!
+Pengembangan proyek ini masih terus **berlanjut** dan akan terus di-*update* untuk meningkatkan fungsionalitas dan pengalaman pengguna secara keseluruhan.  
+Stay tuned for more updates! 🌸
+
+---
+
+## 📌 Lisensi
+
+Proyek ini dibuat untuk tujuan pembelajaran dan bukan untuk penggunaan komersial. Semua hak cipta dimiliki oleh anggota Kelompok 4 Polibatam.
+
