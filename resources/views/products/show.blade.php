@@ -32,9 +32,9 @@
                 <p class="text-gray-600">{{ $product->stock }} unit tersedia</p>
             </div>
 
-            <button class="w-full bg-primary hover:bg-primary/90 text-white py-3 rounded-lg font-semibold transition-colors duration-300">
+            <a href="{{ route('checkout', $product->id) }}" class="block w-full bg-primary hover:bg-primary/90 text-white py-3 rounded-lg font-semibold transition-colors duration-300 text-center">
                 Pesan Sekarang
-            </button>
+            </a>
         </div>
     </div>
 

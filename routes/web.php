@@ -10,6 +10,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WhatsAppController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\OrderController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -77,6 +78,12 @@ Route::prefix('admin')->group(function () {
         Route::put('/products/{product}', [AdminController::class, 'updateProduct'])->name('admin.products.update');
         Route::delete('/products/{product}', [AdminController::class, 'destroyProduct'])->name('admin.products.destroy');
 
+        // Order Management Routes
+        Route::get('/orders', [AdminController::class, 'orders'])->name('admin.orders.index');
+        Route::get('/orders/{order}', [AdminController::class, 'showOrder'])->name('admin.orders.show');
+        Route::patch('/orders/{order}/status', [AdminController::class, 'updateOrderStatus'])->name('admin.orders.update-status');
+        Route::delete('/orders/{order}', [AdminController::class, 'destroyOrder'])->name('admin.orders.destroy');
+
         // User Management Routes
         Route::get('/users', [AdminController::class, 'users'])->name('admin.users.index');
         Route::get('/users/{id}/edit', [AdminController::class, 'editUser'])->name('admin.users.edit');
@@ -92,6 +99,12 @@ Route::prefix('admin')->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
     Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+    Route::get('/checkout/{productId}', [OrderController::class, 'checkout'])->name('checkout');
+    Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+    Route::get('/orders/success', [OrderController::class, 'success'])->name('orders.success');
+    
+    // Profile Routes
+    Route::get('/profile/orders', [ProfileController::class, 'orders'])->name('profile.orders');
 });
 
 // WhatsApp Route

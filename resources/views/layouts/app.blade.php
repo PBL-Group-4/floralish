@@ -65,6 +65,16 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
+        /* Add padding to create hover area */
+        .dropdown::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            height: 20px;
+            background: transparent;
+        }
         .dropdown-item {
             color: black;
             padding: 12px 16px;
@@ -129,12 +139,33 @@
         }
         .mobile-menu-dropdown {
             padding-left: 1rem;
+            display: none;
         }
         .mobile-menu-dropdown-item {
             display: block;
             padding: 0.5rem 0;
             color: #666;
             text-decoration: none;
+            cursor: pointer;
+        }
+        .mobile-menu-dropdown-item:hover {
+            color: #90C9CF;
+        }
+        .mobile-menu-dropdown form {
+            margin: 0;
+            padding: 0;
+        }
+        .mobile-menu-dropdown button {
+            background: none;
+            border: none;
+            padding: 0.5rem 0;
+            color: #666;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+        }
+        .mobile-menu-dropdown button:hover {
+            color: #90C9CF;
         }
     </style>
 </head>
@@ -147,11 +178,11 @@
             <!-- Navigasi Desktop -->
             <nav class="hidden md:flex items-center">
                 <ul class="flex space-x-6 mr-6">
-                    <li><a href="/" class="text-black hover:text-primary">Home</a></li>
+                    <li><a href="{{ route('home') }}" class="text-black hover:text-primary">Home</a></li>
                     <li><a href="{{ route('products.index') }}" class="text-black hover:text-primary">Products</a></li>
-                    <li><a href="/about" class="text-black hover:text-primary">About</a></li>
-                    <li><a href="/contact" class="text-black hover:text-primary">Contact</a></li>
-                    <li><a href="/lokasi" class="text-black hover:text-primary">Lokasi</a></li>
+                    <li><a href="{{ route('about') }}" class="text-black hover:text-primary">About</a></li>
+                    <li><a href="{{ route('contact') }}" class="text-black hover:text-primary">Contact</a></li>
+                    <li><a href="{{ route('lokasi.index') }}" class="text-black hover:text-primary">Lokasi</a></li>
                 </ul>
                 
                 <!-- Menu Dropdown Profil (Belum Login) -->
@@ -177,8 +208,8 @@
                         {{ Auth::check() ? Auth::user()->name : 'Profile' }}
                     </button>
                     <div class="dropdown-content">
-                        <a href="#" class="dropdown-item">My Profile</a>
-                        <a href="#" class="dropdown-item">My Orders</a>
+                        <a href="{{ route('profile.orders') }}" class="dropdown-item">My Profile</a>
+                        <a href="{{ route('profile.orders') }}" class="dropdown-item">My Orders</a>
                         <div class="dropdown-divider"></div>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
@@ -212,17 +243,26 @@
             <button id="mobileMenuClose" class="mobile-menu-close">&times;</button>
         </div>
         <div class="mobile-menu-content">
-            <a href="/" class="mobile-menu-item">Home</a>
+            <a href="{{ route('home') }}" class="mobile-menu-item">Home</a>
             <a href="{{ route('products.index') }}" class="mobile-menu-item">Products</a>
-            <a href="/about" class="mobile-menu-item">About</a>
-            <a href="/contact" class="mobile-menu-item">Contact</a>
-            <a href="/lokasi" class="mobile-menu-item">Lokasi</a>
+            <a href="{{ route('about') }}" class="mobile-menu-item">About</a>
+            <a href="{{ route('contact') }}" class="mobile-menu-item">Contact</a>
+            <a href="{{ route('lokasi.index') }}" class="mobile-menu-item">Lokasi</a>
             
             <div class="mt-4">
                 <div class="mobile-menu-item">Profile</div>
                 <div class="mobile-menu-dropdown">
-                    <a href="{{ route('login') }}" class="mobile-menu-dropdown-item">Login</a>
-                    <a href="{{ route('register') }}" class="mobile-menu-dropdown-item">Register</a>
+                    @auth
+                        <a href="{{ route('profile.orders') }}" class="mobile-menu-dropdown-item">My Profile</a>
+                        <a href="{{ route('profile.orders') }}" class="mobile-menu-dropdown-item">My Orders</a>
+                        <form action="{{ route('logout') }}" method="POST" class="mobile-menu-dropdown-item">
+                            @csrf
+                            <button type="submit" class="w-full text-left">Logout</button>
+                        </form>
+                    @else
+                        <a href="{{ route('login') }}" class="mobile-menu-dropdown-item">Login</a>
+                        <a href="{{ route('register') }}" class="mobile-menu-dropdown-item">Register</a>
+                    @endauth
                 </div>
             </div>
         </div>
@@ -273,10 +313,10 @@
                 <div>
                     <h3 class="text-lg font-semibold text-gray-800 mb-4">Quick Links</h3>
                     <ul class="space-y-2">
-                        <li><a href="/" class="text-gray-600 hover:text-[#7eaeb5] transition">Home</a></li>
+                        <li><a href="{{ route('home') }}" class="text-gray-600 hover:text-[#7eaeb5] transition">Home</a></li>
                         <li><a href="{{ route('products.index') }}" class="text-gray-600 hover:text-[#7eaeb5] transition">Products</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-[#7eaeb5] transition">About Us</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-[#7eaeb5] transition">Contact</a></li>
+                        <li><a href="{{ route('about') }}" class="text-gray-600 hover:text-[#7eaeb5] transition">About Us</a></li>
+                        <li><a href="{{ route('contact') }}" class="text-gray-600 hover:text-[#7eaeb5] transition">Contact</a></li>
                     </ul>
                 </div>
 
@@ -336,15 +376,15 @@
         mobileMenuOverlay.addEventListener('click', closeMobileMenu);
 
         // Mobile Menu Dropdown
-        const mobileMenuItems = document.querySelectorAll('.mobile-menu-item');
-        mobileMenuItems.forEach(item => {
-            item.addEventListener('click', function() {
-                const dropdown = this.nextElementSibling;
-                if (dropdown && dropdown.classList.contains('mobile-menu-dropdown')) {
-                    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-                }
+        const profileMenuItem = document.querySelector('.mobile-menu-item:contains("Profile")');
+        const profileDropdown = document.querySelector('.mobile-menu-dropdown');
+        
+        if (profileMenuItem && profileDropdown) {
+            profileMenuItem.addEventListener('click', function(e) {
+                e.preventDefault();
+                profileDropdown.style.display = profileDropdown.style.display === 'block' ? 'none' : 'block';
             });
-        });
+        }
     </script>
 </body>
 </html> 

@@ -53,4 +53,9 @@ class User extends Authenticatable
     {
         return $this->role_id === 9998;
     }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

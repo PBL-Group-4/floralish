@@ -71,10 +71,13 @@
                     John Doe
                 </button>
                 <div class="dropdown-content">
-                    <a href="#" class="dropdown-item">My Profile</a>
-                    <a href="#" class="dropdown-item">My Orders</a>
+                    <a href="{{ route('profile.orders') }}" class="dropdown-item">My Profile</a>
+                    <a href="{{ route('profile.orders') }}" class="dropdown-item">My Orders</a>
                     <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">Logout</a>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="dropdown-item w-full text-left">Logout</button>
+                    </form>
                 </div>
             </div>
         </nav>
@@ -121,7 +124,7 @@
     <div class="overflow-hidden max-w-lg flex flex-col space-y-4 mt-20 ">
     <h4 class="text-xl font-semibold tracking-tight">Nama Bunga</h4>
     <h5 class="text-2xl font-semibold">$599</h5>
-    <p class="text-black ">Buket Serenity Bloom menghadirkan perpaduan elegan antara mawar putih yang melambangkan ketulusan hati, hydrangea biru muda sebagai simbol ketenangan dan pengertian, serta sentuhan lembut dari baby’s breath yang memberi nuansa manis dan damai. Dibalut dengan kertas wrapping biru klasik dan pita senada, buket ini cocok untuk momen istimewa seperti ulang tahun, wisuda, atau sekadar mengungkapkan kasih yang tulus dan tenang.</p>
+    <p class="text-black ">Buket Serenity Bloom menghadirkan perpaduan elegan antara mawar putih yang melambangkan ketulusan hati, hydrangea biru muda sebagai simbol ketenangan dan pengertian, serta sentuhan lembut dari baby's breath yang memberi nuansa manis dan damai. Dibalut dengan kertas wrapping biru klasik dan pita senada, buket ini cocok untuk momen istimewa seperti ulang tahun, wisuda, atau sekadar mengungkapkan kasih yang tulus dan tenang.</p>
     </div>
 
 </div>

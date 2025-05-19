@@ -39,8 +39,52 @@
         }
         .navbar-logo {
             margin-top: 0.5rem;
+        }
+        /* Navbar Styles */
+        .dropdown {
             position: relative;
-            top: 0.5rem;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1000;
+            border-radius: 4px;
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        /* Add padding to create hover area */
+        .dropdown::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            height: 20px;
+            background: transparent;
+        }
+        .dropdown-item {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            position: relative;
+            z-index: 1000;
+        }
+        .dropdown-item:hover {
+            background-color: #f1f1f1;
+        }
+        .dropdown-divider {
+            height: 1px;
+            background-color: #e5e5e5;
+            margin: 4px 0;
         }
         .navbar-container {
             padding-top: 0.5rem;
@@ -57,38 +101,6 @@
             100% {
                 transform: translateX(-50%);
             }
-        }
-        .dropdown {
-            position: relative;
-        }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            right: 0;
-            background-color: white;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1000;
-            border-radius: 4px;
-            margin-top: 0.5rem;
-            padding-top: 0.5rem;
-            transition: opacity 0.3s ease;
-        }
-        .dropdown-content.show {
-            display: block;
-            opacity: 1;
-        }
-        .dropdown-item {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            position: relative;
-            z-index: 1000;
-            transition: background-color 0.2s ease;
-        }
-        .dropdown-item:hover {
-            background-color: #f8f9fa;
         }
         .dropdown-button {
             cursor: pointer;
@@ -136,8 +148,8 @@
                         {{ Auth::check() ? Auth::user()->name : 'Profile' }}
                     </button>
                     <div class="dropdown-content">
-                        <a href="#" class="dropdown-item">My Profile</a>
-                        <a href="#" class="dropdown-item">My Orders</a>
+                        <a href="{{ route('profile.orders') }}" class="dropdown-item">My Profile</a>
+                        <a href="{{ route('profile.orders') }}" class="dropdown-item">My Orders</a>
                         <div class="dropdown-divider"></div>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf

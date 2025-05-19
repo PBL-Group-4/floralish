@@ -549,4 +549,82 @@ class AdminController extends Controller
         return redirect()->route('admin.batam.products.index')
             ->with('success', 'Produk Batam berhasil dihapus');
     }
+
+    public function orders(Request $request)
+    {
+        $query = Order::with(['user', 'product']);
+
+        // Filter by status
+        if ($request->has('status')) {
+            $query->where('status', $request->status);
+        }
+
+        // Search
+        if ($request->has('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('phone', 'like', "%{$search}%")
+                  ->orWhere('address', 'like', "%{$search}%");
+            });
+        }
+
+        // Sort
+        if ($request->has('sort')) {
+            switch ($request->sort) {
+                case 'date_asc':
+                    $query->orderBy('created_at', 'asc');
+                    break;
+                case 'date_desc':
+                    $query->orderBy('created_at', 'desc');
+                    break;
+                case 'status_asc':
+                    $query->orderBy('status', 'asc');
+                    break;
+                case 'status_desc':
+                    $query->orderBy('status', 'desc');
+                    break;
+                default:
+                    $query->latest();
+                    break;
+            }
+        } else {
+            $query->latest();
+        }
+
+        $orders = $query->paginate(10);
+        return view('admin.orders.index', compact('orders'));
+    }
+
+    public function updateOrderStatus(Request $request, Order $order)
+    {
+        $request->validate([
+            'status' => 'required|in:pending,confirmed,completed,cancelled'
+        ]);
+
+        $order->update([
+            'status' => $request->status
+        ]);
+
+        return redirect()->back()->with('success', 'Status pesanan berhasil diperbarui');
+    }
+
+    public function showOrder(Order $order)
+    {
+        $order->load(['user', 'product']);
+        return view('admin.orders.show', compact('order'));
+    }
+
+    public function destroyOrder(Order $order)
+    {
+        // Hapus bukti pembayaran jika ada
+        if ($order->payment_proof) {
+            Storage::disk('public')->delete($order->payment_proof);
+        }
+        
+        $order->delete();
+        
+        return redirect()->route('admin.orders.index')
+            ->with('success', 'Pesanan berhasil dihapus');
+    }
 } 

@@ -215,8 +215,8 @@
                         {{ Auth::check() ? Auth::user()->name : 'About' }}
                     </a>
                     <div class="dropdown-content">
-                        <a href="/about" class="dropdown-item">My Profile</a>
-                        <a href="#" class="dropdown-item">My Orders</a>
+                        <a href="{{ route('profile.orders') }}" class="dropdown-item">My Profile</a>
+                        <a href="{{ route('profile.orders') }}" class="dropdown-item">My Orders</a>
                         <div class="dropdown-divider"></div>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
