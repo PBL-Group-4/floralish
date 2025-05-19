@@ -79,7 +79,7 @@
 
 ### Backend
 - **PHP** (Laravel Framework)
-- **MySQL/MariaDB** (Database)
+- **MySQL** (Database)
 
 ### Frontend
 - **HTML**, **CSS** (Tailwind CSS), **JavaScript**
@@ -105,5 +105,5 @@ Stay tuned for more updates! 🌸
 
 ## 📌 Lisensi
 
-Proyek ini dibuat untuk tujuan pembelajaran dan bukan untuk penggunaan komersial. Semua hak cipta dimiliki oleh anggota Kelompok 4 Polibatam.
+Proyek ini dibuat untuk tujuan pembelajaran dan bukan untuk penggunaan komersial. Semua hak cipta dimiliki oleh anggota Kelompok 4 Informatika 2A Malam Polibatam.
 
