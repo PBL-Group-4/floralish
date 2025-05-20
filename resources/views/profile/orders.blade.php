@@ -70,6 +70,13 @@
                                         class="max-w-xs rounded-lg shadow-md">
                                 </div>
                             @endif
+
+                            <div class="mt-4 pt-4 border-t flex justify-end">
+                                <a href="{{ route('profile.orders.print-receipt', $order) }}" target="_blank" 
+                                    class="inline-flex items-center px-4 py-2 bg-green-500 text-white text-sm font-semibold rounded-lg shadow hover:bg-green-600 transition duration-300">
+                                    <i class="fas fa-print mr-2"></i> Cetak Resi
+                                </a>
+                            </div>
                         </div>
                     </div>
                 @endforeach

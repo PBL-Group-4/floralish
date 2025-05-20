@@ -75,6 +75,9 @@
                         <a href="{{ route('admin.orders.show', $order) }}" class="inline-flex items-center px-3 py-1.5 bg-primary text-white text-xs font-semibold rounded-lg shadow hover:bg-opacity-90 transition duration-300">
                             <i class="fas fa-eye mr-1"></i> View
                         </a>
+                        <a href="{{ route('admin.orders.print-shipping-label', $order) }}" target="_blank" class="inline-flex items-center px-3 py-1.5 bg-green-500 text-white text-xs font-semibold rounded-lg shadow hover:bg-green-600 transition duration-300">
+                            <i class="fas fa-print mr-1"></i> Cetak Resi
+                        </a>
                         <form action="{{ route('admin.orders.update-status', $order) }}" method="POST" class="inline-block">
                             @csrf
                             @method('PATCH')

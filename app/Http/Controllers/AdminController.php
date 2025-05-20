@@ -615,6 +615,12 @@ class AdminController extends Controller
         return view('admin.orders.show', compact('order'));
     }
 
+    public function printShippingLabel(Order $order)
+    {
+        $order->load(['product']);
+        return view('admin.orders.shipping-label', compact('order'));
+    }
+
     public function destroyOrder(Order $order)
     {
         // Hapus bukti pembayaran jika ada

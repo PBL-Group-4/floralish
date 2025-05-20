@@ -83,6 +83,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/orders/{order}', [AdminController::class, 'showOrder'])->name('admin.orders.show');
         Route::patch('/orders/{order}/status', [AdminController::class, 'updateOrderStatus'])->name('admin.orders.update-status');
         Route::delete('/orders/{order}', [AdminController::class, 'destroyOrder'])->name('admin.orders.destroy');
+        Route::get('/orders/{order}/print-shipping-label', [AdminController::class, 'printShippingLabel'])->name('admin.orders.print-shipping-label');
 
         // User Management Routes
         Route::get('/users', [AdminController::class, 'users'])->name('admin.users.index');
@@ -105,6 +106,7 @@ Route::middleware(['auth'])->group(function () {
     
     // Profile Routes
     Route::get('/profile/orders', [ProfileController::class, 'orders'])->name('profile.orders');
+    Route::get('/profile/orders/{order}/print-receipt', [ProfileController::class, 'printReceipt'])->name('profile.orders.print-receipt');
 });
 
 // WhatsApp Route
