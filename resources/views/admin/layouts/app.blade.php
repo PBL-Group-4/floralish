@@ -48,6 +48,44 @@
             background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
             border-left: 4px solid #90C9CF;
         }
+        /* Notification Styles */
+        .notification-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            width: 320px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 50;
+            margin-top: 0.5rem;
+        }
+        .notification-dropdown.active {
+            display: block;
+        }
+        .notification-item {
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            transition: background-color 0.2s;
+        }
+        .notification-item:hover {
+            background-color: #f9fafb;
+        }
+        .notification-item.unread {
+            background-color: #f0f9ff;
+        }
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #ef4444;
+            color: white;
+            border-radius: 9999px;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
     </style>
     <script>
         function initImagePreview() {
@@ -188,12 +226,20 @@
                     </div>
                     <div class="flex items-center">
                         <div class="relative">
-                            <button class="flex items-center text-gray-500 hover:text-gray-700">
+                            <button id="notificationButton" class="flex items-center text-gray-500 hover:text-gray-700 relative">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                                 </svg>
-                                <span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-500"></span>
+                                <span id="notificationBadge" class="notification-badge hidden">0</span>
                             </button>
+                            <div id="notificationDropdown" class="notification-dropdown">
+                                <div class="p-3 border-b border-gray-200">
+                                    <h3 class="font-semibold text-gray-800">Notifications</h3>
+                                </div>
+                                <div id="notificationList" class="max-h-96 overflow-y-auto">
+                                    <!-- Notifications will be dynamically added here -->
+                                </div>
+                            </div>
                         </div>
                         <div class="ml-4">
                             <form action="{{ route('admin.logout') }}" method="POST">
@@ -216,5 +262,144 @@
         </div>
     </div>
     @stack('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const notificationButton = document.getElementById('notificationButton');
+            const notificationDropdown = document.getElementById('notificationDropdown');
+            const notificationBadge = document.getElementById('notificationBadge');
+            const notificationList = document.getElementById('notificationList');
+            let unreadCount = 0;
+
+            // Function to fetch notifications
+            async function fetchNotifications() {
+                try {
+                    const response = await fetch('{{ route("admin.notifications.index") }}');
+                    const data = await response.json();
+                    
+                    // Update unread count
+                    unreadCount = data.unread_count;
+                    updateNotificationBadge();
+                    
+                    // Update notification list
+                    notificationList.innerHTML = '';
+                    data.notifications.forEach(notification => {
+                        const notificationItem = createNotificationElement(notification);
+                        notificationList.appendChild(notificationItem);
+                    });
+                } catch (error) {
+                    console.error('Error fetching notifications:', error);
+                }
+            }
+
+            // Function to create notification element
+            function createNotificationElement(notification) {
+                const notificationItem = document.createElement('div');
+                notificationItem.className = `notification-item ${notification.is_read ? '' : 'unread'}`;
+                notificationItem.dataset.id = notification.id;
+                
+                notificationItem.innerHTML = `
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0">
+                            <svg class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-gray-800">${notification.message}</p>
+                            <p class="text-xs text-gray-500 mt-1">${notification.time_ago}</p>
+                        </div>
+                    </div>
+                `;
+
+                // Add click handler to mark as read
+                if (!notification.is_read) {
+                    notificationItem.addEventListener('click', () => markAsRead(notification.id));
+                }
+
+                return notificationItem;
+            }
+
+            // Function to mark notification as read
+            async function markAsRead(notificationId) {
+                try {
+                    const response = await fetch(`{{ route('admin.notifications.mark-read', '') }}/${notificationId}`, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Content-Type': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        const notificationItem = notificationList.querySelector(`[data-id="${notificationId}"]`);
+                        if (notificationItem) {
+                            notificationItem.classList.remove('unread');
+                            unreadCount = Math.max(0, unreadCount - 1);
+                            updateNotificationBadge();
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error marking notification as read:', error);
+                }
+            }
+
+            // Function to mark all notifications as read
+            async function markAllAsRead() {
+                try {
+                    const response = await fetch('{{ route("admin.notifications.mark-all-read") }}', {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Content-Type': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        document.querySelectorAll('.notification-item.unread').forEach(item => {
+                            item.classList.remove('unread');
+                        });
+                        unreadCount = 0;
+                        updateNotificationBadge();
+                    }
+                } catch (error) {
+                    console.error('Error marking all notifications as read:', error);
+                }
+            }
+
+            // Toggle notification dropdown
+            notificationButton.addEventListener('click', async function(e) {
+                e.stopPropagation();
+                notificationDropdown.classList.toggle('active');
+                
+                if (notificationDropdown.classList.contains('active')) {
+                    await fetchNotifications();
+                    await markAllAsRead();
+                }
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!notificationDropdown.contains(e.target) && !notificationButton.contains(e.target)) {
+                    notificationDropdown.classList.remove('active');
+                }
+            });
+
+            // Function to update notification badge
+            function updateNotificationBadge() {
+                if (unreadCount > 0) {
+                    notificationBadge.textContent = unreadCount;
+                    notificationBadge.classList.remove('hidden');
+                } else {
+                    notificationBadge.classList.add('hidden');
+                }
+            }
+
+            // Fetch notifications every 30 seconds
+            setInterval(fetchNotifications, 30000);
+
+            // Initial fetch
+            fetchNotifications();
+        });
+    </script>
 </body>
 </html> 

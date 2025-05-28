@@ -43,16 +43,16 @@
         }
         .logo-text {
             font-family: 'Pacifico', cursive;
-            font-size: 2.75rem;
+            font-size: 2.5rem;
         }
         .navbar-logo {
+            margin-top: 0;
             display: flex;
             align-items: center;
-            height: 100%;
         }
         .navbar-container {
-            padding-top: 1rem;
-            padding-bottom: 1rem;
+            padding-top: 1.3rem;
+            padding-bottom: 1.3rem;
         }
         .logo-font { 
             font-family: 'Roboto Slab', cursive; 
@@ -174,32 +174,47 @@
             color: #666;
             text-decoration: none;
         }
+        /* Add padding to create hover area */
+        .dropdown::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            height: 20px;
+            background: transparent;
+        }
+        .dropdown-button {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
     </style>
 </head>
 <body class="bg-gradient-to-br from-[#d1f0f5] to-[#a1d9db] min-h-screen flex flex-col">
     <!-- Navbar -->
     <header class="bg-white shadow-sm">
         <div class="container mx-auto px-4 navbar-container flex justify-between items-center">
-            <a href="/" class="text-2xl font-bold text-black logo-text hover:text-primary transition-colors duration-300 navbar-logo">Floralish.</a>
+            <a href="/" class="text-2xl font-bold text-black logo-text hover:text-primary transition-colors duration-300 navbar-logo flex items-center">Floralish.</a>
             
             <!-- Navigasi Desktop -->
             <nav class="hidden md:flex items-center">
-                <ul class="flex space-x-6 mr-6">
-                    <li><a href="/" class="text-black hover:text-primary">Home</a></li>
-                    <li><a href="{{ route('products.index') }}" class="text-black hover:text-primary">Products</a></li>
-                    <li><a href="/about" class="text-black hover:text-primary">About</a></li>
-                    <li><a href="/contact" class="text-black hover:text-primary">Contact</a></li>
-                    <li><a href="/lokasi" class="text-black hover:text-primary">Lokasi</a></li>
+                <ul class="flex space-x-6 mr-6 items-center">
+                    <li><a href="/" class="text-black hover:text-primary flex items-center">Home</a></li>
+                    <li><a href="{{ route('products.index') }}" class="text-black hover:text-primary flex items-center">Products</a></li>
+                    <li><a href="/about" class="text-black hover:text-primary flex items-center">About</a></li>
+                    <li><a href="/contact" class="text-black hover:text-primary flex items-center">Contact</a></li>
+                    <li><a href="/lokasi" class="text-black hover:text-primary flex items-center">Lokasi</a></li>
                 </ul>
                 
                 <!-- Menu Dropdown Profil (Belum Login) -->
                 <div class="dropdown {{ Auth::check() ? 'hidden' : '' }}">
-                    <a href="/about" class="flex items-center text-black hover:text-primary">
+                    <button class="flex items-center text-black hover:text-primary">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
-                        About
-                    </a>
+                        Profile
+                    </button>
                     <div class="dropdown-content">
                         <a href="{{ route('login') }}" class="dropdown-item">Login</a>
                         <a href="{{ route('register') }}" class="dropdown-item">Register</a>
@@ -208,14 +223,14 @@
                 
                 <!-- Menu Dropdown Profil (Sudah Login) -->
                 <div class="dropdown {{ Auth::check() ? '' : 'hidden' }}" id="loggedInDropdown">
-                    <a href="/about" class="flex items-center text-black hover:text-primary">
+                    <button class="flex items-center text-black hover:text-primary">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
-                        {{ Auth::check() ? Auth::user()->name : 'About' }}
-                    </a>
+                        {{ Auth::check() ? Auth::user()->name : 'Profile' }}
+                    </button>
                     <div class="dropdown-content">
-                        <a href="{{ route('profile.orders') }}" class="dropdown-item">My Profile</a>
+                        <a href="{{ route('profile.settings') }}" class="dropdown-item">My Profile</a>
                         <a href="{{ route('profile.orders') }}" class="dropdown-item">My Orders</a>
                         <div class="dropdown-divider"></div>
                         <form action="{{ route('logout') }}" method="POST">
@@ -282,18 +297,17 @@
             <div class="md:w-1/2 w-full text-gray-800 p-6 md:p-10">
                 <h1 class="text-2xl md:text-3xl font-bold mb-2 leading-tight text-[#7eaeb5]">About Our<br />Company Profile</h1>
                 <div class="w-20 h-1 bg-[#7eaeb5] mb-6"></div>
-                <p class="text-sm md:text-base leading-relaxed mb-4 text-gray-700">
-                    Florish adalah usaha mikro kecil menengah (UMKM) yang bergerak di bidang pembuatan dan penjualan buket bunga untuk berbagai momen spesial. Didirikan dengan semangat untuk membawa kebahagiaan melalui keindahan bunga, Florish hadir sebagai sahabat terbaik dalam merayakan cinta, kebahagiaan, dan pencapaian hidup.
+                <p class="text-gray-600 mb-6">
+                    Floralish adalah usaha mikro kecil menengah (UMKM) yang bergerak di bidang pembuatan dan penjualan buket bunga untuk berbagai momen spesial. Didirikan dengan semangat untuk membawa kebahagiaan melalui keindahan bunga, Floralish hadir sebagai sahabat terbaik dalam merayakan cinta, kebahagiaan, dan pencapaian hidup.
                 </p>
-                <p class="text-sm md:text-base leading-relaxed mb-4 text-gray-700">
-                <p class="text-sm md:text-base leading-relaxed mb-4">
-                    Kami percaya bahwa setiap bunga memiliki cerita, dan melalui tangan-tangan kreatif kami, setiap buket di Florish dirangkai dengan penuh perhatian dan sentuhan personal. Mulai dari buket wisuda, ulang tahun, hingga hadiah kejutan untuk orang terkasih, Florish siap memberikan layanan terbaik dengan desain yang elegan, segar, dan penuh makna.
+                <p class="text-gray-600 mb-6">
+                    Kami percaya bahwa setiap bunga memiliki cerita, dan melalui tangan-tangan kreatif kami, setiap buket di Floralish dirangkai dengan penuh perhatian dan sentuhan personal. Mulai dari buket wisuda, ulang tahun, hingga hadiah kejutan untuk orang terkasih, Floralish siap memberikan layanan terbaik dengan desain yang elegan, segar, dan penuh makna.
                 </p>
-                <p class="text-sm md:text-base leading-relaxed mb-4">
+                <p class="text-gray-600 mb-6">
                     Dengan mengutamakan kualitas, pelayanan ramah, dan harga yang bersahabat, kami berkomitmen untuk terus tumbuh bersama pelanggan serta menjadi bagian dari setiap momen bahagia Anda.
                 </p>
-                <p class="text-sm md:text-base leading-relaxed">
-                    Florish – Merangkai bunga, menyampaikan rasa.
+                <p class="text-xl font-semibold text-primary mt-8">
+                    Floralish – Merangkai bunga, menyampaikan rasa.
                 </p>
             </div>
         </div>

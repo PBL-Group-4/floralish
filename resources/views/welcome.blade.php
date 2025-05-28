@@ -148,7 +148,7 @@
                         {{ Auth::check() ? Auth::user()->name : 'Profile' }}
                     </button>
                     <div class="dropdown-content">
-                        <a href="{{ route('profile.orders') }}" class="dropdown-item">My Profile</a>
+                        <a href="{{ route('profile.settings') }}" class="dropdown-item">My Profile</a>
                         <a href="{{ route('profile.orders') }}" class="dropdown-item">My Orders</a>
                         <div class="dropdown-divider"></div>
                         <form action="{{ route('logout') }}" method="POST">
@@ -265,6 +265,41 @@
     <!-- Bagian Catalog Produk -->
     <section class="bg-white w-full px-0 py-12">
         <h2 class="text-3xl font-bold text-center text-black mb-8">Catalog Produk</h2>
+        
+        <div class="container mx-auto px-4 py-8">
+            <form id="filterForm" action="{{ route('home') }}" method="GET" class="flex flex-wrap gap-4 justify-between items-center mb-8">
+                <div class="flex-1 min-w-[200px] flex gap-2">
+                    <input type="text" name="search" value="{{ request('search') }}" 
+                        placeholder="Cari produk..." 
+                        class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                    <button type="submit" class="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg transition-colors duration-300 flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                        Cari
+                    </button>
+                </div>
+                <div class="w-[200px]">
+                    <select name="category" onchange="this.form.submit()" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <option value="">Semua Kategori</option>
+                        @foreach($categories as $category)
+                            <option value="{{ $category->category }}" {{ request('category') == $category->category ? 'selected' : '' }}>
+                                {{ $category->category }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="w-[200px]">
+                    <select name="sort" onchange="this.form.submit()" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <option value="">Urutkan</option>
+                        <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>Harga: Rendah ke Tinggi</option>
+                        <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>Harga: Tinggi ke Rendah</option>
+                        <option value="name_asc" {{ request('sort') == 'name_asc' ? 'selected' : '' }}>Nama: A-Z</option>
+                        <option value="name_desc" {{ request('sort') == 'name_desc' ? 'selected' : '' }}>Nama: Z-A</option>
+                    </select>
+                </div>
+            </form>
+        </div>
         
         @foreach(['Bunga', 'Karangan Bunga Papan', 'Kado & Cakes'] as $categoryName)
         <div class="mb-12 px-4 sm:px-6 md:px-8">
@@ -492,6 +527,14 @@
                     isDropdownVisible = false;
                 }
             });
+        });
+
+        // Mencegah form submit saat menekan enter di input pencarian
+        document.querySelector('input[name="search"]').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                document.getElementById('filterForm').submit();
+            }
         });
     </script>
 

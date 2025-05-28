@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Florish.id - Lokasi</title>
+  <title>Floralish.id - Lokasi</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
   <!-- Tambahkan Font Poppins dan Pacifico dari Google Fonts -->
@@ -120,7 +120,7 @@
                     {{ Auth::check() ? Auth::user()->name : 'Profile' }}
                 </button>
                 <div class="dropdown-content">
-                    <a href="{{ route('profile.orders') }}" class="dropdown-item">My Profile</a>
+                    <a href="{{ route('profile.settings') }}" class="dropdown-item">My Profile</a>
                     <a href="{{ route('profile.orders') }}" class="dropdown-item">My Orders</a>
                     <div class="dropdown-divider"></div>
                     <form action="{{ route('logout') }}" method="POST">

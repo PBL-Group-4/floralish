@@ -316,6 +316,16 @@
                 clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
             }
         }
+
+        .navbar-container {
+            padding-top: 1.3rem;
+            padding-bottom: 1.3rem;
+        }
+        .navbar-logo {
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
     </style>
 </head>
 <body class="bg-[#8dc6db] min-h-screen flex flex-col">
@@ -323,16 +333,16 @@
     <!-- Navbar -->
     <header class="bg-white shadow-sm">
         <div class="container mx-auto px-4 navbar-container flex justify-between items-center">
-            <a href="/" class="text-2xl font-bold text-black logo-text hover:text-primary transition-colors duration-300 navbar-logo">Floralish.</a>
+            <a href="/" class="text-2xl font-bold text-black logo-text hover:text-primary transition-colors duration-300 navbar-logo flex items-center">Floralish.</a>
             
             <!-- Navigasi Desktop -->
             <nav class="hidden md:flex items-center">
-                <ul class="flex space-x-6 mr-6">
-                    <li><a href="/" class="text-black hover:text-primary">Home</a></li>
-                    <li><a href="{{ route('products.index') }}" class="text-black hover:text-primary">Products</a></li>
-                    <li><a href="/about" class="text-black hover:text-primary">About</a></li>
-                    <li><a href="/contact" class="text-black hover:text-primary">Contact</a></li>
-                    <li><a href="/lokasi" class="text-black hover:text-primary">Lokasi</a></li>
+                <ul class="flex space-x-6 mr-6 items-center">
+                    <li><a href="/" class="text-black hover:text-primary flex items-center">Home</a></li>
+                    <li><a href="{{ route('products.index') }}" class="text-black hover:text-primary flex items-center">Products</a></li>
+                    <li><a href="/about" class="text-black hover:text-primary flex items-center">About</a></li>
+                    <li><a href="/contact" class="text-black hover:text-primary flex items-center">Contact</a></li>
+                    <li><a href="/lokasi" class="text-black hover:text-primary flex items-center">Lokasi</a></li>
                 </ul>
                 
                 <!-- Menu Dropdown Profil (Belum Login) -->
@@ -358,7 +368,7 @@
                         {{ Auth::check() ? Auth::user()->name : 'Profile' }}
                     </button>
                     <div class="dropdown-content">
-                        <a href="{{ route('profile.orders') }}" class="dropdown-item">My Profile</a>
+                        <a href="{{ route('profile.settings') }}" class="dropdown-item">My Profile</a>
                         <a href="{{ route('profile.orders') }}" class="dropdown-item">My Orders</a>
                         <div class="dropdown-divider"></div>
                         <form action="{{ route('logout') }}" method="POST">
@@ -441,7 +451,7 @@
                     
                     <div class="info-kontak">
                         <p>Email :</p>
-                        <p>Florish.id@gmail.com</p>
+                        <p>Floralish.id@gmail.com</p>
                     </div>
                     
                     <div class="ikon-sosmed">
@@ -463,7 +473,7 @@
                 <h2 class="judul-kontak">Get In Touch</h2>
                 <p class="font-bold mb-8">
                     Setiap rangkaian kami adalah simfoni warna dan tekstur yang mengalir dalam
-                    harmoni sempurna. Hubungi Florish.id dan biarkan kami mengubah karya yang menggema dalam
+                    harmoni sempurna. Hubungi Floralish.id dan biarkan kami mengubah karya yang menggema dalam
                     kenangan, melampaui batas waktu dan musim.
                 </p>
                 
@@ -639,7 +649,7 @@
                     </li>
                     <li class="flex items-center text-gray-600">
                         <i class="fas fa-envelope w-5 text-[#7eaeb5]"></i>
-                        <span>Florish.id@gmail.com</span>
+                        <span>Floralish.id@gmail.com</span>
                     </li>
                 </ul>
             </div>

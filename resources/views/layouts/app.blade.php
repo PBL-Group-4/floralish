@@ -1,9 +1,21 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>@yield('title', 'Floralish')</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <!-- Tambahkan Font Poppins dan Pacifico dari Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -208,7 +220,7 @@
                         {{ Auth::check() ? Auth::user()->name : 'Profile' }}
                     </button>
                     <div class="dropdown-content">
-                        <a href="{{ route('profile.orders') }}" class="dropdown-item">My Profile</a>
+                        <a href="{{ route('profile.settings') }}" class="dropdown-item">My Profile</a>
                         <a href="{{ route('profile.orders') }}" class="dropdown-item">My Orders</a>
                         <div class="dropdown-divider"></div>
                         <form action="{{ route('logout') }}" method="POST">
@@ -253,7 +265,7 @@
                 <div class="mobile-menu-item">Profile</div>
                 <div class="mobile-menu-dropdown">
                     @auth
-                        <a href="{{ route('profile.orders') }}" class="mobile-menu-dropdown-item">My Profile</a>
+                        <a href="{{ route('profile.settings') }}" class="mobile-menu-dropdown-item">My Profile</a>
                         <a href="{{ route('profile.orders') }}" class="mobile-menu-dropdown-item">My Orders</a>
                         <form action="{{ route('logout') }}" method="POST" class="mobile-menu-dropdown-item">
                             @csrf

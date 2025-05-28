@@ -11,6 +11,7 @@ use App\Http\Controllers\WhatsAppController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\RatingController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -94,19 +95,34 @@ Route::prefix('admin')->group(function () {
 
         // Settings Route
         Route::get('/settings', [AdminController::class, 'settings'])->name('admin.settings');
+
+        // Notification routes
+        Route::get('/notifications', [App\Http\Controllers\Admin\NotificationController::class, 'index'])->name('admin.notifications.index');
+        Route::post('/notifications/mark-all-read', [App\Http\Controllers\Admin\NotificationController::class, 'markAllAsRead'])->name('admin.notifications.mark-all-read');
+        Route::post('/notifications/{notification}/mark-read', [App\Http\Controllers\Admin\NotificationController::class, 'markAsRead'])->name('admin.notifications.mark-read');
     });
 });
 
+// Public routes untuk produk
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+
+// Routes yang memerlukan autentikasi
 Route::middleware(['auth'])->group(function () {
-    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-    Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
     Route::get('/checkout/{productId}', [OrderController::class, 'checkout'])->name('checkout');
     Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
     Route::get('/orders/success', [OrderController::class, 'success'])->name('orders.success');
     
     // Profile Routes
+    Route::get('/profile/settings', [ProfileController::class, 'settings'])->name('profile.settings');
+    Route::put('/profile/settings', [ProfileController::class, 'updateSettings'])->name('profile.settings.update');
+    Route::put('/profile/settings/password', [ProfileController::class, 'updatePassword'])->name('profile.settings.update-password');
     Route::get('/profile/orders', [ProfileController::class, 'orders'])->name('profile.orders');
     Route::get('/profile/orders/{order}/print-receipt', [ProfileController::class, 'printReceipt'])->name('profile.orders.print-receipt');
+
+    // Rating routes (memerlukan auth)
+    Route::post('/products/{product}/rate', [RatingController::class, 'store'])->name('products.rate');
+    Route::delete('/products/{product}/rate', [RatingController::class, 'destroy'])->name('products.rate.destroy');
 });
 
 // WhatsApp Route
