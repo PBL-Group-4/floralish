@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
     <!-- Tambahkan Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Tambahkan AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -28,38 +31,45 @@
             }
         }
     </script>
+    
     <link rel="stylesheet" href="{{ asset('style/welcome.css') }}">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
         }
+
         .logo-text {
             font-family: 'Pacifico', cursive;
             font-size: 2.5rem;
         }
+
         .navbar-logo {
             margin-top: 0.5rem;
         }
+
         /* Navbar Styles */
         .dropdown {
             position: relative;
             display: inline-block;
         }
+
         .dropdown-content {
             display: none;
             position: absolute;
             right: 0;
             background-color: white;
             min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
             z-index: 1000;
             border-radius: 4px;
             margin-top: 0.5rem;
             padding-top: 0.5rem;
         }
+
         .dropdown:hover .dropdown-content {
             display: block;
         }
+
         /* Add padding to create hover area */
         .dropdown::after {
             content: '';
@@ -70,6 +80,7 @@
             height: 20px;
             background: transparent;
         }
+
         .dropdown-item {
             color: black;
             padding: 12px 16px;
@@ -78,30 +89,37 @@
             position: relative;
             z-index: 1000;
         }
+
         .dropdown-item:hover {
             background-color: #f1f1f1;
         }
+
         .dropdown-divider {
             height: 1px;
             background-color: #e5e5e5;
             margin: 4px 0;
         }
+
         .navbar-container {
             padding-top: 0.5rem;
             padding-bottom: 0.5rem;
         }
+
         .animate-marquee {
             animation: marquee 20s linear infinite;
             will-change: transform;
         }
+
         @keyframes marquee {
             0% {
                 transform: translateX(0);
             }
+
             100% {
                 transform: translateX(-50%);
             }
         }
+
         .dropdown-button {
             cursor: pointer;
             display: flex;
@@ -109,12 +127,13 @@
         }
     </style>
 </head>
+
 <body class="min-h-screen">
     <!-- Bagian Header -->
-    <header class="bg-white shadow-sm">
+    <header class="bg-white shadow-sm" data-aos="fade-down" data-aos-duration="1000">
         <div class="container mx-auto px-4 navbar-container flex justify-between items-center">
             <a href="/" class="text-2xl font-bold text-black logo-text hover:text-primary transition-colors duration-300 navbar-logo">Floralish.</a>
-            
+
             <!-- Navigasi Desktop -->
             <nav class="hidden md:flex items-center">
                 <ul class="flex space-x-6 mr-6">
@@ -124,7 +143,7 @@
                     <li><a href="/contact" class="text-black hover:text-primary">Contact</a></li>
                     <li><a href="/lokasi" class="text-black hover:text-primary">Lokasi</a></li>
                 </ul>
-                
+
                 <!-- Menu Dropdown Profil (Belum Login) -->
                 <div class="dropdown {{ Auth::check() ? 'hidden' : '' }}" id="profileDropdown">
                     <button class="dropdown-button flex items-center text-black hover:text-primary">
@@ -138,7 +157,7 @@
                         <a href="{{ route('register') }}" class="dropdown-item">Register</a>
                     </div>
                 </div>
-                
+
                 <!-- Menu Dropdown Profil (Sudah Login) -->
                 <div class="dropdown {{ Auth::check() ? '' : 'hidden' }}" id="loggedInDropdown">
                     <button class="flex items-center text-black hover:text-primary">
@@ -160,20 +179,20 @@
 
                 <!-- WhatsApp Button -->
                 @auth
-                    <a href="{{ route('whatsapp.send') }}" class="flex items-center text-black hover:text-primary ml-5">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                        </svg>
-                    </a>
+                <a href="{{ route('whatsapp.send') }}" class="flex items-center text-black hover:text-primary ml-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                    </svg>
+                </a>
                 @else
-                    <a href="{{ route('login') }}" class="flex items-center text-black hover:text-primary ml-5" title="Login untuk menghubungi kami via WhatsApp">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                        </svg>
-                    </a>
+                <a href="{{ route('login') }}" class="flex items-center text-black hover:text-primary ml-5" title="Login untuk menghubungi kami via WhatsApp">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                    </svg>
+                </a>
                 @endauth
             </nav>
-            
+
             <!-- Tombol Menu Mobile -->
             <button id="mobileMenuButton" class="md:hidden text-black">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -196,7 +215,7 @@
             <a href="/about" class="mobile-menu-item">About</a>
             <a href="/contact" class="mobile-menu-item">Contact</a>
             <a href="/lokasi" class="mobile-menu-item">Lokasi</a>
-            
+
             <div class="mt-4">
                 <div class="mobile-menu-item">Profile</div>
                 <div class="mobile-menu-dropdown">
@@ -210,7 +229,7 @@
     <!-- Bagian Hero -->
     <section class="bg-gradient-to-br from-primary to-secondary w-full px-4 pt-4 flex flex-col md:flex-row items-center">
         <div class="container mx-auto flex flex-col md:flex-row items-center">
-            <div class="md:w-1/2 mb-8 md:mb-0">
+            <div class="md:w-1/2 mb-8 md:mb-0" data-aos="fade-right" data-aos-duration="1000">
                 <h1 class="text-4xl md:text-5xl font-bold mb-2">
                     <span class="text-black">Pesan</span> <span class="text-red-600">Bunga</span>
                 </h1>
@@ -219,8 +238,8 @@
                 <button id="startButton" class="inline-block bg-button hover:bg-opacity-90 text-black font-semibold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105 shadow-lg">
                     Discover our Product
                 </button>
-                
-                <div class="stats-container">
+
+                <div class="stats-container" data-aos="fade-up" data-aos-delay="300">
                     <div class="stat-item">
                         <div class="stat-value" id="orderCount">0</div>
                         <div class="stat-label">Total pesanan</div>
@@ -237,7 +256,7 @@
                     </div>
                 </div>
             </div>
-            <div class="md:w-1/2 flex justify-center">
+            <div class="md:w-1/2 flex justify-center" data-aos="fade-left" data-aos-duration="1000">
                 <div class="window-frame">
                     <div class="window-content">
                         <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?ixlib=rb-1.2.1&auto=format&fit=crop&w=512&h=512&q=80" alt="Buket Bunga Indah">
@@ -246,31 +265,31 @@
             </div>
         </div>
     </section>
-    
-    <!-- Bagian Kategori -->
-    <section class="bg-white container mx-auto px-4 py-12">
-        <h2 class="text-3xl font-bold text-center text-black mb-8">Kategori Produk</h2>
-        <div class="flex flex-wrap justify-center gap-6 md:gap-10">
+
+    <section class="bg-white container max-w-7xl mx-auto px-4 py-12">
+        <h2 class="text-3xl font-bold text-center text-black mb-8" data-aos="fade-up" data-aos-duration="1000">Kategori Produk</h2>
+        <div class="flex flex-wrap justify-center gap-6 md:gap-10" data-aos="fade-up" data-aos-duration="1500">
             @foreach($categories as $category)
-            <div class="category-item">
-                <div class="category-circle">
-                    <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&h=150&q=80" alt="{{ $category->category }}">
+            <div class="w-24 md:w-32 lg:w-40 flex flex-col items-center transition-transform hover:scale-105 duration-300">
+                <div class="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded-full overflow-hidden border-2 border-gray-300">
+                    <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&h=150&q=80" alt="{{ $category->category }}" class="w-full h-full object-cover">
                 </div>
-                <h3 class="text-lg font-semibold text-center mt-3">{{ $category->category }}</h3>
+                <h3 class="text-sm md:text-base lg:text-lg font-semibold text-center mt-3">{{ $category->category }}</h3>
             </div>
             @endforeach
         </div>
     </section>
-    
+
+
     <!-- Bagian Catalog Produk -->
-    <section class="bg-white w-full px-0 py-12">
-        <h2 class="text-3xl font-bold text-center text-black mb-8">Catalog Produk</h2>
-        
-        <div class="container mx-auto px-4 py-8">
+    <section class="bg-white w-full px-0 py-12 max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold text-center text-black mb-8" data-aos="fade-up" data-aos-duration="1000">Catalog Produk</h2>
+
+        <div class="container mx-auto px-4 py-8" data-aos="fade-up" data-aos-duration="1200">
             <form id="filterForm" action="{{ route('home') }}" method="GET" class="flex flex-wrap gap-4 justify-between items-center mb-8">
                 <div class="flex-1 min-w-[200px] flex gap-2">
-                    <input type="text" name="search" value="{{ request('search') }}" 
-                        placeholder="Cari produk..." 
+                    <input type="text" name="search" value="{{ request('search') }}"
+                        placeholder="Cari produk..."
                         class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
                     <button type="submit" class="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg transition-colors duration-300 flex items-center gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -279,17 +298,17 @@
                         Cari
                     </button>
                 </div>
-                <div class="w-[200px]">
+                <div class="w-full sm:w-[200px]">
                     <select name="category" onchange="this.form.submit()" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
                         <option value="">Semua Kategori</option>
                         @foreach($categories as $category)
-                            <option value="{{ $category->category }}" {{ request('category') == $category->category ? 'selected' : '' }}>
-                                {{ $category->category }}
-                            </option>
+                        <option value="{{ $category->category }}" {{ request('category') == $category->category ? 'selected' : '' }}>
+                            {{ $category->category }}
+                        </option>
                         @endforeach
                     </select>
                 </div>
-                <div class="w-[200px]">
+                <div class="w-full sm:w-[200px]">
                     <select name="sort" onchange="this.form.submit()" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
                         <option value="">Urutkan</option>
                         <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>Harga: Rendah ke Tinggi</option>
@@ -300,43 +319,48 @@
                 </div>
             </form>
         </div>
-        
+
         @foreach(['Bunga', 'Karangan Bunga Papan', 'Kado & Cakes'] as $categoryName)
         <div class="mb-12 px-4 sm:px-6 md:px-8">
             <div class="relative mb-6">
-                <h3 class="text-2xl font-semibold text-center text-black">{{ $categoryName }}</h3>
+                <h3 class="text-2xl font-semibold text-center text-black" data-aos="fade-up" data-aos-duration="1000">{{ $categoryName }}</h3>
                 @if($products->where('category', $categoryName)->count() > 0)
-                    <a href="{{ route('products.index', ['category' => $categoryName]) }}" class="absolute right-0 top-[80%] inline-flex items-center gap-2 text-primary hover:text-primary-dark transition-all duration-300 group">
-                        <span class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all after:duration-300 group-hover:after:w-full">Lihat Selengkapnya</span>
+                <div class="text-right mt-2">
+                    <a href="{{ route('products.index', ['category' => $categoryName]) }}"
+                        class="inline-flex items-center gap-2 text-primary hover:text-primary-dark transition-all duration-300 group" data-aos="fade-left" data-aos-duration="1000">
+                        <span class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all after:duration-300 group-hover:after:w-full" >
+                            Lihat Selengkapnya
+                        </span>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-0.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                         </svg>
                     </a>
+                </div>
                 @endif
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 max-w-7xl mx-auto" data-aos="fade-up" data-aos-duration="1300">
                 @foreach($products->where('category', $categoryName)->take(4) as $product)
-                    <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300 h-full flex flex-col">
-                        <a href="{{ route('products.show', $product) }}" class="block flex-grow">
-                            <div class="relative pb-[75%]">
-                                <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" 
-                                    class="absolute inset-0 w-full h-full object-cover">
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300 h-full flex flex-col" >
+                    <a href="{{ route('products.show', $product) }}" class="block flex-grow">
+                        <div class="relative pb-[75%]">
+                            <img src="{{ asset($product->image) }}" alt="{{ $product->name }}"
+                                class="absolute inset-0 w-full h-full object-cover">
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2 line-clamp-2">{{ $product->name }}</h3>
+                            <p class="text-sm text-gray-600 mb-4 line-clamp-2">{{ Str::limit($product->description, 50) }}</p>
+                            <div class="flex justify-between items-center mb-4 mt-auto">
+                                <span class="text-primary font-bold">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
                             </div>
-                            <div class="p-4 flex flex-col flex-grow">
-                                <h3 class="text-lg font-semibold text-gray-800 mb-2 line-clamp-2">{{ $product->name }}</h3>
-                                <p class="text-sm text-gray-600 mb-4 line-clamp-2">{{ Str::limit($product->description, 50) }}</p>
-                                <div class="flex justify-between items-center mb-4 mt-auto">
-                                    <span class="text-primary font-bold">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
-                                </div>
-                                <a href="{{ route('products.show', $product) }}" class="w-full inline-flex items-center justify-center gap-2 bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark hover:scale-[1.02] transition-all duration-300 shadow-md hover:shadow-lg transform">
-                                    <span>Lihat Detail</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                    </svg>
-                                </a>
-                            </div>
-                        </a>
-                    </div>
+                            <a href="{{ route('products.show', $product) }}" class="w-full inline-flex items-center justify-center gap-2 bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark hover:scale-[1.02] transition-all duration-300 shadow-md hover:shadow-lg transform">
+                                <span>Lihat Detail</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                </svg>
+                            </a>
+                        </div>
+                    </a>
+                </div>
                 @endforeach
             </div>
         </div>
@@ -344,52 +368,54 @@
     </section>
 
     <!-- Features -->
-    <section class="max-w-full mx-0 mt-6 px-4 sm:px-6 md:px-10 lg:px-16">
-        <div class="bg-white rounded-2xl px-6 py-8 max-w-screen-xl mx-auto shadow-md flex flex-col sm:flex-row justify-between items-center gap-6">
-            <!-- Item -->
-            <div class="flex items-center gap-4 min-w-[200px] flex-1 justify-center sm:justify-start">
-                <div class="text-[#7eaeb5] text-3xl"><i class="fas fa-shipping-fast"></i></div>
-                <div>
-                    <div class="font-bold text-base sm:text-lg">Gratis Ongkir</div>
-                    <div class="text-gray-600 text-sm">Free Ongkir Pembelian Didalam Kota</div>
-                </div>
-            </div>
-
-            <div class="flex items-center gap-4 min-w-[200px] flex-1 justify-center sm:justify-start">
-                <div class="text-[#7eaeb5] text-3xl"><i class="far fa-map"></i></div>
-                <div>
-                    <div class="font-bold text-base sm:text-lg">Jangkauan Luas</div>
-                    <div class="text-gray-600 text-sm">Kirim ke 200+ Kota di Indonesia</div>
-                </div>
-            </div>
-
-            <div class="flex items-center gap-4 min-w-[200px] flex-1 justify-center sm:justify-start">
-                <div class="text-[#7eaeb5] text-3xl"><i class="fas fa-shield-alt"></i></div>
-                <div>
-                    <div class="font-bold text-base sm:text-lg">Keamanan Pembeli</div>
-                    <div class="text-gray-600 text-sm">Menjamin keamanan Data pembeli</div>
-                </div>
-            </div>
-
-            <div class="flex items-center gap-4 min-w-[200px] flex-1 justify-center sm:justify-start relative">
-                <div class="text-[#7eaeb5] text-3xl relative">
-                    <i class="fas fa-clock"></i>
-                    <div class="absolute top-[-0.5rem] left-1/2 transform -translate-x-1/2 bg-white rounded-full text-xs text-[#7eaeb5] font-bold w-5 h-5 flex items-center justify-center shadow-sm">24</div>
-                </div>
-                <div>
-                    <div class="font-bold text-base sm:text-lg">Garansi Waktu</div>
-                    <div class="text-gray-600 text-sm">Pesanan anda pasti tiba sesuai Jadwal</div>
-                </div>
+    <section class="max-w-full mx-0 mt-6 px-4 sm:px-6 md:px-10 lg:px-16" data-aos="fade-up" data-aos-duration="1000">
+    <div class="bg-white rounded-2xl px-6 py-8 max-w-screen-xl mx-auto shadow-md flex flex-wrap justify-between items-start gap-6">
+        <!-- Item -->
+        <div class="flex items-center gap-4 w-full sm:w-[48%] lg:w-[23%]">
+            <div class="text-[#7eaeb5] text-3xl"><i class="fas fa-shipping-fast"></i></div>
+            <div>
+                <div class="font-bold text-base sm:text-lg">Gratis Ongkir</div>
+                <div class="text-gray-600 text-sm">Free Ongkir Pembelian Didalam Kota</div>
             </div>
         </div>
+
+        <div class="flex items-center gap-4 w-full sm:w-[48%] lg:w-[23%]">
+            <div class="text-[#7eaeb5] text-3xl"><i class="far fa-map"></i></div>
+            <div>
+                <div class="font-bold text-base sm:text-lg">Jangkauan Luas</div>
+                <div class="text-gray-600 text-sm">Kirim ke 200+ Kota di Indonesia</div>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-4 w-full sm:w-[48%] lg:w-[23%]">
+            <div class="text-[#7eaeb5] text-3xl"><i class="fas fa-shield-alt"></i></div>
+            <div>
+                <div class="font-bold text-base sm:text-lg">Keamanan Pembeli</div>
+                <div class="text-gray-600 text-sm">Menjamin keamanan Data pembeli</div>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-4 w-full sm:w-[48%] lg:w-[23%] relative">
+            <div class="text-[#7eaeb5] text-3xl relative">
+                <i class="fas fa-clock"></i>
+                <div class="absolute top-[-0.5rem] left-1/2 transform -translate-x-1/2 bg-white rounded-full text-xs text-[#7eaeb5] font-bold w-5 h-5 flex items-center justify-center shadow-sm">24</div>
+            </div>
+            <div>
+                <div class="font-bold text-base sm:text-lg">Garansi Waktu</div>
+                <div class="text-gray-600 text-sm">Pesanan anda pasti tiba sesuai Jadwal</div>
+            </div>
+        </div>
+
+    </div>
     </section>
+
 
     <!-- Offline Store / Lokasi -->
     <section class="max-w-6xl mx-auto mt-10 px-4 sm:px-6 md:px-10 lg:px-16 pb-10">
-        <h3 class="text-[#7eaeb5] text-center text-lg sm:text-xl font-semibold tracking-widest mb-8">Temukan Offline Store kami</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <h3 class="text-[#7eaeb5] text-center text-lg sm:text-xl font-semibold tracking-widest mb-8" data-aos="fade-up" data-aos-duration="1200">Temukan Offline Store kami</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto" data-aos="fade-up" data-aos-duration="1500">
             @foreach(['Batam','Jakarta','Bandung','Surabaya','Medan','Padang','Palembang','Pekanbaru','Pontianak','Kupang','Ambon','Manado','Makassar','Banjarmasin','Samarinda'] as $city)
-                <a href="{{ route('products.index', ['city' => strtolower($city)]) }}" class="btn-store bg-[#7eaeb5] rounded-full shadow-lg py-3 px-8 text-white hover:brightness-90 transition text-sm font-medium text-center">{{ $city }}</a>
+            <a href="{{ route('products.index', ['city' => strtolower($city)]) }}" class="btn-store bg-[#7eaeb5] rounded-full shadow-lg py-3 px-8 text-white hover:brightness-90 transition text-sm font-medium text-center">{{ $city }}</a>
             @endforeach
         </div>
     </section>
@@ -399,10 +425,10 @@
         <div class="logo-container">
             <div class="flower-icon">🌸</div>
             <div class="logo-text" style="font-size: 3rem;">Floralish.</div>
-            <div class="logo-subtext">Menuju ke halaman Produk...</div>  
+            <div class="logo-subtext">Menuju ke halaman Produk...</div>
         </div>
     </div>
-    
+
     <script src="{{ asset('js/welcome.js') }}"></script>
     <script>
         function scrollRight(elementId) {
@@ -410,7 +436,7 @@
             const cardWidth = element.offsetWidth / 4; // 25% of container width
             const currentScroll = element.scrollLeft;
             const maxScroll = element.scrollWidth - element.clientWidth;
-            
+
             if (currentScroll < maxScroll) {
                 element.scrollTo({
                     left: Math.min(currentScroll + cardWidth, maxScroll),
@@ -423,7 +449,7 @@
             const element = document.getElementById(elementId);
             const cardWidth = element.offsetWidth / 4; // 25% of container width
             const currentScroll = element.scrollLeft;
-            
+
             if (currentScroll > 0) {
                 element.scrollTo({
                     left: Math.max(currentScroll - cardWidth, 0),
@@ -435,7 +461,7 @@
         // Inisialisasi scroll behavior saat halaman dimuat
         document.addEventListener('DOMContentLoaded', function() {
             const rows = ['firstRow', 'secondRow'];
-            
+
             rows.forEach(rowId => {
                 const row = document.getElementById(rowId);
                 if (row) {
@@ -443,14 +469,14 @@
                     function updateButtonStates() {
                         const canScrollLeft = row.scrollLeft > 0;
                         const canScrollRight = row.scrollLeft < (row.scrollWidth - row.clientWidth);
-                        
+
                         // Update tombol scroll kiri
                         const leftButton = row.parentElement.querySelector('button[onclick*="scrollLeft"]');
                         if (leftButton) {
                             leftButton.style.opacity = canScrollLeft ? '1' : '0.5';
                             leftButton.style.pointerEvents = canScrollLeft ? 'auto' : 'none';
                         }
-                        
+
                         // Update tombol scroll kanan
                         const rightButton = row.parentElement.querySelector('button[onclick*="scrollRight"]');
                         if (rightButton) {
@@ -461,7 +487,7 @@
 
                     // Tambahkan event listener untuk scroll
                     row.addEventListener('scroll', updateButtonStates);
-                    
+
                     // Panggil fungsi update saat halaman dimuat
                     updateButtonStates();
                 }
@@ -473,7 +499,7 @@
             const overlay = document.getElementById('transitionOverlay');
             overlay.style.display = 'flex';
             overlay.style.opacity = '1';
-            
+
             // Setelah animasi selesai, arahkan ke halaman produk
             setTimeout(function() {
                 window.location.href = "{{ route('products.index') }}";
@@ -539,7 +565,7 @@
     </script>
 
     <!-- Footer -->
-    <footer class="bg-white mt-20">
+    <footer class="bg-white mt-20" data-aos="fade-up" data-aos-duration="1000">
         <!-- Wave Divider -->
         <div class="relative">
             <div class="absolute top-0 left-0 w-full overflow-hidden leading-none">
@@ -552,22 +578,22 @@
         <!-- Our Partners Section -->
         <div class="w-full bg-gray-50 py-12">
             <h3 class="text-center text-xl font-semibold text-gray-800 mb-8">Our Partners</h3>
-            
+
             <!-- Marquee Container -->
             <div class="relative overflow-hidden w-full">
                 <div class="flex animate-marquee space-x-16">
                     <!-- First Set of Logos -->
                     @foreach(['BCA.png', 'BNI.png', 'BRi.png', 'BUMN.png', 'JNE.png', 'JNT.png', 'Lion_parcel.png', 'SiCepat.png'] as $logo)
-                        <div class="flex-shrink-0 w-32 h-32 bg-white rounded-xl flex items-center justify-center shadow-sm hover:shadow-md transition-shadow p-4">
-                            <img src="{{ asset('image/support/' . $logo) }}" alt="Partner Logo" class="w-full h-full object-contain">
-                        </div>
+                    <div class="flex-shrink-0 w-32 h-32 bg-white rounded-xl flex items-center justify-center shadow-sm hover:shadow-md transition-shadow p-4">
+                        <img src="{{ asset('image/support/' . $logo) }}" alt="Partner Logo" class="w-full h-full object-contain">
+                    </div>
                     @endforeach
-                    
+
                     <!-- Duplicate Set for Seamless Loop -->
                     @foreach(['BCA.png', 'BNI.png', 'BRi.png', 'BUMN.png', 'JNE.png', 'JNT.png', 'Lion_parcel.png', 'SiCepat.png'] as $logo)
-                        <div class="flex-shrink-0 w-32 h-32 bg-white rounded-xl flex items-center justify-center shadow-sm hover:shadow-md transition-shadow p-4">
-                            <img src="{{ asset('image/support/' . $logo) }}" alt="Partner Logo" class="w-full h-full object-contain">
-                        </div>
+                    <div class="flex-shrink-0 w-32 h-32 bg-white rounded-xl flex items-center justify-center shadow-sm hover:shadow-md transition-shadow p-4">
+                        <img src="{{ asset('image/support/' . $logo) }}" alt="Partner Logo" class="w-full h-full object-contain">
+                    </div>
                     @endforeach
                 </div>
             </div>
@@ -633,7 +659,7 @@
             <div class="mt-12 pt-8 border-t border-gray-200">
                 <div class="max-w-md mx-auto text-center">
                     <h3 class="text-lg font-semibold text-gray-800 mb-4">Subscribe to Our Newsletter</h3>
-                    <div class="flex gap-2">
+                    <div class="flex flex-col sm:flex-row gap-2">
                         <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:border-[#7eaeb5]">
                         <button class="bg-[#7eaeb5] text-white px-6 py-2 rounded-full hover:bg-[#6a9ba3] transition">
                             Subscribe
@@ -651,16 +677,31 @@
 
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    (function(){
-    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-    s1.async=true;
-    s1.src='https://embed.tawk.to/682c477148300f190da7003a/1irmfe5jb';
-    s1.charset='UTF-8';
-    s1.setAttribute('crossorigin','*');
-    s0.parentNode.insertBefore(s1,s0);
-    })();
+        var Tawk_API = Tawk_API || {},
+            Tawk_LoadStart = new Date();
+        (function() {
+            var s1 = document.createElement("script"),
+                s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/682c477148300f190da7003a/1irmfe5jb';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
     </script>
     <!--End of Tawk.to Script-->
+
+    <!-- Tambahkan AOS JS di bagian bawah sebelum closing body tag -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Inisialisasi AOS
+        AOS.init({
+            once: true, // Animasi hanya akan dijalankan sekali
+            offset: 100, // Offset (dalam px) dari titik trigger
+            duration: 1000, // Durasi animasi dalam milidetik
+            easing: 'ease-in-out', // Jenis easing
+        });
+    </script>
 </body>
+
 </html>
