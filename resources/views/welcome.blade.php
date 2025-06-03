@@ -431,7 +431,7 @@
     <section class="bg-white section-padding">
         <div class="container">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-8">Kategori Produk</h2>
-            <div class="flex flex-col items-center space-y-12">
+            <div class="flex flex-col md:flex-row justify-center items-center md:gap-12 space-y-12 md:space-y-0">
                 <!-- Kategori 1 -->
                 <div class="text-center">
                     <div class="circle-border">
