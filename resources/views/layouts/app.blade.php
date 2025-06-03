@@ -35,23 +35,412 @@
                     fontFamily: {
                         sans: ['Poppins', 'sans-serif'],
                         pacifico: ['Pacifico', 'cursive'],
+                    },
+                    screens: {
+                        'xs': '320px',    // iPhone SE
+                        'sm': '360px',    // Samsung Galaxy S20
+                        'md': '390px',    // iPhone 12/13/14
+                        'lg': '428px',    // iPhone 12/13/14 Pro Max
+                        'xl': '768px',    // iPad Mini
+                        '2xl': '1024px',  // iPad Pro
+                        '3xl': '1792px',  // Custom large screen
                     }
                 }
             }
         }
     </script>
     <style>
+        /* Base styles */
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
         body {
             font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: none;
+        }
+        .modal-overlay.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal {
+            background: white;
+            border-radius: 0.5rem;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.3s ease-out;
+        }
+        .modal.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        @media (min-width: 1792px) {
+            .modal {
+                max-width: 600px;
+            }
+        }
+
+        /* Dropdown styles */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1000;
+            border-radius: 4px;
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            height: 20px;
+            background: transparent;
+        }
+        .dropdown-item {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            position: relative;
+            z-index: 1000;
+        }
+        .dropdown-item:hover {
+            background-color: #f1f1f1;
+        }
+        .dropdown-divider {
+            height: 1px;
+            background-color: #e5e5e5;
+            margin: 4px 0;
+        }
+
+        /* Mobile menu styles */
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 40;
+        }
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: white;
+            z-index: 50;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        @media (min-width: 360px) {
+            .mobile-menu {
+                width: 90%;
+            }
+        }
+        @media (min-width: 390px) {
+            .mobile-menu {
+                width: 85%;
+            }
+        }
+        @media (min-width: 428px) {
+            .mobile-menu {
+                width: 80%;
+            }
+        }
+        @media (min-width: 768px) {
+            .mobile-menu {
+                width: 70%;
+            }
+        }
+        @media (min-width: 1024px) {
+            .mobile-menu {
+                width: 60%;
+            }
+        }
+        @media (min-width: 1792px) {
+            .mobile-menu {
+                width: 50%;
+            }
+        }
+
+        /* Container styles */
+        .container {
+            width: 100%;
+            max-width: 100%;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        @media (min-width: 360px) {
+            .container {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+        }
+        @media (min-width: 390px) {
+            .container {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+        }
+        @media (min-width: 428px) {
+            .container {
+                padding-left: 2.5rem;
+                padding-right: 2.5rem;
+            }
+        }
+        @media (min-width: 768px) {
+            .container {
+                padding-left: 3rem;
+                padding-right: 3rem;
+            }
+        }
+        @media (min-width: 1024px) {
+            .container {
+                padding-left: 4rem;
+                padding-right: 4rem;
+            }
+        }
+        @media (min-width: 1792px) {
+            .container {
+                padding-left: 5rem;
+                padding-right: 5rem;
+                max-width: 1792px;
+                margin: 0 auto;
+            }
+        }
+
+        /* Typography styles */
+        .text-responsive {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+        }
+        .heading-responsive {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+        }
+        @media (min-width: 1792px) {
+            .text-responsive {
+                font-size: 1.25rem;
+            }
+            .heading-responsive {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Grid styles */
+        .grid-responsive {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+        @media (min-width: 1792px) {
+            .grid-responsive {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* Card styles */
+        .card {
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        @media (min-width: 1792px) {
+            .card {
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+        }
+
+        /* Button styles */
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        @media (min-width: 1792px) {
+            .btn {
+                padding: 0.75rem 1.5rem;
+            }
+        }
+
+        /* Form styles */
+        .form-input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.25rem;
+            transition: border-color 0.3s ease;
+        }
+        .form-input:focus {
+            border-color: #90C9CF;
+            outline: none;
+        }
+        @media (min-width: 1792px) {
+            .form-input {
+                padding: 0.75rem;
+            }
+        }
+
         .logo-text {
             font-family: 'Pacifico', cursive;
-            font-size: 2.75rem;
+            font-size: clamp(1.5rem, 4vw, 2.75rem);
         }
         .navbar-logo {
             display: flex;
             align-items: center;
             height: 100%;
+        }
+        .container {
+            width: 100%;
+            max-width: 100%;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        @media (min-width: 360px) {
+            .container {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+        }
+        @media (min-width: 390px) {
+            .container {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+        }
+        @media (min-width: 428px) {
+            .container {
+                padding-left: 2.5rem;
+                padding-right: 2.5rem;
+            }
+        }
+        @media (min-width: 768px) {
+            .container {
+                padding-left: 3rem;
+                padding-right: 3rem;
+            }
+        }
+        @media (min-width: 1024px) {
+            .container {
+                padding-left: 4rem;
+                padding-right: 4rem;
+            }
+        }
+        @media (min-width: 1792px) {
+            .container {
+                padding-left: 5rem;
+                padding-right: 5rem;
+                max-width: 1792px;
+                margin: 0 auto;
+            }
+            .navbar-container {
+                max-width: 1792px;
+                margin: 0 auto;
+            }
+            .footer-container {
+                max-width: 1792px;
+                margin: 0 auto;
+            }
+            .content-container {
+                max-width: 1792px;
+                margin: 0 auto;
+            }
+        }
+        .mobile-menu {
+            width: 100%;
+            max-width: 100%;
+        }
+        .mobile-menu-content {
+            padding: 1rem;
+        }
+        @media (min-width: 360px) {
+            .mobile-menu {
+                width: 90%;
+            }
+        }
+        @media (min-width: 390px) {
+            .mobile-menu {
+                width: 85%;
+            }
+        }
+        @media (min-width: 428px) {
+            .mobile-menu {
+                width: 80%;
+            }
+        }
+        @media (min-width: 1792px) {
+            .grid-cols-4 {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+            .grid-cols-3 {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+            .grid-cols-2 {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+            .text-2xl {
+                font-size: 1.75rem;
+            }
+            .text-3xl {
+                font-size: 2rem;
+            }
+            .text-4xl {
+                font-size: 2.5rem;
+            }
+            .space-x-6 > * + * {
+                margin-left: 2rem;
+            }
+            .space-y-8 > * + * {
+                margin-top: 3rem;
+            }
         }
         .navbar-container {
             padding-top: 1rem;
@@ -140,9 +529,6 @@
             font-size: 1.5rem;
             color: #666;
         }
-        .mobile-menu-content {
-            padding: 1rem;
-        }
         .mobile-menu-item {
             display: block;
             padding: 0.75rem 0;
@@ -179,47 +565,68 @@
         .mobile-menu-dropdown button:hover {
             color: #90C9CF;
         }
+        /* Tambahkan style untuk mobile */
+        @media (max-width: 640px) {
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            .mobile-menu {
+                width: 100%;
+                max-width: none;
+            }
+            .mobile-menu-content {
+                padding: 1rem;
+            }
+        }
+        /* Tambahkan style untuk tablet */
+        @media (min-width: 641px) and (max-width: 1023px) {
+            .container {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+        }
     </style>
 </head>
 <body class="min-h-screen">
     <!-- Navbar -->
     <header class="bg-white shadow-sm">
-        <div class="container mx-auto px-4 navbar-container flex justify-between items-center">
-            <a href="/" class="text-2xl font-bold text-black logo-text hover:text-primary transition-colors duration-300 navbar-logo">Floralish.</a>
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="/" class="text-xl sm:text-2xl font-bold text-black logo-text hover:text-primary transition-colors duration-300 navbar-logo">Floralish.</a>
             
             <!-- Navigasi Desktop -->
-            <nav class="hidden md:flex items-center">
-                <ul class="flex space-x-6 mr-6">
-                    <li><a href="{{ route('home') }}" class="text-black hover:text-primary">Home</a></li>
-                    <li><a href="{{ route('products.index') }}" class="text-black hover:text-primary">Products</a></li>
-                    <li><a href="{{ route('about') }}" class="text-black hover:text-primary">About</a></li>
-                    <li><a href="{{ route('contact') }}" class="text-black hover:text-primary">Contact</a></li>
-                    <li><a href="{{ route('lokasi.index') }}" class="text-black hover:text-primary">Lokasi</a></li>
+            <nav class="hidden md:flex items-center space-x-4 lg:space-x-6">
+                <ul class="flex space-x-4 lg:space-x-6 mr-4 lg:mr-6">
+                    <li><a href="{{ route('home') }}" class="text-sm lg:text-base text-black hover:text-primary">Home</a></li>
+                    <li><a href="{{ route('products.index') }}" class="text-sm lg:text-base text-black hover:text-primary">Products</a></li>
+                    <li><a href="{{ route('about') }}" class="text-sm lg:text-base text-black hover:text-primary">About</a></li>
+                    <li><a href="{{ route('contact') }}" class="text-sm lg:text-base text-black hover:text-primary">Contact</a></li>
+                    <li><a href="{{ route('lokasi.index') }}" class="text-sm lg:text-base text-black hover:text-primary">Lokasi</a></li>
                 </ul>
                 
                 <!-- Menu Dropdown Profil (Belum Login) -->
-                <div class="dropdown {{ Auth::check() ? 'hidden' : '' }}">
+                <div class="relative inline-block {{ Auth::check() ? 'hidden' : '' }}">
                     <button class="flex items-center text-black hover:text-primary">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
                         Profile
                     </button>
-                    <div class="dropdown-content">
+                    <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10 hidden group-hover:block">
                         <a href="{{ route('login') }}" class="dropdown-item">Login</a>
                         <a href="{{ route('register') }}" class="dropdown-item">Register</a>
                     </div>
                 </div>
                 
                 <!-- Menu Dropdown Profil (Sudah Login) -->
-                <div class="dropdown {{ Auth::check() ? '' : 'hidden' }}" id="loggedInDropdown">
+                <div class="relative inline-block {{ Auth::check() ? '' : 'hidden' }}" id="loggedInDropdown">
                     <button class="flex items-center text-black hover:text-primary">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
                         {{ Auth::check() ? Auth::user()->name : 'Profile' }}
                     </button>
-                    <div class="dropdown-content">
+                    <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10 hidden group-hover:block">
                         <a href="{{ route('profile.settings') }}" class="dropdown-item">My Profile</a>
                         <a href="{{ route('profile.orders') }}" class="dropdown-item">My Orders</a>
                         <div class="dropdown-divider"></div>
@@ -239,7 +646,7 @@
             </nav>
             
             <!-- Tombol Menu Mobile -->
-            <button id="mobileMenuButton" class="md:hidden text-black">
+            <button id="mobileMenuButton" class="md:hidden text-black p-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
@@ -248,32 +655,32 @@
     </header>
 
     <!-- Menu Mobile -->
-    <div id="mobileMenuOverlay" class="mobile-menu-overlay"></div>
-    <div id="mobileMenu" class="mobile-menu">
-        <div class="mobile-menu-header">
-            <div class="text-xl font-bold text-black">Menu</div>
-            <button id="mobileMenuClose" class="mobile-menu-close">&times;</button>
+    <div id="mobileMenuOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+    <div id="mobileMenu" class="fixed top-0 right-0 bottom-0 w-full sm:w-4/5 max-w-xs bg-white z-50 transform translate-x-full transition-transform duration-300 ease-in-out">
+        <div class="flex justify-between items-center p-4 border-b">
+            <div class="text-lg sm:text-xl font-bold text-black">Menu</div>
+            <button id="mobileMenuClose" class="text-2xl text-gray-600 p-2">&times;</button>
         </div>
-        <div class="mobile-menu-content">
-            <a href="{{ route('home') }}" class="mobile-menu-item">Home</a>
-            <a href="{{ route('products.index') }}" class="mobile-menu-item">Products</a>
-            <a href="{{ route('about') }}" class="mobile-menu-item">About</a>
-            <a href="{{ route('contact') }}" class="mobile-menu-item">Contact</a>
-            <a href="{{ route('lokasi.index') }}" class="mobile-menu-item">Lokasi</a>
+        <div class="p-4 overflow-y-auto max-h-[calc(100vh-4rem)]">
+            <a href="{{ route('home') }}" class="block py-3 text-base text-black border-b border-gray-100">Home</a>
+            <a href="{{ route('products.index') }}" class="block py-3 text-base text-black border-b border-gray-100">Products</a>
+            <a href="{{ route('about') }}" class="block py-3 text-base text-black border-b border-gray-100">About</a>
+            <a href="{{ route('contact') }}" class="block py-3 text-base text-black border-b border-gray-100">Contact</a>
+            <a href="{{ route('lokasi.index') }}" class="block py-3 text-base text-black border-b border-gray-100">Lokasi</a>
             
             <div class="mt-4">
-                <div class="mobile-menu-item">Profile</div>
-                <div class="mobile-menu-dropdown">
+                <div class="block py-3 text-base text-black border-b border-gray-100">Profile</div>
+                <div class="pl-4 hidden">
                     @auth
-                        <a href="{{ route('profile.settings') }}" class="mobile-menu-dropdown-item">My Profile</a>
-                        <a href="{{ route('profile.orders') }}" class="mobile-menu-dropdown-item">My Orders</a>
-                        <form action="{{ route('logout') }}" method="POST" class="mobile-menu-dropdown-item">
+                        <a href="{{ route('profile.settings') }}" class="block py-3 text-base text-gray-600 border-b border-gray-100">My Profile</a>
+                        <a href="{{ route('profile.orders') }}" class="block py-3 text-base text-gray-600 border-b border-gray-100">My Orders</a>
+                        <form action="{{ route('logout') }}" method="POST" class="block py-3 text-base text-gray-600 border-b border-gray-100">
                             @csrf
                             <button type="submit" class="w-full text-left">Logout</button>
                         </form>
                     @else
-                        <a href="{{ route('login') }}" class="mobile-menu-dropdown-item">Login</a>
-                        <a href="{{ route('register') }}" class="mobile-menu-dropdown-item">Register</a>
+                        <a href="{{ route('login') }}" class="block py-3 text-base text-gray-600 border-b border-gray-100">Login</a>
+                        <a href="{{ route('register') }}" class="block py-3 text-base text-gray-600 border-b border-gray-100">Register</a>
                     @endauth
                 </div>
             </div>
@@ -281,70 +688,72 @@
     </div>
 
     <!-- Content -->
-    <main>
-        @yield('content')
+    <main class="flex-grow w-full">
+        <div class="content-container">
+            @yield('content')
+        </div>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white mt-20">
+    <footer class="bg-white w-full">
         <!-- Wave Divider -->
-        <div class="relative">
+        <div class="relative w-full">
             <div class="absolute top-0 left-0 w-full overflow-hidden leading-none">
-                <svg class="relative block w-full h-12" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <svg class="relative block w-full h-8 sm:h-12" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
                     <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="fill-[#d1f0f5]"></path>
                 </svg>
             </div>
         </div>
 
         <!-- Main Footer Content -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="footer-container w-full px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Company Info -->
-                <div class="col-span-1 md:col-span-2">
-                    <h2 class="text-3xl font-pacifico text-[#7eaeb5] mb-4">Floralish.</h2>
-                    <p class="text-gray-600 mb-4 max-w-md">
+                <div class="col-span-1 sm:col-span-2">
+                    <h2 class="text-2xl sm:text-3xl font-pacifico text-[#7eaeb5] mb-4">Floralish.</h2>
+                    <p class="text-sm sm:text-base text-gray-600 mb-4 max-w-md">
                         Menyediakan rangkaian bunga berkualitas tinggi untuk setiap momen spesial Anda. Kami berkomitmen memberikan pengalaman berbelanja bunga yang menyenangkan dan memuaskan.
                     </p>
                     <div class="flex space-x-4">
                         <a href="#" class="text-[#7eaeb5] hover:text-[#6a9ba3] transition">
-                            <i class="fab fa-instagram text-xl"></i>
+                            <i class="fab fa-instagram text-lg sm:text-xl"></i>
                         </a>
                         <a href="#" class="text-[#7eaeb5] hover:text-[#6a9ba3] transition">
-                            <i class="fab fa-facebook text-xl"></i>
+                            <i class="fab fa-facebook text-lg sm:text-xl"></i>
                         </a>
                         <a href="#" class="text-[#7eaeb5] hover:text-[#6a9ba3] transition">
-                            <i class="fab fa-twitter text-xl"></i>
+                            <i class="fab fa-twitter text-lg sm:text-xl"></i>
                         </a>
                         <a href="#" class="text-[#7eaeb5] hover:text-[#6a9ba3] transition">
-                            <i class="fab fa-tiktok text-xl"></i>
+                            <i class="fab fa-tiktok text-lg sm:text-xl"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- Quick Links -->
                 <div>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Quick Links</h3>
+                    <h3 class="text-base sm:text-lg font-semibold text-gray-800 mb-4">Quick Links</h3>
                     <ul class="space-y-2">
-                        <li><a href="{{ route('home') }}" class="text-gray-600 hover:text-[#7eaeb5] transition">Home</a></li>
-                        <li><a href="{{ route('products.index') }}" class="text-gray-600 hover:text-[#7eaeb5] transition">Products</a></li>
-                        <li><a href="{{ route('about') }}" class="text-gray-600 hover:text-[#7eaeb5] transition">About Us</a></li>
-                        <li><a href="{{ route('contact') }}" class="text-gray-600 hover:text-[#7eaeb5] transition">Contact</a></li>
+                        <li><a href="{{ route('home') }}" class="text-sm sm:text-base text-gray-600 hover:text-[#7eaeb5] transition">Home</a></li>
+                        <li><a href="{{ route('products.index') }}" class="text-sm sm:text-base text-gray-600 hover:text-[#7eaeb5] transition">Products</a></li>
+                        <li><a href="{{ route('about') }}" class="text-sm sm:text-base text-gray-600 hover:text-[#7eaeb5] transition">About Us</a></li>
+                        <li><a href="{{ route('contact') }}" class="text-sm sm:text-base text-gray-600 hover:text-[#7eaeb5] transition">Contact</a></li>
                     </ul>
                 </div>
 
                 <!-- Contact Info -->
                 <div>
-                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Contact Us</h3>
+                    <h3 class="text-base sm:text-lg font-semibold text-gray-800 mb-4">Contact Us</h3>
                     <ul class="space-y-2">
-                        <li class="flex items-center text-gray-600">
+                        <li class="flex items-center text-sm sm:text-base text-gray-600">
                             <i class="fas fa-map-marker-alt w-5 text-[#7eaeb5]"></i>
                             <span>Jl. Bunga Indah No. 123, Jakarta</span>
                         </li>
-                        <li class="flex items-center text-gray-600">
+                        <li class="flex items-center text-sm sm:text-base text-gray-600">
                             <i class="fas fa-phone w-5 text-[#7eaeb5]"></i>
                             <span>+62 812 3456 7890</span>
                         </li>
-                        <li class="flex items-center text-gray-600">
+                        <li class="flex items-center text-sm sm:text-base text-gray-600">
                             <i class="fas fa-envelope w-5 text-[#7eaeb5]"></i>
                             <span>info@floralish.com</span>
                         </li>
@@ -353,7 +762,7 @@
             </div>
 
             <!-- Copyright -->
-            <div class="mt-12 pt-8 border-t border-gray-200 text-center text-gray-600">
+            <div class="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-200 text-center text-sm sm:text-base text-gray-600">
                 <p>&copy; 2025 Floralish. All rights reserved.</p>
             </div>
         </div>
@@ -368,18 +777,16 @@
         const mobileMenu = document.getElementById('mobileMenu');
 
         function openMobileMenu() {
-            mobileMenuOverlay.style.display = 'block';
-            mobileMenu.style.display = 'block';
-            setTimeout(() => {
-                mobileMenu.classList.add('active');
-            }, 10);
+            mobileMenuOverlay.classList.remove('hidden');
+            mobileMenu.classList.remove('translate-x-full');
+            document.body.style.overflow = 'hidden';
         }
 
         function closeMobileMenu() {
-            mobileMenu.classList.remove('active');
+            mobileMenu.classList.add('translate-x-full');
             setTimeout(() => {
-                mobileMenu.style.display = 'none';
-                mobileMenuOverlay.style.display = 'none';
+                mobileMenuOverlay.classList.add('hidden');
+                document.body.style.overflow = '';
             }, 300);
         }
 
@@ -387,16 +794,12 @@
         mobileMenuClose.addEventListener('click', closeMobileMenu);
         mobileMenuOverlay.addEventListener('click', closeMobileMenu);
 
-        // Mobile Menu Dropdown
-        const profileMenuItem = document.querySelector('.mobile-menu-item:contains("Profile")');
-        const profileDropdown = document.querySelector('.mobile-menu-dropdown');
-        
-        if (profileMenuItem && profileDropdown) {
-            profileMenuItem.addEventListener('click', function(e) {
-                e.preventDefault();
-                profileDropdown.style.display = profileDropdown.style.display === 'block' ? 'none' : 'block';
-            });
-        }
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) { // md breakpoint
+                closeMobileMenu();
+            }
+        });
     </script>
 </body>
 </html> 

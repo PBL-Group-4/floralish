@@ -151,3 +151,116 @@
         </div>
     </div>
 </nav>
+
+<!-- Mobile Menu Overlay -->
+<div id="mobileMenuOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden transition-opacity duration-300"></div>
+
+<!-- Mobile Menu -->
+<div id="mobileMenu" class="fixed top-0 right-0 bottom-0 w-full sm:w-4/5 md:w-3/5 lg:w-2/5 xl:w-1/3 bg-white z-50 transform translate-x-full transition-transform duration-300 ease-in-out">
+    <div class="flex justify-between items-center p-4 border-b">
+        <div class="text-lg sm:text-xl md:text-2xl font-bold text-black">Menu</div>
+        <button id="mobileMenuClose" class="text-2xl sm:text-3xl text-gray-600 p-2 hover:bg-gray-100 rounded-lg transition-colors duration-300">&times;</button>
+    </div>
+    
+    <div class="p-4 overflow-y-auto max-h-[calc(100vh-4rem)]">
+        <!-- Main Navigation -->
+        <nav class="space-y-1">
+            <a href="{{ route('home') }}" class="block py-3 px-4 text-base sm:text-lg text-black hover:bg-gray-50 rounded-lg transition-colors duration-300">
+                <i class="fas fa-home w-6 text-[#7eaeb5]"></i>
+                <span class="ml-3">Home</span>
+            </a>
+            <a href="{{ route('products.index') }}" class="block py-3 px-4 text-base sm:text-lg text-black hover:bg-gray-50 rounded-lg transition-colors duration-300">
+                <i class="fas fa-shopping-bag w-6 text-[#7eaeb5]"></i>
+                <span class="ml-3">Products</span>
+            </a>
+            <a href="{{ route('about') }}" class="block py-3 px-4 text-base sm:text-lg text-black hover:bg-gray-50 rounded-lg transition-colors duration-300">
+                <i class="fas fa-info-circle w-6 text-[#7eaeb5]"></i>
+                <span class="ml-3">About</span>
+            </a>
+            <a href="{{ route('contact') }}" class="block py-3 px-4 text-base sm:text-lg text-black hover:bg-gray-50 rounded-lg transition-colors duration-300">
+                <i class="fas fa-envelope w-6 text-[#7eaeb5]"></i>
+                <span class="ml-3">Contact</span>
+            </a>
+            <a href="{{ route('lokasi.index') }}" class="block py-3 px-4 text-base sm:text-lg text-black hover:bg-gray-50 rounded-lg transition-colors duration-300">
+                <i class="fas fa-map-marker-alt w-6 text-[#7eaeb5]"></i>
+                <span class="ml-3">Lokasi</span>
+            </a>
+        </nav>
+
+        <!-- User Menu -->
+        <div class="mt-6 pt-6 border-t border-gray-200">
+            <h3 class="px-4 text-sm sm:text-base font-semibold text-gray-500 uppercase tracking-wider">Account</h3>
+            <nav class="mt-2 space-y-1">
+                @auth
+                    <a href="{{ route('profile.settings') }}" class="block py-3 px-4 text-base sm:text-lg text-black hover:bg-gray-50 rounded-lg transition-colors duration-300">
+                        <i class="fas fa-user-cog w-6 text-[#7eaeb5]"></i>
+                        <span class="ml-3">My Profile</span>
+                    </a>
+                    <a href="{{ route('profile.orders') }}" class="block py-3 px-4 text-base sm:text-lg text-black hover:bg-gray-50 rounded-lg transition-colors duration-300">
+                        <i class="fas fa-shopping-cart w-6 text-[#7eaeb5]"></i>
+                        <span class="ml-3">My Orders</span>
+                    </a>
+                    <form action="{{ route('logout') }}" method="POST" class="block">
+                        @csrf
+                        <button type="submit" class="w-full text-left py-3 px-4 text-base sm:text-lg text-black hover:bg-gray-50 rounded-lg transition-colors duration-300">
+                            <i class="fas fa-sign-out-alt w-6 text-[#7eaeb5]"></i>
+                            <span class="ml-3">Logout</span>
+                        </button>
+                    </form>
+                @else
+                    <a href="{{ route('login') }}" class="block py-3 px-4 text-base sm:text-lg text-black hover:bg-gray-50 rounded-lg transition-colors duration-300">
+                        <i class="fas fa-sign-in-alt w-6 text-[#7eaeb5]"></i>
+                        <span class="ml-3">Login</span>
+                    </a>
+                    <a href="{{ route('register') }}" class="block py-3 px-4 text-base sm:text-lg text-black hover:bg-gray-50 rounded-lg transition-colors duration-300">
+                        <i class="fas fa-user-plus w-6 text-[#7eaeb5]"></i>
+                        <span class="ml-3">Register</span>
+                    </a>
+                @endauth
+            </nav>
+        </div>
+
+        <!-- Social Links -->
+        <div class="mt-6 pt-6 border-t border-gray-200">
+            <h3 class="px-4 text-sm sm:text-base font-semibold text-gray-500 uppercase tracking-wider">Follow Us</h3>
+            <div class="mt-4 px-4 flex space-x-4">
+                <a href="#" class="text-[#7eaeb5] hover:text-[#6a9ba3] transition-colors duration-300">
+                    <i class="fab fa-instagram text-xl sm:text-2xl"></i>
+                </a>
+                <a href="#" class="text-[#7eaeb5] hover:text-[#6a9ba3] transition-colors duration-300">
+                    <i class="fab fa-facebook text-xl sm:text-2xl"></i>
+                </a>
+                <a href="#" class="text-[#7eaeb5] hover:text-[#6a9ba3] transition-colors duration-300">
+                    <i class="fab fa-twitter text-xl sm:text-2xl"></i>
+                </a>
+                <a href="#" class="text-[#7eaeb5] hover:text-[#6a9ba3] transition-colors duration-300">
+                    <i class="fab fa-tiktok text-xl sm:text-2xl"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    const mobileMenuClose = document.getElementById('mobileMenuClose');
+    const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    function toggleMobileMenu() {
+        mobileMenuOverlay.classList.toggle('hidden');
+        mobileMenu.classList.toggle('translate-x-full');
+        document.body.style.overflow = mobileMenu.classList.contains('translate-x-full') ? '' : 'hidden';
+    }
+
+    mobileMenuButton.addEventListener('click', toggleMobileMenu);
+    mobileMenuClose.addEventListener('click', toggleMobileMenu);
+    mobileMenuOverlay.addEventListener('click', toggleMobileMenu);
+
+    // Close mobile menu on window resize
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768 && !mobileMenu.classList.contains('translate-x-full')) {
+            toggleMobileMenu();
+        }
+    });
+</script>

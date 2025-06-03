@@ -30,8 +30,32 @@
     </script>
     <link rel="stylesheet" href="{{ asset('style/welcome.css') }}">
     <style>
-        body {
+        body { 
             font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+        }
+        .container {
+            width: 100%;
+            max-width: 100%;
+            padding-left: clamp(1rem, 5vw, 2rem);
+            padding-right: clamp(1rem, 5vw, 2rem);
+            margin: 0 auto;
+        }
+        .section-padding {
+            padding-top: clamp(2rem, 5vw, 4rem);
+            padding-bottom: clamp(2rem, 5vw, 4rem);
+        }
+        .grid-responsive {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+            gap: clamp(1rem, 3vw, 2rem);
+        }
+        .flex-responsive {
+            display: flex;
+            flex-wrap: wrap;
+            gap: clamp(1rem, 3vw, 2rem);
         }
         .logo-text {
             font-family: 'Pacifico', cursive;
@@ -107,12 +131,80 @@
             display: flex;
             align-items: center;
         }
+        
+        /* Navbar Styles for 828x1792 */
+        @media (max-width: 828px) {
+            .navbar-container {
+                padding: 0.5rem 1rem;
+            }
+            
+            .nav-dropdown {
+                position: relative;
+                display: inline-block;
+            }
+            
+            .nav-dropdown-content {
+                display: none;
+                position: absolute;
+                right: 0;
+                background-color: white;
+                min-width: 200px;
+                box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+                border-radius: 8px;
+                z-index: 1000;
+                padding: 0.5rem 0;
+            }
+            
+            .nav-dropdown:hover .nav-dropdown-content {
+                display: block;
+            }
+            
+            .nav-dropdown-item {
+                padding: 0.75rem 1rem;
+                color: #333;
+                text-decoration: none;
+                display: block;
+                transition: background-color 0.3s;
+            }
+            
+            .nav-dropdown-item:hover {
+                background-color: #f5f5f5;
+            }
+            
+            .nav-dropdown-divider {
+                height: 1px;
+                background-color: #e5e5e5;
+                margin: 0.5rem 0;
+            }
+            
+            .nav-dropdown-button {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.5rem;
+                cursor: pointer;
+                color: #333;
+                transition: color 0.3s;
+            }
+            
+            .nav-dropdown-button:hover {
+                color: #90C9CF;
+            }
+            
+            .nav-dropdown-button i {
+                transition: transform 0.3s;
+            }
+            
+            .nav-dropdown:hover .nav-dropdown-button i {
+                transform: rotate(180deg);
+            }
+        }
     </style>
 </head>
-<body class="min-h-screen">
+<body class="overflow-x-hidden">
     <!-- Bagian Header -->
-    <header class="bg-white shadow-sm">
-        <div class="container mx-auto px-4 navbar-container flex justify-between items-center">
+    <header class="bg-white shadow-sm w-full">
+        <div class="container flex justify-between items-center py-4">
             <a href="/" class="text-2xl font-bold text-black logo-text hover:text-primary transition-colors duration-300 navbar-logo">Floralish.</a>
             
             <!-- Navigasi Desktop -->
@@ -208,39 +300,42 @@
     </div>
 
     <!-- Bagian Hero -->
-    <section class="bg-gradient-to-br from-primary to-secondary w-full px-4 pt-4 flex flex-col md:flex-row items-center">
-        <div class="container mx-auto flex flex-col md:flex-row items-center">
-            <div class="md:w-1/2 mb-8 md:mb-0">
-                <h1 class="text-4xl md:text-5xl font-bold mb-2">
-                    <span class="text-black">Pesan</span> <span class="text-red-600">Bunga</span>
-                </h1>
-                <h2 class="text-2xl md:text-3xl font-semibold text-black mb-4">Mudah & Cepat</h2>
-                <p class="text-xl text-black mb-8">Temukan keindahan dan keharuman bunga untuk setiap momen spesial Anda. Kami menyediakan berbagai rangkaian bunga segar dengan kualitas terbaik.</p>
-                <button id="startButton" class="inline-block bg-button hover:bg-opacity-90 text-black font-semibold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105 shadow-lg">
-                    Discover our Product
-                </button>
-                
-                <div class="stats-container">
-                    <div class="stat-item">
-                        <div class="stat-value" id="orderCount">0</div>
-                        <div class="stat-label">Total pesanan</div>
-                    </div>
-                    <div class="divider"></div>
-                    <div class="stat-item">
-                        <div class="stat-value" id="regionCount">0</div>
-                        <div class="stat-label">Wilayah</div>
-                    </div>
-                    <div class="divider"></div>
-                    <div class="stat-item">
-                        <div class="stat-value" id="ratingValue">0</div>
-                        <div class="stat-label">Rating</div>
+    <section class="bg-gradient-to-br from-primary to-secondary w-full section-padding">
+        <div class="container">
+            <div class="grid-responsive items-center">
+                <div class="space-y-6">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold">
+                        <span class="text-black">Pesan</span> <span class="text-red-600">Bunga</span>
+                    </h1>
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-semibold text-black">
+                        Mudah & Cepat
+                    </h2>
+                    <p class="text-lg md:text-xl text-black">
+                        Temukan keindahan dan keharuman bunga untuk setiap momen spesial Anda.
+                    </p>
+                    <button id="startButton" class="bg-button hover:bg-opacity-90 text-black font-semibold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105 shadow-lg">
+                        Discover our Product
+                    </button>
+                    <div class="flex-responsive justify-between mt-8">
+                        <div class="stat-item">
+                            <div class="stat-value" id="orderCount">0</div>
+                            <div class="stat-label">Total pesanan</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="regionCount">0</div>
+                            <div class="stat-label">Wilayah</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="ratingValue">0</div>
+                            <div class="stat-label">Rating</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="md:w-1/2 flex justify-center">
-                <div class="window-frame">
-                    <div class="window-content">
-                        <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?ixlib=rb-1.2.1&auto=format&fit=crop&w=512&h=512&q=80" alt="Buket Bunga Indah">
+                <div class="flex justify-center">
+                    <div class="window-frame w-full max-w-md">
+                        <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?ixlib=rb-1.2.1&auto=format&fit=crop&w=512&h=512&q=80" 
+                             alt="Buket Bunga Indah"
+                             class="w-full h-auto object-cover rounded-lg">
                     </div>
                 </div>
             </div>
@@ -248,149 +343,172 @@
     </section>
     
     <!-- Bagian Kategori -->
-    <section class="bg-white container mx-auto px-4 py-12">
-        <h2 class="text-3xl font-bold text-center text-black mb-8">Kategori Produk</h2>
-        <div class="flex flex-wrap justify-center gap-6 md:gap-10">
-            @foreach($categories as $category)
-            <div class="category-item">
-                <div class="category-circle">
-                    <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&h=150&q=80" alt="{{ $category->category }}">
+    <section class="bg-white section-padding">
+        <div class="container">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8">Kategori Produk</h2>
+            <div class="grid-responsive">
+                @foreach($categories as $category)
+                <div class="category-item text-center">
+                    <div class="category-circle aspect-square">
+                        <img src="{{ $category->image }}" 
+                             alt="{{ $category->category }}"
+                             class="w-full h-full object-cover rounded-full">
+                    </div>
+                    <h3 class="text-lg font-semibold mt-3">{{ $category->category }}</h3>
                 </div>
-                <h3 class="text-lg font-semibold text-center mt-3">{{ $category->category }}</h3>
+                @endforeach
             </div>
-            @endforeach
         </div>
     </section>
     
     <!-- Bagian Catalog Produk -->
-    <section class="bg-white w-full px-0 py-12">
-        <h2 class="text-3xl font-bold text-center text-black mb-8">Catalog Produk</h2>
-        
-        <div class="container mx-auto px-4 py-8">
-            <form id="filterForm" action="{{ route('home') }}" method="GET" class="flex flex-wrap gap-4 justify-between items-center mb-8">
-                <div class="flex-1 min-w-[200px] flex gap-2">
-                    <input type="text" name="search" value="{{ request('search') }}" 
-                        placeholder="Cari produk..." 
-                        class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
-                    <button type="submit" class="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg transition-colors duration-300 flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                        Cari
-                    </button>
+    <section class="bg-white section-padding">
+        <div class="container">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8">Catalog Produk</h2>
+            
+            <!-- Filter Form -->
+            <form id="filterForm" class="flex-responsive mb-8">
+                <div class="flex-1 min-w-[200px]">
+                    <input type="text" 
+                           name="search" 
+                           value="{{ request('search') }}" 
+                           placeholder="Cari produk..." 
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
                 </div>
                 <div class="w-[200px]">
-                    <select name="category" onchange="this.form.submit()" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                    <select name="category" 
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
                         <option value="">Semua Kategori</option>
                         @foreach($categories as $category)
-                            <option value="{{ $category->category }}" {{ request('category') == $category->category ? 'selected' : '' }}>
+                            <option value="{{ $category->category }}" 
+                                    {{ request('category') == $category->category ? 'selected' : '' }}>
                                 {{ $category->category }}
                             </option>
                         @endforeach
                     </select>
                 </div>
                 <div class="w-[200px]">
-                    <select name="sort" onchange="this.form.submit()" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                    <select name="sort" 
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
                         <option value="">Urutkan</option>
-                        <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>Harga: Rendah ke Tinggi</option>
-                        <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>Harga: Tinggi ke Rendah</option>
-                        <option value="name_asc" {{ request('sort') == 'name_asc' ? 'selected' : '' }}>Nama: A-Z</option>
-                        <option value="name_desc" {{ request('sort') == 'name_desc' ? 'selected' : '' }}>Nama: Z-A</option>
+                        <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>
+                            Harga: Rendah ke Tinggi
+                        </option>
+                        <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>
+                            Harga: Tinggi ke Rendah
+                        </option>
                     </select>
                 </div>
             </form>
-        </div>
-        
-        @foreach(['Bunga', 'Karangan Bunga Papan', 'Kado & Cakes'] as $categoryName)
-        <div class="mb-12 px-4 sm:px-6 md:px-8">
-            <div class="relative mb-6">
-                <h3 class="text-2xl font-semibold text-center text-black">{{ $categoryName }}</h3>
-                @if($products->where('category', $categoryName)->count() > 0)
-                    <a href="{{ route('products.index', ['category' => $categoryName]) }}" class="absolute right-0 top-[80%] inline-flex items-center gap-2 text-primary hover:text-primary-dark transition-all duration-300 group">
-                        <span class="relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all after:duration-300 group-hover:after:w-full">Lihat Selengkapnya</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-0.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </a>
-                @endif
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
-                @foreach($products->where('category', $categoryName)->take(4) as $product)
-                    <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300 h-full flex flex-col">
-                        <a href="{{ route('products.show', $product) }}" class="block flex-grow">
-                            <div class="relative pb-[75%]">
-                                <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" 
-                                    class="absolute inset-0 w-full h-full object-cover">
-                            </div>
-                            <div class="p-4 flex flex-col flex-grow">
-                                <h3 class="text-lg font-semibold text-gray-800 mb-2 line-clamp-2">{{ $product->name }}</h3>
-                                <p class="text-sm text-gray-600 mb-4 line-clamp-2">{{ Str::limit($product->description, 50) }}</p>
-                                <div class="flex justify-between items-center mb-4 mt-auto">
-                                    <span class="text-primary font-bold">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
-                                </div>
-                                <a href="{{ route('products.show', $product) }}" class="w-full inline-flex items-center justify-center gap-2 bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark hover:scale-[1.02] transition-all duration-300 shadow-md hover:shadow-lg transform">
-                                    <span>Lihat Detail</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                    </svg>
-                                </a>
-                            </div>
+
+            <!-- Products Grid -->
+            @foreach(['Bunga', 'Karangan Bunga Papan', 'Kado & Cakes'] as $categoryName)
+            <div class="mb-12">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-semibold">{{ $categoryName }}</h3>
+                    @if($products->where('category', $categoryName)->count() > 0)
+                        <a href="{{ route('products.index', ['category' => $categoryName]) }}" 
+                           class="text-primary hover:text-primary-dark transition-all duration-300">
+                            Lihat Selengkapnya
                         </a>
-                    </div>
-                @endforeach
+                    @endif
+                </div>
+                <div class="grid-responsive">
+                    @foreach($products->where('category', $categoryName)->take(4) as $product)
+                        <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300">
+                            <a href="{{ route('products.show', $product) }}" class="block">
+                                <div class="aspect-w-1 aspect-h-1">
+                                    <img src="{{ asset($product->image) }}" 
+                                         alt="{{ $product->name }}" 
+                                         class="w-full h-full object-cover">
+                                </div>
+                                <div class="p-4">
+                                    <h3 class="text-lg font-semibold text-gray-800 mb-2 line-clamp-2">
+                                        {{ $product->name }}
+                                    </h3>
+                                    <p class="text-sm text-gray-600 mb-4 line-clamp-2">
+                                        {{ Str::limit($product->description, 50) }}
+                                    </p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-primary font-bold">
+                                            Rp {{ number_format($product->price, 0, ',', '.') }}
+                                        </span>
+                                        <a href="{{ route('products.show', $product) }}" 
+                                           class="bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark transition-all duration-300">
+                                            Lihat Detail
+                                        </a>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
             </div>
+            @endforeach
         </div>
-        @endforeach
     </section>
 
     <!-- Features -->
-    <section class="max-w-full mx-0 mt-6 px-4 sm:px-6 md:px-10 lg:px-16">
-        <div class="bg-white rounded-2xl px-6 py-8 max-w-screen-xl mx-auto shadow-md flex flex-col sm:flex-row justify-between items-center gap-6">
-            <!-- Item -->
-            <div class="flex items-center gap-4 min-w-[200px] flex-1 justify-center sm:justify-start">
-                <div class="text-[#7eaeb5] text-3xl"><i class="fas fa-shipping-fast"></i></div>
-                <div>
-                    <div class="font-bold text-base sm:text-lg">Gratis Ongkir</div>
-                    <div class="text-gray-600 text-sm">Free Ongkir Pembelian Didalam Kota</div>
+    <section class="bg-white section-padding">
+        <div class="container">
+            <div class="grid-responsive">
+                <div class="flex items-center gap-4">
+                    <div class="text-[#7eaeb5] text-3xl">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <div>
+                        <div class="font-bold text-lg">Gratis Ongkir</div>
+                        <div class="text-gray-600">Free Ongkir Pembelian Didalam Kota</div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="flex items-center gap-4 min-w-[200px] flex-1 justify-center sm:justify-start">
-                <div class="text-[#7eaeb5] text-3xl"><i class="far fa-map"></i></div>
-                <div>
-                    <div class="font-bold text-base sm:text-lg">Jangkauan Luas</div>
-                    <div class="text-gray-600 text-sm">Kirim ke 200+ Kota di Indonesia</div>
+                <div class="flex items-center gap-4">
+                    <div class="text-[#7eaeb5] text-3xl">
+                        <i class="far fa-map"></i>
+                    </div>
+                    <div>
+                        <div class="font-bold text-lg">Jangkauan Luas</div>
+                        <div class="text-gray-600">Kirim ke 200+ Kota di Indonesia</div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="flex items-center gap-4 min-w-[200px] flex-1 justify-center sm:justify-start">
-                <div class="text-[#7eaeb5] text-3xl"><i class="fas fa-shield-alt"></i></div>
-                <div>
-                    <div class="font-bold text-base sm:text-lg">Keamanan Pembeli</div>
-                    <div class="text-gray-600 text-sm">Menjamin keamanan Data pembeli</div>
+                <div class="flex items-center gap-4">
+                    <div class="text-[#7eaeb5] text-3xl">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div>
+                        <div class="font-bold text-lg">Keamanan Pembeli</div>
+                        <div class="text-gray-600">Menjamin keamanan Data pembeli</div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="flex items-center gap-4 min-w-[200px] flex-1 justify-center sm:justify-start relative">
-                <div class="text-[#7eaeb5] text-3xl relative">
-                    <i class="fas fa-clock"></i>
-                    <div class="absolute top-[-0.5rem] left-1/2 transform -translate-x-1/2 bg-white rounded-full text-xs text-[#7eaeb5] font-bold w-5 h-5 flex items-center justify-center shadow-sm">24</div>
-                </div>
-                <div>
-                    <div class="font-bold text-base sm:text-lg">Garansi Waktu</div>
-                    <div class="text-gray-600 text-sm">Pesanan anda pasti tiba sesuai Jadwal</div>
+                <div class="flex items-center gap-4">
+                    <div class="text-[#7eaeb5] text-3xl">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div>
+                        <div class="font-bold text-lg">Garansi Waktu</div>
+                        <div class="text-gray-600">Pesanan anda pasti tiba sesuai Jadwal</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Offline Store / Lokasi -->
-    <section class="max-w-6xl mx-auto mt-10 px-4 sm:px-6 md:px-10 lg:px-16 pb-10">
-        <h3 class="text-[#7eaeb5] text-center text-lg sm:text-xl font-semibold tracking-widest mb-8">Temukan Offline Store kami</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            @foreach(['Batam','Jakarta','Bandung','Surabaya','Medan','Padang','Palembang','Pekanbaru','Pontianak','Kupang','Ambon','Manado','Makassar','Banjarmasin','Samarinda'] as $city)
-                <a href="{{ route('products.index', ['city' => strtolower($city)]) }}" class="btn-store bg-[#7eaeb5] rounded-full shadow-lg py-3 px-8 text-white hover:brightness-90 transition text-sm font-medium text-center">{{ $city }}</a>
-            @endforeach
+    <section class="bg-white section-padding">
+        <div class="container">
+            <h3 class="text-[#7eaeb5] text-center text-xl font-semibold tracking-widest mb-8">
+                Temukan Offline Store kami
+            </h3>
+            <div class="grid-responsive">
+                @foreach(['Batam','Jakarta','Bandung','Surabaya','Medan','Padang','Palembang','Pekanbaru','Pontianak','Kupang','Ambon','Manado','Makassar','Banjarmasin','Samarinda'] as $city)
+                    <a href="{{ route('products.index', ['city' => strtolower($city)]) }}" 
+                       class="btn-store bg-[#7eaeb5] rounded-full shadow-lg py-3 px-8 text-white hover:brightness-90 transition text-sm font-medium text-center">
+                        {{ $city }}
+                    </a>
+                @endforeach
+            </div>
         </div>
     </section>
 
