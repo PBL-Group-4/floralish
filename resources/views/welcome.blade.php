@@ -451,45 +451,53 @@
     <!-- Features -->
     <section class="bg-white section-padding">
         <div class="container">
-            <div class="grid-responsive">
-                <div class="flex items-center gap-4">
-                    <div class="text-[#7eaeb5] text-3xl">
-                        <i class="fas fa-shipping-fast"></i>
+            <div class="bg-white p-6">
+                <div class="max-w-7xl mx-auto bg-white rounded-xl shadow-md p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                    
+                    <!-- Fitur: Gratis Ongkir -->
+                    <div class="flex items-start gap-4">
+                        <div class="text-[#7eaeb5] text-3xl flex-shrink-0 mt-1">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900 text-base leading-5">Gratis Ongkir</h3>
+                            <p class="text-gray-600 text-sm leading-5">Free Ongkir Pembelian Didalam Kota</p>
+                        </div>
                     </div>
-                    <div>
-                        <div class="font-bold text-lg">Gratis Ongkir</div>
-                        <div class="text-gray-600">Free Ongkir Pembelian Didalam Kota</div>
-                    </div>
-                </div>
 
-                <div class="flex items-center gap-4">
-                    <div class="text-[#7eaeb5] text-3xl">
-                        <i class="far fa-map"></i>
+                    <!-- Fitur: Jangkauan Luas -->
+                    <div class="flex items-start gap-4">
+                        <div class="text-[#7eaeb5] text-3xl flex-shrink-0 mt-1">
+                            <i class="far fa-map"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900 text-base leading-5">Jangkauan Luas</h3>
+                            <p class="text-gray-600 text-sm leading-5">Kirim ke 200+ Kota di Indonesia</p>
+                        </div>
                     </div>
-                    <div>
-                        <div class="font-bold text-lg">Jangkauan Luas</div>
-                        <div class="text-gray-600">Kirim ke 200+ Kota di Indonesia</div>
-                    </div>
-                </div>
 
-                <div class="flex items-center gap-4">
-                    <div class="text-[#7eaeb5] text-3xl">
-                        <i class="fas fa-shield-alt"></i>
+                    <!-- Fitur: Keamanan Pembeli -->
+                    <div class="flex items-start gap-4">
+                        <div class="text-[#7eaeb5] text-3xl flex-shrink-0 mt-1">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900 text-base leading-5">Keamanan Pembeli</h3>
+                            <p class="text-gray-600 text-sm leading-5">Menjamin keamanan Data pembeli</p>
+                        </div>
                     </div>
-                    <div>
-                        <div class="font-bold text-lg">Keamanan Pembeli</div>
-                        <div class="text-gray-600">Menjamin keamanan Data pembeli</div>
-                    </div>
-                </div>
 
-                <div class="flex items-center gap-4">
-                    <div class="text-[#7eaeb5] text-3xl">
-                        <i class="fas fa-clock"></i>
+                    <!-- Fitur: Garansi Waktu -->
+                    <div class="flex items-start gap-4">
+                        <div class="text-[#7eaeb5] text-3xl flex-shrink-0 mt-1">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900 text-base leading-5">Garansi Waktu</h3>
+                            <p class="text-gray-600 text-sm leading-5">Pesanan anda pasti tiba sesuai Jadwal</p>
+                        </div>
                     </div>
-                    <div>
-                        <div class="font-bold text-lg">Garansi Waktu</div>
-                        <div class="text-gray-600">Pesanan anda pasti tiba sesuai Jadwal</div>
-                    </div>
+
                 </div>
             </div>
         </div>
