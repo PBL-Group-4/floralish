@@ -199,6 +199,91 @@
                 transform: rotate(180deg);
             }
         }
+        .circle-border {
+            width: 200px;
+            height: 200px;
+            border: 10px solid #6B9CA6;
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+        }
+
+        .circle-border::before {
+            content: '';
+            width: 140px;
+            height: 140px;
+            background-color: white;
+            border-radius: 50%;
+            position: absolute;
+            z-index: 2;
+        }
+
+        .inner-image {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            position: absolute;
+            z-index: 1;
+        }
+
+        /* Responsive styles for different screen sizes */
+        @media (max-width: 1024px) {
+            .circle-border {
+                width: 180px !important;
+                height: 180px !important;
+                border-width: 8px !important;
+            }
+
+            .circle-border::before {
+                width: 120px !important;
+                height: 120px !important;
+            }
+
+            .inner-image {
+                width: 120px !important;
+                height: 120px !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .circle-border {
+                width: 150px !important;
+                height: 150px !important;
+                border-width: 6px !important;
+            }
+
+            .circle-border::before {
+                width: 100px !important;
+                height: 100px !important;
+            }
+
+            .inner-image {
+                width: 100px !important;
+                height: 100px !important;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .circle-border {
+                width: 120px !important;
+                height: 120px !important;
+                border-width: 5px !important;
+            }
+
+            .circle-border::before {
+                width: 80px !important;
+                height: 80px !important;
+            }
+
+            .inner-image {
+                width: 80px !important;
+                height: 80px !important;
+            }
+        }
     </style>
 </head>
 <body class="overflow-x-hidden">
@@ -346,17 +431,30 @@
     <section class="bg-white section-padding">
         <div class="container">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-8">Kategori Produk</h2>
-            <div class="grid-responsive">
-                @foreach($categories as $category)
-                <div class="category-item text-center">
-                    <div class="category-circle aspect-square">
-                        <img src="{{ $category->image }}" 
-                             alt="{{ $category->category }}"
-                             class="w-full h-full object-cover rounded-full">
+            <div class="flex flex-col items-center space-y-12">
+                <!-- Kategori 1 -->
+                <div class="text-center">
+                    <div class="circle-border">
+                        <img class="inner-image" src="{{ asset('image/bukethand1.png') }}" alt="Bunga" />
                     </div>
-                    <h3 class="text-lg font-semibold mt-3">{{ $category->category }}</h3>
+                    <h3 class="text-lg font-semibold mt-4">Bunga</h3>
                 </div>
-                @endforeach
+
+                <!-- Kategori 2 -->
+                <div class="text-center">
+                    <div class="circle-border">
+                        <img class="inner-image" src="{{ asset('image/standing flower1.png') }}" alt="Karangan Bunga Papan" />
+                    </div>
+                    <h3 class="text-lg font-semibold mt-4">Karangan Bunga Papan</h3>
+                </div>
+
+                <!-- Kategori 3 -->
+                <div class="text-center">
+                    <div class="circle-border">
+                        <img class="inner-image" src="{{ asset('image/cake.jpg') }}" alt="Kado & Cakes" />
+                    </div>
+                    <h3 class="text-lg font-semibold mt-4">Kado & Cakes</h3>
+                </div>
             </div>
         </div>
     </section>
@@ -402,49 +500,112 @@
             </form>
 
             <!-- Products Grid -->
-            @foreach(['Bunga', 'Karangan Bunga Papan', 'Kado & Cakes'] as $categoryName)
-            <div class="mb-12">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-2xl font-semibold">{{ $categoryName }}</h3>
-                    @if($products->where('category', $categoryName)->count() > 0)
-                        <a href="{{ route('products.index', ['category' => $categoryName]) }}" 
-                           class="text-primary hover:text-primary-dark transition-all duration-300">
-                            Lihat Selengkapnya
-                        </a>
-                    @endif
-                </div>
-                <div class="grid-responsive">
-                    @foreach($products->where('category', $categoryName)->take(4) as $product)
-                        <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300">
-                            <a href="{{ route('products.show', $product) }}" class="block">
-                                <div class="aspect-w-1 aspect-h-1">
-                                    <img src="{{ asset($product->image) }}" 
-                                         alt="{{ $product->name }}" 
-                                         class="w-full h-full object-cover">
-                                </div>
-                                <div class="p-4">
-                                    <h3 class="text-lg font-semibold text-gray-800 mb-2 line-clamp-2">
-                                        {{ $product->name }}
-                                    </h3>
-                                    <p class="text-sm text-gray-600 mb-4 line-clamp-2">
-                                        {{ Str::limit($product->description, 50) }}
-                                    </p>
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-primary font-bold">
-                                            Rp {{ number_format($product->price, 0, ',', '.') }}
-                                        </span>
-                                        <a href="{{ route('products.show', $product) }}" 
-                                           class="bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark transition-all duration-300">
-                                            Lihat Detail
-                                        </a>
+            <div class="space-y-16">
+                <!-- Bunga Section -->
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl font-bold text-gray-800 mb-8">Bunga</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        @foreach($products->where('category', 'Bunga')->take(4) as $product)
+                            <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300">
+                                <a href="{{ route('products.show', $product) }}" class="block">
+                                    <div class="aspect-w-1 aspect-h-1">
+                                        <img src="{{ asset($product->image) }}" 
+                                             alt="{{ $product->name }}" 
+                                             class="w-full h-full object-cover">
                                     </div>
-                                </div>
-                            </a>
-                        </div>
-                    @endforeach
+                                    <div class="p-4">
+                                        <h3 class="text-lg font-semibold text-gray-800 mb-2 line-clamp-2">
+                                            {{ $product->name }}
+                                        </h3>
+                                        <p class="text-sm text-gray-600 mb-4 line-clamp-2">
+                                            {{ Str::limit($product->description, 50) }}
+                                        </p>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-primary font-bold">
+                                                Rp {{ number_format($product->price, 0, ',', '.') }}
+                                            </span>
+                                            <a href="{{ route('products.show', $product) }}" 
+                                               class="bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark transition-all duration-300">
+                                                Lihat Detail
+                                            </a>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                <!-- Karangan Bunga Papan Section -->
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl font-bold text-gray-800 mb-8">Karangan Bunga Papan</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        @foreach($products->where('category', 'Karangan Bunga Papan')->take(4) as $product)
+                            <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300">
+                                <a href="{{ route('products.show', $product) }}" class="block">
+                                    <div class="aspect-w-1 aspect-h-1">
+                                        <img src="{{ asset($product->image) }}" 
+                                             alt="{{ $product->name }}" 
+                                             class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="p-4">
+                                        <h3 class="text-lg font-semibold text-gray-800 mb-2 line-clamp-2">
+                                            {{ $product->name }}
+                                        </h3>
+                                        <p class="text-sm text-gray-600 mb-4 line-clamp-2">
+                                            {{ Str::limit($product->description, 50) }}
+                                        </p>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-primary font-bold">
+                                                Rp {{ number_format($product->price, 0, ',', '.') }}
+                                            </span>
+                                            <a href="{{ route('products.show', $product) }}" 
+                                               class="bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark transition-all duration-300">
+                                                Lihat Detail
+                                            </a>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                <!-- Kado & Cakes Section -->
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl font-bold text-gray-800 mb-8">Kado & Cakes</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        @foreach($products->where('category', 'Kado & Cakes')->take(4) as $product)
+                            <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300">
+                                <a href="{{ route('products.show', $product) }}" class="block">
+                                    <div class="aspect-w-1 aspect-h-1">
+                                        <img src="{{ asset($product->image) }}" 
+                                             alt="{{ $product->name }}" 
+                                             class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="p-4">
+                                        <h3 class="text-lg font-semibold text-gray-800 mb-2 line-clamp-2">
+                                            {{ $product->name }}
+                                        </h3>
+                                        <p class="text-sm text-gray-600 mb-4 line-clamp-2">
+                                            {{ Str::limit($product->description, 50) }}
+                                        </p>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-primary font-bold">
+                                                Rp {{ number_format($product->price, 0, ',', '.') }}
+                                            </span>
+                                            <a href="{{ route('products.show', $product) }}" 
+                                               class="bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark transition-all duration-300">
+                                                Lihat Detail
+                                            </a>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
-            @endforeach
         </div>
     </section>
 
