@@ -78,6 +78,30 @@
         transform: translateX(-50%);
       }
     }
+    /* Tambahan CSS untuk Hero Section */
+    @media (max-width: 640px) {
+      .hero-content {
+        width: 90%;
+        right: 5%;
+        padding: 1rem;
+      }
+    }
+
+    @media (min-width: 641px) and (max-width: 1024px) {
+      .hero-content {
+        width: 45%;
+        right: 2rem;
+        padding: 1.5rem;
+      }
+    }
+
+    @media (min-width: 1025px) {
+      .hero-content {
+        width: 40%;
+        right: 3rem;
+        padding: 2rem;
+      }
+    }
   </style>
 </head>
 <body class="bg-gradient-to-b from-[#d1f0f5] to-[#a1d9db] min-h-screen">
@@ -174,15 +198,16 @@
   <!-- Hero Section -->
   <section class="max-w-6xl mx-auto mt-6 px-4 sm:px-6 md:px-10 lg:px-16 relative">
     <div class="rounded-3xl overflow-hidden relative flex justify-center">
-    
-    <img alt="Person holding white roses"
-     class="rounded-3xl w-full max-w-4xl object-cover"
-     src="{{ asset('image/lokasi_asset/Frame 2.png') }}" />
+      <div class="w-full aspect-[16/9] relative">
+        <img alt="Person holding white roses"
+          class="w-full h-full object-cover rounded-3xl"
+          src="{{ asset('image/lokasi_asset/Frame 2.png') }}" />
 
-      <div class="absolute top-1/2 right-6 transform -translate-y-1/2 bg-white rounded-2xl p-6 max-w-md shadow-lg">
-        <h2 class="font-bold text-lg sm:text-xl leading-tight mb-2 text-center">Toko Bunga & Florist Online Terlengkap, Kirim Se-Indonesia</h2>
-        <p class="text-xs sm:text-sm font-semibold text-center mb-4">Toko bunga & florist online yang menghadirkan rangkaian bunga berkualitas tinggi...</p>
-        <button onclick="openLocationModal()" class="btn-pilih bg-[#7eaeb5] text-white rounded-full px-5 py-2 mx-auto block shadow-md hover:bg-[#6a9ba3] transition-colors">Pilih Tujuan Pengiriman</button>
+        <div class="absolute top-1/2 right-6 transform -translate-y-1/2 bg-white rounded-2xl p-6 w-[90%] max-w-md shadow-lg">
+          <h2 class="font-bold text-lg sm:text-xl leading-tight mb-2 text-center">Toko Bunga & Florist Online Terlengkap, Kirim Se-Indonesia</h2>
+          <p class="text-xs sm:text-sm font-semibold text-center mb-4">Toko bunga & florist online yang menghadirkan rangkaian bunga berkualitas tinggi...</p>
+          <button onclick="openLocationModal()" class="btn-pilih bg-[#7eaeb5] text-white rounded-full px-5 py-2 mx-auto block shadow-md hover:bg-[#6a9ba3] transition-colors">Pilih Tujuan Pengiriman</button>
+        </div>
       </div>
     </div>
   </section>

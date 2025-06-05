@@ -44,6 +44,7 @@
         body {
             font-family: 'Poppins', sans-serif;
             background: #8dc6db;
+            min-height: 100vh;
         }
         
         .logo-text {
@@ -177,21 +178,20 @@
             display: flex;
             min-height: 600px;
             width: 100%;
-            background: none;
-            box-shadow: none;
-            border-radius: 0;
+            background: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border-radius: 1rem;
+            overflow: hidden;
         }
         
         /* Bagian Kiri - Info Kontak */
         .kontak-kiri {
-            width: 80%;
+            width: 100%;
             background-image: url('https://images.pexels.com/photos/5894075/pexels-photo-5894075.jpeg');
             background-size: cover;
             background-position: center;
             color: white;
-            padding: 4rem 3rem;
             position: relative;
-            clip-path: none;
         }
         
         .kontak-kiri::before {
@@ -208,14 +208,13 @@
         .kontak-kiri-konten {
             position: relative;
             z-index: 2;
+            height: 100%;
         }
         
         /* Bagian Kanan - Formulir */
         .kontak-kanan {
-            width: 80%;
+            width: 100%;
             background-color: #d1f0f5;
-            padding: 4rem 3rem;
-            clip-path: none;
         }
         
         /* Judul Bagian */
@@ -300,9 +299,32 @@
         }
         
         /* Media Query untuk Responsivitas */
-        @media (max-width: 768px) {
+        @media (min-width: 768px) {
+            .kontak-container {
+                flex-direction: row;
+                max-width: 1200px;
+                margin: 2rem auto;
+            }
+            
+            .kontak-kiri, .kontak-kanan {
+                width: 50%;
+            }
+            
+            .kontak-kiri {
+                border-top-left-radius: 1rem;
+                border-bottom-left-radius: 1rem;
+            }
+            
+            .kontak-kanan {
+                border-top-right-radius: 1rem;
+                border-bottom-right-radius: 1rem;
+            }
+        }
+
+        @media (max-width: 767px) {
             .kontak-container {
                 flex-direction: column;
+                margin: 1rem;
             }
             
             .kontak-kiri, .kontak-kanan {
@@ -310,10 +332,14 @@
             }
             
             .kontak-kiri {
-                clip-path: polygon(0 0, 92% 0, 100% 100%, 0 100%)
+                min-height: 400px;
+                border-top-left-radius: 1rem;
+                border-top-right-radius: 1rem;
             }
+            
             .kontak-kanan {
-                clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
+                border-bottom-left-radius: 1rem;
+                border-bottom-right-radius: 1rem;
             }
         }
 
@@ -428,33 +454,35 @@
     </div>
     <!-- Konten Utama - Halaman Kontak -->
     <main class="flex-grow flex items-center justify-center p-4 sm:px-6 md:px-10 lg:px-16">
-        <div class="kontak-container bg-white shadow-lg rounded-lg overflow-hidden w-full max-w-[1400px]">
+        <div class="kontak-container">
             <!-- Bagian Kiri - Informasi Kontak -->
-            <section class="kontak-kiri w-1/2">
-                <div class="kontak-kiri-konten px-4 sm:px-6 md:px-8">
-                    <h2 class="judul-kontak">Contact us</h2>
-                    <p class="mb-8">
+            <section class="kontak-kiri">
+                <div class="kontak-kiri-konten px-4 sm:px-6 md:px-8 py-8 md:py-12">
+                    <h2 class="judul-kontak text-2xl md:text-3xl lg:text-4xl">Contact us</h2>
+                    <p class="mb-8 text-sm md:text-base">
                         Keindahan ada dalam setiap kelopak bunga yang kami rangkai.
                         Percayakan momen berharga Anda pada Floralish.id, di mana kreativitas bertemu
                         dengan ketelitian untuk menciptakan karya yang memikat hati.
                     </p>
                     
-                    <div class="info-kontak">
-                        <p>Address :</p>
-                        <p>Jl. Melati Indah No. 28, Kebayoran Baru, Jakarta Selatan 12160, Indonesia</p>
+                    <div class="info-kontak space-y-4">
+                        <div>
+                            <p class="font-semibold">Address :</p>
+                            <p class="text-sm md:text-base">Jl. Melati Indah No. 28, Kebayoran Baru, Jakarta Selatan 12160, Indonesia</p>
+                        </div>
+                        
+                        <div>
+                            <p class="font-semibold">Phone :</p>
+                            <p class="text-sm md:text-base">+62 822-8531-0010</p>
+                        </div>
+                        
+                        <div>
+                            <p class="font-semibold">Email :</p>
+                            <p class="text-sm md:text-base">Floralish.id@gmail.com</p>
+                        </div>
                     </div>
                     
-                    <div class="info-kontak">
-                        <p>Phone :</p>
-                        <p>+62 822-8531-0010</p>
-                    </div>
-                    
-                    <div class="info-kontak">
-                        <p>Email :</p>
-                        <p>Floralish.id@gmail.com</p>
-                    </div>
-                    
-                    <div class="ikon-sosmed">
+                    <div class="ikon-sosmed mt-8">
                         <a href="#" class="ikon-sosmed-item" aria-label="Facebook">
                             <i class="fab fa-facebook-f"></i>
                         </a>
@@ -469,9 +497,9 @@
             </section>
             
             <!-- Bagian Kanan - Formulir Kontak -->
-            <section class="kontak-kanan w-1/2 px-4 sm:px-6 md:px-8">
-                <h2 class="judul-kontak">Get In Touch</h2>
-                <p class="font-bold mb-8">
+            <section class="kontak-kanan px-4 sm:px-6 md:px-8 py-8 md:py-12">
+                <h2 class="judul-kontak text-2xl md:text-3xl lg:text-4xl">Get In Touch</h2>
+                <p class="font-bold mb-8 text-sm md:text-base">
                     Setiap rangkaian kami adalah simfoni warna dan tekstur yang mengalir dalam
                     harmoni sempurna. Hubungi Floralish.id dan biarkan kami mengubah karya yang menggema dalam
                     kenangan, melampaui batas waktu dan musim.
@@ -495,10 +523,10 @@
                         </div>
                     @endif
 
-                    <div class="baris-form">
+                    <div class="baris-form flex flex-col md:flex-row gap-4">
                         <div class="w-full">
                             <input type="text" name="name" placeholder="Nama" aria-label="Nama" required 
-                                class="@error('name') border-red-500 @enderror"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary @error('name') border-red-500 @enderror"
                                 value="{{ old('name') }}">
                             @error('name')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -506,17 +534,17 @@
                         </div>
                         <div class="w-full">
                             <input type="email" name="email" placeholder="Email" aria-label="Email" required
-                                class="@error('email') border-red-500 @enderror"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary @error('email') border-red-500 @enderror"
                                 value="{{ old('email') }}">
                             @error('email')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
-                    <div class="baris-form">
+                    <div class="baris-form flex flex-col md:flex-row gap-4 mt-4">
                         <div class="w-full">
                             <select name="category" aria-label="Kategori" required
-                                class="@error('category') border-red-500 @enderror">
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary @error('category') border-red-500 @enderror">
                                 <option value="">Kategori</option>
                                 <option value="wedding" {{ old('category') == 'wedding' ? 'selected' : '' }}>Pernikahan</option>
                                 <option value="birthday" {{ old('category') == 'birthday' ? 'selected' : '' }}>Ulang Tahun</option>
@@ -529,7 +557,7 @@
                         </div>
                         <div class="w-full">
                             <select name="budget" aria-label="Budget" required
-                                class="@error('budget') border-red-500 @enderror">
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary @error('budget') border-red-500 @enderror">
                                 <option value="">Budget</option>
                                 <option value="under_200k" {{ old('budget') == 'under_200k' ? 'selected' : '' }}>Di bawah Rp 200.000</option>
                                 <option value="200k_500k" {{ old('budget') == '200k_500k' ? 'selected' : '' }}>Rp 200.000 - Rp 500.000</option>
@@ -541,14 +569,14 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="w-full">
+                    <div class="w-full mt-4">
                         <textarea name="message" placeholder="Pesan..." aria-label="Pesan" required
-                            class="@error('message') border-red-500 @enderror">{{ old('message') }}</textarea>
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary min-h-[150px] @error('message') border-red-500 @enderror">{{ old('message') }}</textarea>
                         @error('message')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
                     </div>
-                    <button type="submit" class="tombol-kirim" id="submitButton">
+                    <button type="submit" class="tombol-kirim mt-6 w-full md:w-auto" id="submitButton">
                         <span class="button-text">Kirim Pesan</span>
                         <span class="loading-spinner hidden">
                             <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
