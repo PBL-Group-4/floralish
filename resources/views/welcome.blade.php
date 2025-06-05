@@ -209,25 +209,16 @@
             justify-content: center;
             align-items: center;
             margin: 0 auto;
-        }
-
-        .circle-border::before {
-            content: '';
-            width: 140px;
-            height: 140px;
-            background-color: white;
-            border-radius: 50%;
-            position: absolute;
-            z-index: 2;
+            overflow: hidden;
         }
 
         .inner-image {
-            width: 140px;
-            height: 140px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
             object-fit: cover;
-            position: absolute;
-            z-index: 1;
+            position: relative;
+            z-index: 2;
         }
 
         /* Responsive styles for different screen sizes */
@@ -238,14 +229,9 @@
                 border-width: 8px !important;
             }
 
-            .circle-border::before {
-                width: 120px !important;
-                height: 120px !important;
-            }
-
             .inner-image {
-                width: 120px !important;
-                height: 120px !important;
+                width: 160px !important;
+                height: 160px !important;
             }
         }
 
@@ -256,14 +242,9 @@
                 border-width: 6px !important;
             }
 
-            .circle-border::before {
-                width: 100px !important;
-                height: 100px !important;
-            }
-
             .inner-image {
-                width: 100px !important;
-                height: 100px !important;
+                width: 130px !important;
+                height: 130px !important;
             }
         }
 
@@ -274,14 +255,9 @@
                 border-width: 5px !important;
             }
 
-            .circle-border::before {
-                width: 80px !important;
-                height: 80px !important;
-            }
-
             .inner-image {
-                width: 80px !important;
-                height: 80px !important;
+                width: 100px !important;
+                height: 100px !important;
             }
         }
     </style>
@@ -466,12 +442,18 @@
             
             <!-- Filter Form -->
             <form id="filterForm" class="flex-responsive mb-8">
-                <div class="flex-1 min-w-[200px]">
+                <div class="flex-1 min-w-[200px] flex items-center gap-2">
                     <input type="text" 
                            name="search" 
                            value="{{ request('search') }}" 
                            placeholder="Cari produk..." 
                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                    <button type="button"
+                            class="flex items-center gap-2 bg-[#8dc6d3] text-white text-[18px] font-normal rounded-[8px] px-6 py-2 cursor-pointer hover:bg-[#7ab5c2] transition-colors duration-300"
+                            onclick="handleSearchClick()">
+                        <i class="fas fa-search text-white text-[18px]"></i>
+                        Cari
+                    </button>
                 </div>
                 <div class="w-[200px]">
                     <select name="category" 
@@ -500,7 +482,7 @@
             </form>
 
             <!-- Products Grid -->
-            <div class="space-y-16">
+            <div class="space-y-16 mt-12">
                 <!-- Bunga Section -->
                 <div class="text-center mb-12">
                     <h3 class="text-3xl font-bold text-gray-800 mb-8">Bunga</h3>
@@ -823,6 +805,11 @@
                 document.getElementById('filterForm').submit();
             }
         });
+
+        function handleSearchClick() {
+            // Submit form pencarian
+            document.getElementById('filterForm').submit();
+        }
     </script>
 
     <!-- Footer -->
