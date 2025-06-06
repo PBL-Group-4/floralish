@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
     <!-- Tambahkan Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -264,12 +266,12 @@
 </head>
 <body class="overflow-x-hidden">
     <!-- Bagian Header -->
-    <header class="bg-white shadow-sm w-full">
-        <div class="container flex justify-between items-center py-4">
+    <header class="bg-white shadow-sm w-full" >
+        <div class="container flex justify-between items-center py-4" data-aos="fade-down" data-aos-delay="100">
             <a href="/" class="text-2xl font-bold text-black logo-text hover:text-primary transition-colors duration-300 navbar-logo">Floralish.</a>
             
             <!-- Navigasi Desktop -->
-            <nav class="hidden md:flex items-center">
+            <nav class="hidden md:flex items-center" >
                 <ul class="flex space-x-6 mr-6">
                     <li><a href="/" class="text-black hover:text-primary">Home</a></li>
                     <li><a href="{{ route('products.index') }}" class="text-black hover:text-primary">Products</a></li>
@@ -364,7 +366,7 @@
     <section class="bg-gradient-to-br from-primary to-secondary w-full section-padding">
         <div class="container">
             <div class="grid-responsive items-center">
-                <div class="space-y-6">
+                <div class="space-y-6" data-aos="fade-right">
                     <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold">
                         <span class="text-black">Pesan</span> <span class="text-red-600">Bunga</span>
                     </h1>
@@ -378,21 +380,21 @@
                         Discover our Product
                     </button>
                     <div class="flex-responsive justify-between mt-8">
-                        <div class="stat-item">
+                        <div class="stat-item" data-aos="fade-up" data-aos-delay="90">
                             <div class="stat-value" id="orderCount">0</div>
                             <div class="stat-label">Total pesanan</div>
                         </div>
-                        <div class="stat-item">
+                        <div class="stat-item" data-aos="fade-up" data-aos-delay="70">
                             <div class="stat-value" id="regionCount">0</div>
                             <div class="stat-label">Wilayah</div>
                         </div>
-                        <div class="stat-item">
+                        <div class="stat-item" data-aos="fade-up" data-aos-delay="50">
                             <div class="stat-value" id="ratingValue">0</div>
                             <div class="stat-label">Rating</div>
                         </div>
                     </div>
                 </div>
-                <div class="flex justify-center">
+                <div class="flex justify-center" data-aos="fade-left">
                     <div class="window-frame w-full max-w-md">
                         <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?ixlib=rb-1.2.1&auto=format&fit=crop&w=512&h=512&q=80" 
                              alt="Buket Bunga Indah"
@@ -406,27 +408,27 @@
     <!-- Bagian Kategori -->
     <section class="bg-white section-padding">
         <div class="container">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8">Kategori Produk</h2>
-            <div class="flex flex-col md:flex-row justify-center items-center md:gap-12 space-y-12 md:space-y-0">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8" data-aos="fade-up">Kategori Produk</h2>
+            <div class="flex flex-col md:flex-row justify-center items-center md:gap-12 space-y-8 md:space-y-0">
                 <!-- Kategori 1 -->
-                <div class="text-center">
-                    <div class="circle-border">
+                <div class="text-center w-full md:w-auto" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="circle-border mx-auto md:mx-0">
                         <img class="inner-image" src="{{ asset('image/bukethand1.png') }}" alt="Bunga" />
                     </div>
                     <h3 class="text-lg font-semibold mt-4">Bunga</h3>
                 </div>
 
                 <!-- Kategori 2 -->
-                <div class="text-center">
-                    <div class="circle-border">
+                <div class="text-center w-full md:w-auto" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="circle-border mx-auto md:mx-0">
                         <img class="inner-image" src="{{ asset('image/standing flower1.png') }}" alt="Karangan Bunga Papan" />
                     </div>
                     <h3 class="text-lg font-semibold mt-4">Karangan Bunga Papan</h3>
                 </div>
 
                 <!-- Kategori 3 -->
-                <div class="text-center">
-                    <div class="circle-border">
+                <div class="text-center w-full md:w-auto" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="circle-border mx-auto md:mx-0">
                         <img class="inner-image" src="{{ asset('image/cake.jpg') }}" alt="Kado & Cakes" />
                     </div>
                     <h3 class="text-lg font-semibold mt-4">Kado & Cakes</h3>
@@ -438,24 +440,24 @@
     <!-- Bagian Catalog Produk -->
     <section class="bg-white section-padding">
         <div class="container">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8">Catalog Produk</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8" data-aos="fade-up">Catalog Produk</h2>
             
             <!-- Filter Form -->
-            <form id="filterForm" class="flex-responsive mb-8">
-                <div class="flex-1 min-w-[200px] flex items-center gap-2">
+            <form id="filterForm" class="flex flex-col md:flex-row gap-4 mb-8" data-aos="fade-up" data-aos-delay="100">
+                <div class="flex-1 min-w-[200px] flex flex-col md:flex-row items-center gap-2">
                     <input type="text" 
                            name="search" 
                            value="{{ request('search') }}" 
                            placeholder="Cari produk..." 
                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
                     <button type="button"
-                            class="flex items-center gap-2 bg-[#8dc6d3] text-white text-[18px] font-normal rounded-[8px] px-6 py-2 cursor-pointer hover:bg-[#7ab5c2] transition-colors duration-300"
+                            class="w-full md:w-auto flex items-center justify-center gap-2 bg-[#8dc6d3] text-white text-[18px] font-normal rounded-[8px] px-6 py-2 cursor-pointer hover:bg-[#7ab5c2] transition-colors duration-300"
                             onclick="handleSearchClick()">
                         <i class="fas fa-search text-white text-[18px]"></i>
                         Cari
                     </button>
                 </div>
-                <div class="w-[200px]">
+                <div class="w-full md:w-[200px]">
                     <select name="category" 
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
                         <option value="">Semua Kategori</option>
@@ -467,7 +469,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="w-[200px]">
+                <div class="w-full md:w-[200px]">
                     <select name="sort" 
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
                         <option value="">Urutkan</option>
@@ -485,29 +487,31 @@
             <div class="space-y-16 mt-12">
                 <!-- Bunga Section -->
                 <div class="text-center mb-12">
-                    <h3 class="text-3xl font-bold text-gray-800 mb-8">Bunga</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                        @foreach($products->where('category', 'Bunga')->take(4) as $product)
-                            <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300">
+                    <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-8" data-aos="fade-up">Bunga</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                        @foreach($products->where('category', 'Bunga')->take(4) as $index => $product)
+                            <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300" 
+                                 data-aos="fade-up" 
+                                 data-aos-delay="{{ ($index + 1) * 100 }}">
                                 <a href="{{ route('products.show', $product) }}" class="block">
                                     <div class="aspect-w-1 aspect-h-1">
                                         <img src="{{ asset($product->image) }}" 
                                              alt="{{ $product->name }}" 
-                                             class="w-full h-full object-cover">
+                                             class="w-full h-48 md:h-64 object-cover">
                                     </div>
                                     <div class="p-4">
-                                        <h3 class="text-lg font-semibold text-gray-800 mb-2 line-clamp-2">
+                                        <h3 class="text-base md:text-lg font-semibold text-gray-800 mb-2 line-clamp-2">
                                             {{ $product->name }}
                                         </h3>
                                         <p class="text-sm text-gray-600 mb-4 line-clamp-2">
                                             {{ Str::limit($product->description, 50) }}
                                         </p>
-                                        <div class="flex justify-between items-center">
-                                            <span class="text-primary font-bold">
+                                        <div class="flex flex-col md:flex-row justify-between items-center gap-2">
+                                            <span class="text-primary font-bold text-sm md:text-base">
                                                 Rp {{ number_format($product->price, 0, ',', '.') }}
                                             </span>
                                             <a href="{{ route('products.show', $product) }}" 
-                                               class="bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark transition-all duration-300">
+                                               class="w-full md:w-auto bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark transition-all duration-300 text-center">
                                                 Lihat Detail
                                             </a>
                                         </div>
@@ -520,29 +524,31 @@
 
                 <!-- Karangan Bunga Papan Section -->
                 <div class="text-center mb-12">
-                    <h3 class="text-3xl font-bold text-gray-800 mb-8">Karangan Bunga Papan</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                        @foreach($products->where('category', 'Karangan Bunga Papan')->take(4) as $product)
-                            <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300">
+                    <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-8" data-aos="fade-up">Karangan Bunga Papan</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                        @foreach($products->where('category', 'Karangan Bunga Papan')->take(4) as $index => $product)
+                            <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300"
+                                 data-aos="fade-up"
+                                 data-aos-delay="{{ ($index + 1) * 100 }}">
                                 <a href="{{ route('products.show', $product) }}" class="block">
                                     <div class="aspect-w-1 aspect-h-1">
                                         <img src="{{ asset($product->image) }}" 
                                              alt="{{ $product->name }}" 
-                                             class="w-full h-full object-cover">
+                                             class="w-full h-48 md:h-64 object-cover">
                                     </div>
                                     <div class="p-4">
-                                        <h3 class="text-lg font-semibold text-gray-800 mb-2 line-clamp-2">
+                                        <h3 class="text-base md:text-lg font-semibold text-gray-800 mb-2 line-clamp-2">
                                             {{ $product->name }}
                                         </h3>
                                         <p class="text-sm text-gray-600 mb-4 line-clamp-2">
                                             {{ Str::limit($product->description, 50) }}
                                         </p>
-                                        <div class="flex justify-between items-center">
-                                            <span class="text-primary font-bold">
+                                        <div class="flex flex-col md:flex-row justify-between items-center gap-2">
+                                            <span class="text-primary font-bold text-sm md:text-base">
                                                 Rp {{ number_format($product->price, 0, ',', '.') }}
                                             </span>
                                             <a href="{{ route('products.show', $product) }}" 
-                                               class="bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark transition-all duration-300">
+                                               class="w-full md:w-auto bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark transition-all duration-300 text-center">
                                                 Lihat Detail
                                             </a>
                                         </div>
@@ -555,29 +561,31 @@
 
                 <!-- Kado & Cakes Section -->
                 <div class="text-center mb-12">
-                    <h3 class="text-3xl font-bold text-gray-800 mb-8">Kado & Cakes</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                        @foreach($products->where('category', 'Kado & Cakes')->take(4) as $product)
-                            <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300">
+                    <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-8" data-aos="fade-up">Kado & Cakes</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                        @foreach($products->where('category', 'Kado & Cakes')->take(4) as $index => $product)
+                            <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300"
+                                 data-aos="fade-up"
+                                 data-aos-delay="{{ ($index + 1) * 100 }}">
                                 <a href="{{ route('products.show', $product) }}" class="block">
                                     <div class="aspect-w-1 aspect-h-1">
                                         <img src="{{ asset($product->image) }}" 
                                              alt="{{ $product->name }}" 
-                                             class="w-full h-full object-cover">
+                                             class="w-full h-48 md:h-64 object-cover">
                                     </div>
                                     <div class="p-4">
-                                        <h3 class="text-lg font-semibold text-gray-800 mb-2 line-clamp-2">
+                                        <h3 class="text-base md:text-lg font-semibold text-gray-800 mb-2 line-clamp-2">
                                             {{ $product->name }}
                                         </h3>
                                         <p class="text-sm text-gray-600 mb-4 line-clamp-2">
                                             {{ Str::limit($product->description, 50) }}
                                         </p>
-                                        <div class="flex justify-between items-center">
-                                            <span class="text-primary font-bold">
+                                        <div class="flex flex-col md:flex-row justify-between items-center gap-2">
+                                            <span class="text-primary font-bold text-sm md:text-base">
                                                 Rp {{ number_format($product->price, 0, ',', '.') }}
                                             </span>
                                             <a href="{{ route('products.show', $product) }}" 
-                                               class="bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark transition-all duration-300">
+                                               class="w-full md:w-auto bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark transition-all duration-300 text-center">
                                                 Lihat Detail
                                             </a>
                                         </div>
@@ -592,52 +600,52 @@
     </section>
 
     <!-- Features -->
-    <section class="bg-white section-padding">
+    <section class="bg-white section-padding" data-aos="fade-up" data-aos-delay="100">
         <div class="container">
             <div class="bg-white p-6">
                 <div class="max-w-7xl mx-auto bg-white rounded-xl shadow-md p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                     
                     <!-- Fitur: Gratis Ongkir -->
                     <div class="flex items-start gap-4">
-                        <div class="text-[#7eaeb5] text-3xl flex-shrink-0 mt-1">
+                        <div class="text-[#7eaeb5] text-2xl md:text-3xl flex-shrink-0 mt-1">
                             <i class="fas fa-shipping-fast"></i>
                         </div>
                         <div>
-                            <h3 class="font-bold text-gray-900 text-base leading-5">Gratis Ongkir</h3>
-                            <p class="text-gray-600 text-sm leading-5">Free Ongkir Pembelian Didalam Kota</p>
+                            <h3 class="font-bold text-gray-900 text-sm md:text-base leading-5">Gratis Ongkir</h3>
+                            <p class="text-gray-600 text-xs md:text-sm leading-5">Free Ongkir Pembelian Didalam Kota</p>
                         </div>
                     </div>
 
                     <!-- Fitur: Jangkauan Luas -->
                     <div class="flex items-start gap-4">
-                        <div class="text-[#7eaeb5] text-3xl flex-shrink-0 mt-1">
+                        <div class="text-[#7eaeb5] text-2xl md:text-3xl flex-shrink-0 mt-1">
                             <i class="far fa-map"></i>
                         </div>
                         <div>
-                            <h3 class="font-bold text-gray-900 text-base leading-5">Jangkauan Luas</h3>
-                            <p class="text-gray-600 text-sm leading-5">Kirim ke 200+ Kota di Indonesia</p>
+                            <h3 class="font-bold text-gray-900 text-sm md:text-base leading-5">Jangkauan Luas</h3>
+                            <p class="text-gray-600 text-xs md:text-sm leading-5">Kirim ke 200+ Kota di Indonesia</p>
                         </div>
                     </div>
 
                     <!-- Fitur: Keamanan Pembeli -->
                     <div class="flex items-start gap-4">
-                        <div class="text-[#7eaeb5] text-3xl flex-shrink-0 mt-1">
+                        <div class="text-[#7eaeb5] text-2xl md:text-3xl flex-shrink-0 mt-1">
                             <i class="fas fa-shield-alt"></i>
                         </div>
                         <div>
-                            <h3 class="font-bold text-gray-900 text-base leading-5">Keamanan Pembeli</h3>
-                            <p class="text-gray-600 text-sm leading-5">Menjamin keamanan Data pembeli</p>
+                            <h3 class="font-bold text-gray-900 text-sm md:text-base leading-5">Keamanan Pembeli</h3>
+                            <p class="text-gray-600 text-xs md:text-sm leading-5">Menjamin keamanan Data pembeli</p>
                         </div>
                     </div>
 
                     <!-- Fitur: Garansi Waktu -->
                     <div class="flex items-start gap-4">
-                        <div class="text-[#7eaeb5] text-3xl flex-shrink-0 mt-1">
+                        <div class="text-[#7eaeb5] text-2xl md:text-3xl flex-shrink-0 mt-1">
                             <i class="fas fa-clock"></i>
                         </div>
                         <div>
-                            <h3 class="font-bold text-gray-900 text-base leading-5">Garansi Waktu</h3>
-                            <p class="text-gray-600 text-sm leading-5">Pesanan anda pasti tiba sesuai Jadwal</p>
+                            <h3 class="font-bold text-gray-900 text-sm md:text-base leading-5">Garansi Waktu</h3>
+                            <p class="text-gray-600 text-xs md:text-sm leading-5">Pesanan anda pasti tiba sesuai Jadwal</p>
                         </div>
                     </div>
 
@@ -649,13 +657,15 @@
     <!-- Offline Store / Lokasi -->
     <section class="bg-white section-padding">
         <div class="container">
-            <h3 class="text-[#7eaeb5] text-center text-xl font-semibold tracking-widest mb-8">
+            <h3 class="text-[#7eaeb5] text-center text-lg md:text-xl font-semibold tracking-widest mb-8" data-aos="fade-up">
                 Temukan Offline Store kami
             </h3>
             <div class="grid-responsive">
-                @foreach(['Batam','Jakarta','Bandung','Surabaya','Medan','Padang','Palembang','Pekanbaru','Pontianak','Kupang','Ambon','Manado','Makassar','Banjarmasin','Samarinda'] as $city)
+                @foreach(['Batam','Jakarta','Bandung','Surabaya','Medan','Padang','Palembang','Pekanbaru','Pontianak','Kupang','Ambon','Manado','Makassar','Banjarmasin','Samarinda'] as $index => $city)
                     <a href="{{ route('products.index', ['city' => strtolower($city)]) }}" 
-                       class="btn-store bg-[#7eaeb5] rounded-full shadow-lg py-3 px-8 text-white hover:brightness-90 transition text-sm font-medium text-center">
+                       class="btn-store bg-[#7eaeb5] rounded-full shadow-lg py-2 md:py-3 px-4 md:px-8 text-white hover:brightness-90 transition text-xs md:text-sm font-medium text-center"
+                       data-aos="fade-up"
+                       data-aos-delay="{{ ($index + 1) * 50 }}">
                         {{ $city }}
                     </a>
                 @endforeach
@@ -813,10 +823,10 @@
     </script>
 
     <!-- Footer -->
-    <footer class="bg-white mt-20">
+    <footer class="bg-white mt-20" >
         <!-- Wave Divider -->
-        <div class="relative">
-            <div class="absolute top-0 left-0 w-full overflow-hidden leading-none">
+        <div class="relative" >
+            <div class="absolute top-0 left-0 w-full overflow-hidden leading-none" >
                 <svg class="relative block w-full h-12" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
                     <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="fill-[#d1f0f5]"></path>
                 </svg>
@@ -824,7 +834,7 @@
         </div>
 
         <!-- Our Partners Section -->
-        <div class="w-full bg-gray-50 py-12">
+        <div class="w-full bg-gray-50 py-12" data-aos="fade-down" data-aos-delay="100">
             <h3 class="text-center text-xl font-semibold text-gray-800 mb-8">Our Partners</h3>
             
             <!-- Marquee Container -->
@@ -923,6 +933,34 @@
         </div>
     </footer>
 
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Function to check if device is mobile
+        function isMobile() {
+            return window.innerWidth < 768; // md breakpoint in Tailwind
+        }
+
+        // Initialize AOS with conditional settings
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: false,
+            disable: isMobile(), // Disable on mobile
+            startEvent: 'DOMContentLoaded'
+        });
+
+        // Update AOS on window resize
+        window.addEventListener('resize', function() {
+            if (isMobile()) {
+                AOS.disable();
+            } else {
+                AOS.enable();
+                AOS.refresh();
+            }
+        });
+    </script>
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">
     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
