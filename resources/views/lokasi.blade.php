@@ -47,7 +47,13 @@
       font-size: 2.5rem;
     }
     .navbar-logo {
-      margin-top: 0.5rem;
+      margin-top: 0;
+      display: flex;
+      align-items: center;
+    }
+    .navbar-container {
+        padding-top: 1.3rem;
+        padding-bottom: 1.3rem;
     }
     .logo-font { 
       font-family: 'Roboto Slab', cursive; 
@@ -108,7 +114,7 @@
 
 <!-- Bagian Header -->
 <header class="bg-white shadow-sm">
-    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+    <div class="container mx-auto px-4 flex justify-between items-center navbar-container">
         <a href="/" class="text-2xl font-bold text-black logo-text hover:text-primary transition-colors duration-300 navbar-logo">Floralish.</a>
         
         <!-- Navigasi Desktop -->
