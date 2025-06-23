@@ -444,11 +444,24 @@
             <a href="/lokasi" class="mobile-menu-item">Lokasi</a>
             
             <div class="mt-4">
-                <div class="mobile-menu-item">Profile</div>
-                <div class="mobile-menu-dropdown">
-                    <a href="{{ route('login') }}" class="mobile-menu-dropdown-item">Login</a>
-                    <a href="{{ route('register') }}" class="mobile-menu-dropdown-item">Register</a>
-                </div>
+                @auth
+                    <div class="mobile-menu-item font-semibold">{{ Auth::user()->name }}</div>
+                    <div class="mobile-menu-dropdown">
+                        <a href="{{ route('profile.settings') }}" class="mobile-menu-dropdown-item">My Profile</a>
+                        <a href="{{ route('profile.orders') }}" class="mobile-menu-dropdown-item">My Orders</a>
+                        <div class="dropdown-divider"></div>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="mobile-menu-dropdown-item w-full text-left">Logout</button>
+                        </form>
+                    </div>
+                @else
+                    <div class="mobile-menu-item">Profile</div>
+                    <div class="mobile-menu-dropdown">
+                        <a href="{{ route('login') }}" class="mobile-menu-dropdown-item">Login</a>
+                        <a href="{{ route('register') }}" class="mobile-menu-dropdown-item">Register</a>
+                    </div>
+                @endauth
             </div>
         </div>
     </div>

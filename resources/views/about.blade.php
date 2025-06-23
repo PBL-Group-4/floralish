@@ -194,7 +194,7 @@
 <body class="bg-gradient-to-br from-[#d1f0f5] to-[#a1d9db] min-h-screen flex flex-col">
     <!-- Navbar -->
     <header class="bg-white shadow-sm">
-        <div class="container mx-auto px-4 navbar-container flex justify-between items-center">
+        <div class="container mx-auto px-4 navbar-container flex justify-between flex items-center">
             <a href="/" class="text-2xl font-bold text-black logo-text hover:text-primary transition-colors duration-300 navbar-logo flex items-center">Floralish.</a>
             
             <!-- Navigasi Desktop -->
@@ -272,11 +272,24 @@
             <a href="/lokasi" class="mobile-menu-item">Lokasi</a>
             
             <div class="mt-4">
-                <div class="mobile-menu-item">About</div>
-                <div class="mobile-menu-dropdown">
-                    <a href="{{ route('login') }}" class="mobile-menu-dropdown-item">Login</a>
-                    <a href="{{ route('register') }}" class="mobile-menu-dropdown-item">Register</a>
-                </div>
+                @auth
+                    <div class="mobile-menu-item font-semibold">{{ Auth::user()->name }}</div>
+                    <div class="mobile-menu-dropdown">
+                        <a href="{{ route('profile.settings') }}" class="mobile-menu-dropdown-item">My Profile</a>
+                        <a href="{{ route('profile.orders') }}" class="mobile-menu-dropdown-item">My Orders</a>
+                        <div class="dropdown-divider"></div>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="mobile-menu-dropdown-item w-full text-left">Logout</button>
+                        </form>
+                    </div>
+                @else
+                    <div class="mobile-menu-item">Profile</div>
+                    <div class="mobile-menu-dropdown">
+                        <a href="{{ route('login') }}" class="mobile-menu-dropdown-item">Login</a>
+                        <a href="{{ route('register') }}" class="mobile-menu-dropdown-item">Register</a>
+                    </div>
+                @endauth
             </div>
         </div>
     </div>

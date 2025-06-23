@@ -61,11 +61,9 @@
         }
         .logo-text {
             font-family: 'Pacifico', cursive;
-            font-size: 2.5rem;
+            
         }
-        .navbar-logo {
-            margin-top: 0.5rem;
-        }
+        
         /* Navbar Styles */
         .dropdown {
             position: relative;
@@ -266,12 +264,11 @@
 </head>
 <body class="overflow-x-hidden">
     <!-- Bagian Header -->
-    <header class="bg-white shadow-sm w-full" >
-        <div class="container flex justify-between items-center py-4" data-aos="fade-down" data-aos-delay="100">
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 navbar-container flex justify-between items-center" data-aos="fade-down" data-aos-delay="100">
             <a href="/" class="text-2xl font-bold text-black logo-text hover:text-primary transition-colors duration-300 navbar-logo">Floralish.</a>
-            
             <!-- Navigasi Desktop -->
-            <nav class="hidden md:flex items-center" >
+            <nav class="hidden md:flex items-center">
                 <ul class="flex space-x-6 mr-6">
                     <li><a href="/" class="text-black hover:text-primary">Home</a></li>
                     <li><a href="{{ route('products.index') }}" class="text-black hover:text-primary">Products</a></li>
@@ -279,21 +276,19 @@
                     <li><a href="/contact" class="text-black hover:text-primary">Contact</a></li>
                     <li><a href="/lokasi" class="text-black hover:text-primary">Lokasi</a></li>
                 </ul>
-                
                 <!-- Menu Dropdown Profil (Belum Login) -->
-                <div class="dropdown {{ Auth::check() ? 'hidden' : '' }}" id="profileDropdown">
-                    <button class="dropdown-button flex items-center text-black hover:text-primary">
+                <div class="dropdown {{ Auth::check() ? 'hidden' : '' }}">
+                    <button class="flex items-center text-black hover:text-primary">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
                         Profile
                     </button>
-                    <div class="dropdown-content" id="profileDropdownContent">
+                    <div class="dropdown-content">
                         <a href="{{ route('login') }}" class="dropdown-item">Login</a>
                         <a href="{{ route('register') }}" class="dropdown-item">Register</a>
                     </div>
                 </div>
-                
                 <!-- Menu Dropdown Profil (Sudah Login) -->
                 <div class="dropdown {{ Auth::check() ? '' : 'hidden' }}" id="loggedInDropdown">
                     <button class="flex items-center text-black hover:text-primary">
@@ -312,23 +307,13 @@
                         </form>
                     </div>
                 </div>
-
                 <!-- WhatsApp Button -->
-                @auth
-                    <a href="{{ route('whatsapp.send') }}" class="flex items-center text-black hover:text-primary ml-5">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                        </svg>
-                    </a>
-                @else
-                    <a href="{{ route('login') }}" class="flex items-center text-black hover:text-primary ml-5" title="Login untuk menghubungi kami via WhatsApp">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                        </svg>
-                    </a>
-                @endauth
+                <a href="{{ route('whatsapp.send') }}" class="flex items-center text-black hover:text-primary ml-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                </a>
             </nav>
-            
             <!-- Tombol Menu Mobile -->
             <button id="mobileMenuButton" class="md:hidden text-black">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -351,13 +336,25 @@
             <a href="/about" class="mobile-menu-item">About</a>
             <a href="/contact" class="mobile-menu-item">Contact</a>
             <a href="/lokasi" class="mobile-menu-item">Lokasi</a>
-            
             <div class="mt-4">
-                <div class="mobile-menu-item">Profile</div>
-                <div class="mobile-menu-dropdown">
-                    <a href="{{ route('login') }}" class="mobile-menu-dropdown-item">Login</a>
-                    <a href="{{ route('register') }}" class="mobile-menu-dropdown-item">Register</a>
-                </div>
+                @auth
+                    <div class="mobile-menu-item font-semibold">{{ Auth::user()->name }}</div>
+                    <div class="mobile-menu-dropdown">
+                        <a href="{{ route('profile.settings') }}" class="mobile-menu-dropdown-item">My Profile</a>
+                        <a href="{{ route('profile.orders') }}" class="mobile-menu-dropdown-item">My Orders</a>
+                        <div class="dropdown-divider"></div>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="mobile-menu-dropdown-item w-full text-left">Logout</button>
+                        </form>
+                    </div>
+                @else
+                    <div class="mobile-menu-item">Profile</div>
+                    <div class="mobile-menu-dropdown">
+                        <a href="{{ route('login') }}" class="mobile-menu-dropdown-item">Login</a>
+                        <a href="{{ route('register') }}" class="mobile-menu-dropdown-item">Register</a>
+                    </div>
+                @endauth
             </div>
         </div>
     </div>
@@ -677,7 +674,7 @@
     <div id="transitionOverlay" class="transition-overlay">
         <div class="logo-container">
             <div class="flower-icon">🌸</div>
-            <div class="logo-text" style="font-size: 3rem;">Floralish.</div>
+            <div class="logo-text navbar-logo">Floralish.</div>
             <div class="logo-subtext">Menuju ke halaman Produk...</div>  
         </div>
     </div>

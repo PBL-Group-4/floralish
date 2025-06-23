@@ -1,5 +1,6 @@
-/* Tambahkan font Poppins ke semua elemen teks utama */
-body, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, select, .logo-text, .logo-subtext, .stat-value, .stat-label, .dropdown-item, .mobile-menu-item, .mobile-menu-dropdown-item {
+/* Bersihkan CSS: Hapus semua style yang tidak digunakan di welcome.blade.php, terutama navbar, dropdown, mobile menu, dan elemen yang tidak ada di halaman. Sisakan hanya style untuk hero, katalog, kategori, overlay transisi, dan elemen visual utama. */
+
+body, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, select, .logo-text, .logo-subtext, .stat-value, .stat-label {
     font-family: 'Poppins', sans-serif;
 }
 
@@ -13,7 +14,7 @@ body, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, select, .logo-text,
     background-color: rgba(255, 255, 255, 0.95);
     display: none;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     z-index: 1000;
     opacity: 0;
     transition: opacity 0.8s ease;
@@ -27,17 +28,19 @@ body, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, select, .logo-text,
 /* Kontainer untuk logo dan teks */ 
 .logo-container {
     text-align: center;
+    padding-top: 0rem;
 }
 
 /* Gaya untuk teks logo utama */
 .logo-text {
+    
     font-size: 2.5rem;
     font-weight: bold;
     color: #000000;
     margin-bottom: 1rem;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 1s forwards 0.5s;
+    margin-top: 0.7rem;
+    opacity: 1;
+    transform: none;
 }
 
 /* Gaya untuk teks logo sekunder */
@@ -47,18 +50,6 @@ body, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, select, .logo-text,
     opacity: 0;
     transform: translateY(20px);
     animation: fadeInUp 1s forwards 1s;
-}
-
-/* Animasi untuk efek fade in dari bawah ke atas */
-@keyframes fadeInUp {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 /* Gaya untuk ikon bunga */
@@ -369,8 +360,4 @@ body, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, select, .logo-text,
         width: 80px;
         height: 80px;
     }
-}
-
-.navbar-logo {
-    margin-top: 0.5rem;
 } 
