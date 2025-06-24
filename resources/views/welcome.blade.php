@@ -265,7 +265,7 @@
 <body class="overflow-x-hidden">
     <!-- Bagian Header -->
     <header class="bg-white shadow-sm">
-        <div class="container mx-auto px-4 navbar-container flex justify-between items-center" data-aos="fade-down" data-aos-delay="100">
+        <div class="container mx-auto px-4 navbar-container flex justify-between items-center" data-aos="fade-down" data-aos-delay="100" style="position:relative;z-index:2100;">
             <a href="/" class="text-2xl font-bold text-black logo-text hover:text-primary transition-colors duration-300 navbar-logo">Floralish.</a>
             <!-- Navigasi Desktop -->
             <nav class="hidden md:flex items-center">
@@ -284,7 +284,7 @@
                         </svg>
                         Profile
                     </button>
-                    <div class="dropdown-content">
+                    <div class="dropdown-content" style="z-index:2200;">
                         <a href="{{ route('login') }}" class="dropdown-item">Login</a>
                         <a href="{{ route('register') }}" class="dropdown-item">Register</a>
                     </div>
@@ -297,7 +297,7 @@
                         </svg>
                         {{ Auth::check() ? Auth::user()->name : 'Profile' }}
                     </button>
-                    <div class="dropdown-content">
+                    <div class="dropdown-content" style="z-index:2200;">
                         <a href="{{ route('profile.settings') }}" class="dropdown-item">My Profile</a>
                         <a href="{{ route('profile.orders') }}" class="dropdown-item">My Orders</a>
                         <div class="dropdown-divider"></div>
