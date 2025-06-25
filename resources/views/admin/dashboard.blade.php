@@ -405,6 +405,16 @@
 
             // Initial fetch
             fetchNotifications();
+
+            // Hamburger Menu Toggler
+            const hamburger = document.querySelector('button.md\\:hidden');
+            const sidebar = document.querySelector('.sidebar');
+
+            if (hamburger && sidebar) {
+                hamburger.addEventListener('click', function () {
+                    sidebar.classList.toggle('hidden');
+                });
+            }
         });
     </script>
 </body>
