@@ -20,7 +20,8 @@ class ProductLocationSeeder extends Seeder
                 'price' => 250000,
                 'category' => 'Bunga',
                 'location' => 'Jakarta',
-                'image' => 'products/bouquet-mawar-merah.jpg'
+                'image' => 'products/bouquet-mawar-merah.jpg',
+                'stock' => 10,
             ],
             [
                 'name' => 'Karangan Bunga Papan Jakarta',
@@ -28,7 +29,8 @@ class ProductLocationSeeder extends Seeder
                 'price' => 500000,
                 'category' => 'Karangan Bunga Papan',
                 'location' => 'Jakarta',
-                'image' => 'products/karangan-bunga-papan.jpg'
+                'image' => 'products/karangan-bunga-papan.jpg',
+                'stock' => 7,
             ],
             [
                 'name' => 'Kado Spesial Jakarta',
@@ -36,7 +38,8 @@ class ProductLocationSeeder extends Seeder
                 'price' => 350000,
                 'category' => 'Kado & Cakes',
                 'location' => 'Jakarta',
-                'image' => 'products/kado-spesial.jpg'
+                'image' => 'products/kado-spesial.jpg',
+                'stock' => 5,
             ]
         ];
 
@@ -48,7 +51,8 @@ class ProductLocationSeeder extends Seeder
                 'price' => 230000,
                 'category' => 'Bunga',
                 'location' => 'Bandung',
-                'image' => 'products/bouquet-mawar-merah.jpg'
+                'image' => 'products/bouquet-mawar-merah.jpg',
+                'stock' => 12,
             ],
             [
                 'name' => 'Karangan Bunga Papan Bandung',
@@ -56,7 +60,8 @@ class ProductLocationSeeder extends Seeder
                 'price' => 480000,
                 'category' => 'Karangan Bunga Papan',
                 'location' => 'Bandung',
-                'image' => 'products/karangan-bunga-papan.jpg'
+                'image' => 'products/karangan-bunga-papan.jpg',
+                'stock' => 6,
             ],
             [
                 'name' => 'Kado Spesial Bandung',
@@ -64,7 +69,8 @@ class ProductLocationSeeder extends Seeder
                 'price' => 330000,
                 'category' => 'Kado & Cakes',
                 'location' => 'Bandung',
-                'image' => 'products/kado-spesial.jpg'
+                'image' => 'products/kado-spesial.jpg',
+                'stock' => 4,
             ]
         ];
 
@@ -77,5 +83,53 @@ class ProductLocationSeeder extends Seeder
         foreach ($bandungProducts as $product) {
             Product::create($product);
         }
+
+        Product::insert([
+            [
+                'name' => 'Buket Mawar Merah',
+                'description' => 'Buket bunga mawar merah segar, cocok untuk hadiah romantis.',
+                'price' => 150000,
+                'stock' => 20,
+                'category' => 'Bunga',
+                'location' => 'Jakarta',
+                'image' => 'images/default-product.jpg',
+            ],
+            [
+                'name' => 'Buket Ulang Tahun',
+                'description' => 'Buket bunga warna-warni untuk ulang tahun.',
+                'price' => 120000,
+                'stock' => 15,
+                'category' => 'Bunga',
+                'location' => 'Bandung',
+                'image' => 'images/default-product.jpg',
+            ],
+            [
+                'name' => 'Karangan Bunga Papan',
+                'description' => 'Karangan bunga papan untuk ucapan selamat atau duka cita.',
+                'price' => 500000,
+                'stock' => 5,
+                'category' => 'Karangan Bunga Papan',
+                'location' => 'Surabaya',
+                'image' => 'images/default-product.jpg',
+            ],
+            [
+                'name' => 'Kado & Cake Spesial',
+                'description' => 'Paket kado dan kue untuk momen spesial.',
+                'price' => 250000,
+                'stock' => 10,
+                'category' => 'Kado & Cakes',
+                'location' => 'Batam',
+                'image' => 'images/default-product.jpg',
+            ],
+            [
+                'name' => 'Buket Lily Putih',
+                'description' => 'Buket bunga lily putih elegan.',
+                'price' => 180000,
+                'stock' => 8,
+                'category' => 'Bunga',
+                'location' => 'Medan',
+                'image' => 'images/default-product.jpg',
+            ],
+        ]);
     }
 } 

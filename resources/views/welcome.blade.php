@@ -437,22 +437,24 @@
     <!-- Bagian Catalog Produk -->
     <section class="bg-white section-padding">
         <div class="container">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8" data-aos="fade-up">Catalog Produk</h2>
+            <h2 id="catalogProduk" class="text-3xl md:text-4xl font-bold text-center mb-8" data-aos="fade-up" style="scroll-margin-top: 100px;">Catalog Produk</h2>
             
             <!-- Filter Form -->
             <form id="filterForm" class="flex flex-col md:flex-row gap-4 mb-8" data-aos="fade-up" data-aos-delay="100">
                 <div class="flex-1 min-w-[200px] flex flex-col md:flex-row items-center gap-2">
-                    <input type="text" 
-                           name="search" 
-                           value="{{ request('search') }}" 
-                           placeholder="Cari produk..." 
-                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
-                    <button type="button"
-                            class="w-full md:w-auto flex items-center justify-center gap-2 bg-[#8dc6d3] text-white text-[18px] font-normal rounded-[8px] px-6 py-2 cursor-pointer hover:bg-[#7ab5c2] transition-colors duration-300"
-                            onclick="handleSearchClick()">
-                        <i class="fas fa-search text-white text-[18px]"></i>
-                        Cari
-                    </button>
+                    <div class="relative flex items-center w-full">
+                        <input type="text" 
+                               name="search" 
+                               value="{{ request('search') }}" 
+                               placeholder="Cari produk..." 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                        <button type="button" id="searchBtn" class="ml-2 flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                            Cari
+                        </button>
+                    </div>
                 </div>
                 <div class="w-full md:w-[200px]">
                     <select name="category" 
@@ -481,8 +483,16 @@
             </form>
 
             <!-- Products Grid -->
-            <div class="space-y-16 mt-12">
-                <!-- Bunga Section -->
+            <div id="productGrid" class="space-y-16 mt-12">
+                @php
+                    $selectedCategory = request('category');
+                    $hasBunga = $products->where('category', 'Bunga')->count() > 0;
+                    $hasPapan = $products->where('category', 'Karangan Bunga Papan')->count() > 0;
+                    $hasKado = $products->where('category', 'Kado & Cakes')->count() > 0;
+                @endphp
+
+                {{-- Bunga Section --}}
+                @if(($selectedCategory == 'Bunga' && $hasBunga) || (!$selectedCategory && $hasBunga))
                 <div class="text-center mb-12">
                     <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-8" data-aos="fade-up">Bunga</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
@@ -518,8 +528,10 @@
                         @endforeach
                     </div>
                 </div>
+                @endif
 
-                <!-- Karangan Bunga Papan Section -->
+                {{-- Karangan Bunga Papan Section --}}
+                @if(($selectedCategory == 'Karangan Bunga Papan' && $hasPapan) || (!$selectedCategory && $hasPapan))
                 <div class="text-center mb-12">
                     <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-8" data-aos="fade-up">Karangan Bunga Papan</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
@@ -555,8 +567,10 @@
                         @endforeach
                     </div>
                 </div>
+                @endif
 
-                <!-- Kado & Cakes Section -->
+                {{-- Kado & Cakes Section --}}
+                @if(($selectedCategory == 'Kado & Cakes' && $hasKado) || (!$selectedCategory && $hasKado))
                 <div class="text-center mb-12">
                     <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-8" data-aos="fade-up">Kado & Cakes</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
@@ -592,6 +606,13 @@
                         @endforeach
                     </div>
                 </div>
+                @endif
+
+                @if((!$hasBunga && !$hasPapan && !$hasKado) || ($selectedCategory && !$hasBunga && !$hasPapan && !$hasKado))
+                    <div class="text-center py-12">
+                        <p class="text-gray-500 text-lg">Tidak ada produk yang ditemukan</p>
+                    </div>
+                @endif
             </div>
         </div>
     </section>
@@ -805,18 +826,42 @@
             });
         });
 
-        // Mencegah form submit saat menekan enter di input pencarian
-        document.querySelector('input[name="search"]').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                document.getElementById('filterForm').submit();
-            }
+        // Otomatis submit filter saat input berubah
+        const filterForm = document.getElementById('filterForm');
+        const searchInput = filterForm.querySelector('input[name="search"]');
+        const categorySelect = filterForm.querySelector('select[name="category"]');
+        const sortSelect = filterForm.querySelector('select[name="sort"]');
+        const searchBtn = document.getElementById('searchBtn');
+        const productGrid = document.getElementById('productGrid');
+
+        function submitAndScroll() {
+            // Set flag agar scroll hanya terjadi setelah filter/search
+            sessionStorage.setItem('scrollToCatalog', '1');
+            filterForm.action = window.location.pathname + window.location.search + '#catalogProduk';
+            filterForm.submit();
+        }
+
+        let searchTimeout;
+        categorySelect.addEventListener('change', function() {
+            submitAndScroll();
+        });
+        sortSelect.addEventListener('change', function() {
+            submitAndScroll();
+        });
+        searchBtn.addEventListener('click', function() {
+            submitAndScroll();
         });
 
-        function handleSearchClick() {
-            // Submit form pencarian
-            document.getElementById('filterForm').submit();
-        }
+        // Setelah reload, hanya scroll jika flag sessionStorage ada
+        window.addEventListener('DOMContentLoaded', function() {
+            if (window.location.hash === '#catalogProduk' && sessionStorage.getItem('scrollToCatalog') === '1') {
+                const catalogProduk = document.getElementById('catalogProduk');
+                if (catalogProduk) {
+                    catalogProduk.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                sessionStorage.removeItem('scrollToCatalog');
+            }
+        });
     </script>
 
     <!-- Footer -->
